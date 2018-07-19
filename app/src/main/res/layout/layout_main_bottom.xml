@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!--底部的RadioGroup-->
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#11000000"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+        <RadioButton
+            android:id="@+id/bottom_homePage"
+            android:drawableTop="@drawable/homepage_frame_drawable_selector"
+            style="@style/bottom_tag_style"
+            android:text="首页"/>
+        <RadioButton
+            android:id="@+id/bottom_classification"
+            android:drawableTop="@drawable/classification_frame_drawable_selector"
+            style="@style/bottom_tag_style"
+            android:text="分类"/>
+        <RadioButton
+            android:id="@+id/bottom_discover"
+            android:drawableTop="@drawable/discover_frame_drawable_selector"
+            style="@style/bottom_tag_style"
+            android:text="发现"/>
+        <RadioButton
+            android:id="@+id/bottom_shoppingCart"
+            android:drawableTop="@drawable/shopping_cart_frame_drawable_selector"
+            style="@style/bottom_tag_style"
+            android:text="购物车" />
+    </RadioGroup>
+</LinearLayout>

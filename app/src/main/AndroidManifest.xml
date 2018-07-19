@@ -8,20 +8,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"
+        <activity
+            android:name=".activity.MainActivity"
             android:parentActivityName=".activity.MainActivity"
-            android:theme="@style/AppTheme">
-            <!--meta-data兼容低版本-->
+            android:theme="@style/AppTheme"
+            android:configChanges="orientation|screenSize|keyboardHidden">
+            <!-- meta-data兼容低版本 -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity"/>
-
+                android:value=".activity.MainActivity" />
+        </activity>
+        <activity android:name=".activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 
