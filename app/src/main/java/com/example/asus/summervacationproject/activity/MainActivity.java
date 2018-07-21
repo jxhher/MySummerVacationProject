@@ -1,16 +1,21 @@
 package com.example.asus.summervacationproject.activity;
 
 import android.content.res.Configuration;
+import android.os.Handler;
+import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -55,16 +60,15 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     ListView mDrawerListView;
     @BindView(R.id.rg_main)
     RadioGroup radioGroup;
-
-
     private ArrayList<String> menuLists = new ArrayList<String>();
+
+
     private ActionBarDrawerToggle mDrawerToggle;
     private ListViewAdapter adapter;
     private ImageView button;
     private List<BaseFragment> mBaseFragmentList;
     private int selectPostion;   //选中的Fragment对应的位置
     private Fragment mContent;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
                 popup.show();
             }
         });
+
     }
 
     private void initToolBar() {
@@ -106,21 +111,16 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     }
 
     private void initDrawerLayout() {
-
         mDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
             @Override
             public void onDrawerOpened(View drawerView) {           //抽屉打开
                 super.onDrawerOpened(drawerView);
-
             }
-
             @Override
             public void onDrawerClosed(View drawerView) {           //抽屉关闭
                 super.onDrawerClosed(drawerView);
-
             }
         };
-
         drawerLayout.setDrawerListener(mDrawerToggle);
         for(int i=0;i<6;i++)
             menuLists.add("DrawerLayout"+i);
@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         mBaseFragmentList.add(new DiscoverFragment());
         mBaseFragmentList.add(new ShoppingCartFragment());
     }
-
 
     private void setFragment() {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -175,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         //设置默认选中常用框架
         radioGroup.check(R.id.bottom_homePage);
     }
+
 
     private void switchFrament(Fragment from, Fragment to) {
         if(from!=to){
@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
     /**
      * 为Toolbar设置Menu
      */
@@ -239,7 +240,6 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
       //  getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
@@ -251,4 +251,37 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
     }
+
+    private boolean flag = true;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case RESET_BACK:
+                    flag = true;//复原
+                    break;
+            }
+        }
+    };
+    private static final int RESET_BACK = 1;
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK&&flag){
+            Toast.makeText(MainActivity.this,"再点击一次，退出当前应用",Toast.LENGTH_SHORT).show();
+            flag = false;
+            handler.sendEmptyMessageDelayed(RESET_BACK,2000);  //发送延迟消息，判断两秒内点击两次
+            return true;
+        }
+        return super.onKeyUp(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacksAndMessages(null);  //为防止内存泄漏，移除所有的未被执行的消息
+    }
+
+
 }

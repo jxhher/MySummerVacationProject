@@ -1,15 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
-
-    <TextView
-        android:text="homePage"
-        android:layout_width="wrap_content"
+    <SearchView
+        android:id="@+id/homePage_searchView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:textSize="70px"
-        android:layout_centerInParent="true"
-        />
+        android:iconifiedByDefault="false"
+        android:queryHint="请输入搜索商品/店铺"></SearchView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+                <com.youth.banner.Banner
+                    android:id="@+id/banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+
+                    app:is_auto_play="true"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我是小圆圈"
+                    android:gravity="center"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="5dp"/>
+
+            </FrameLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/homePage_recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </ScrollView>
 </LinearLayout>

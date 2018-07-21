@@ -1,1 +1,1 @@
-include ':app', 'butterknife-master'
+include ':app', 'butterknife-master', ':banner'

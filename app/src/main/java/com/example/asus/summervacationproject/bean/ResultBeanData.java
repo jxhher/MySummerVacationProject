@@ -1,0 +1,421 @@
+package com.example.asus.summervacationproject.bean;
+
+import com.alibaba.fastjson.JSONObject;
+
+import java.util.List;
+
+/**
+ * Created by ASUS on 2018/7/21.
+ */
+
+public class ResultBeanData extends JSONObject {
+
+    private int code;
+    private String msg;
+    private ResultBean result;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public ResultBean getResult() {
+        return result;
+    }
+
+    public void setResult(ResultBean result) {
+        this.result = result;
+    }
+
+
+
+    public static class ResultBean {
+
+        //广告横幅类型
+        private List<BannerInfoBean> banner_info;
+        //主题页面类型
+        private List<ThemeInfoBean> themeInfoBeen;
+        //热卖类型
+        private List<HotInfoBean> hot_info;
+        //品牌类型
+        private List<BrandInfoBean> brandInfo;
+        //折扣类型
+        private List<DiscountInfoBean> discountInfoBeen;
+        //推荐类型
+        private List<RecommendInfoBean> recommend_info;
+
+
+        public List<BannerInfoBean> getBanner_info() {
+            return banner_info;
+        }
+
+        public void setBanner_info(List<BannerInfoBean> banner_info) {
+            this.banner_info = banner_info;
+        }
+
+        public List<ThemeInfoBean> getThemeInfoBeen() {
+            return themeInfoBeen;
+        }
+
+        public void setThemeInfoBeen(List<ThemeInfoBean> themeInfoBeen) {
+            this.themeInfoBeen = themeInfoBeen;
+        }
+
+        public List<HotInfoBean> getHot_info() {
+            return hot_info;
+        }
+
+        public void setHot_info(List<HotInfoBean> hot_info) {
+            this.hot_info = hot_info;
+        }
+
+        public List<BrandInfoBean> getBrandInfo() {
+            return brandInfo;
+        }
+
+        public void setBrandInfo(List<BrandInfoBean> brandInfo) {
+            this.brandInfo = brandInfo;
+        }
+
+        public List<DiscountInfoBean> getDiscountInfoBeen() {
+            return discountInfoBeen;
+        }
+
+        public void setDiscountInfoBeen(List<DiscountInfoBean> discountInfoBeen) {
+            this.discountInfoBeen = discountInfoBeen;
+        }
+
+        public List<RecommendInfoBean> getRecommend_info() {
+            return recommend_info;
+        }
+
+
+        public void setRecommend_info(List<RecommendInfoBean> recommend_info) {
+            this.recommend_info = recommend_info;
+        }
+
+
+        public static class BannerInfoBean {
+            private String image;
+            private int option;
+            private int type;
+            private ValueBean valueBean;
+
+            public String getImage() {
+                return image;
+            }
+
+            public void setImage(String image) {
+                this.image = image;
+            }
+
+            public int getOption() {
+                return option;
+            }
+
+            public void setOption(int option) {
+                this.option = option;
+            }
+
+            public int getType() {
+                return type;
+            }
+
+            public void setType(int type) {
+                this.type = type;
+            }
+
+            public ValueBean getValueBean() {
+                return valueBean;
+            }
+
+            public void setValueBean(ValueBean valueBean) {
+                this.valueBean = valueBean;
+            }
+
+            @Override
+            public String toString() {
+                return "BannerInfoBean{" +
+                        "image='" + image + '\'' +
+                        ", option=" + option +
+                        ", type=" + type +
+                        ", valueBean=" + valueBean +
+                        '}';
+            }
+
+            public static class ValueBean {
+                private String url;
+                private String product_id;
+                private String brand_id;
+
+
+                public String getUrl() {
+                    return url;
+                }
+
+                public void setUrl(String url) {
+                    this.url = url;
+                }
+
+                public String getProduct_id() {
+                    return product_id;
+                }
+
+                public void setProduct_id(String product_id) {
+                    this.product_id = product_id;
+                }
+
+                public String getBrand_id() {
+                    return brand_id;
+                }
+
+                public void setBrand_id(String brand_id) {
+                    this.brand_id = brand_id;
+                }
+
+                @Override
+                public String toString() {
+                    return "ValueBean{" +
+                            "url='" + url + '\'' +
+                            ", product_id='" + product_id + '\'' +
+                            ", brand_id='" + brand_id + '\'' +
+                            '}';
+                }
+            }
+
+        }
+
+
+        public static class ThemeInfoBean {
+            private String name;
+            private String url;
+            private String image;
+            private int id;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getImage() {
+                return image;
+            }
+
+            public void setImage(String image) {
+                this.image = image;
+            }
+
+        }
+
+
+        public static class HotInfoBean {
+            private String product_id;
+            private String name;
+            private String cover_price;
+            private String figure;
+
+            public String getProduct_id() {
+                return product_id;
+            }
+
+            public void setProduct_id(String product_id) {
+                this.product_id = product_id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getCover_price() {
+                return cover_price;
+            }
+
+            public void setCover_price(String cover_price) {
+                this.cover_price = cover_price;
+            }
+
+            public String getFigure() {
+                return figure;
+            }
+
+            public void setFigure(String figure) {
+                this.figure = figure;
+            }
+
+            @Override
+            public String toString() {
+                return "HotInfoBean{" +
+                        "product_id='" + product_id + '\'' +
+                        ", name='" + name + '\'' +
+                        ", cover_price='" + cover_price + '\'' +
+                        ", figure='" + figure + '\'' +
+                        '}';
+            }
+        }
+
+
+        public static class BrandInfoBean {
+            private String name;
+            private String image;
+            private String url;
+            private int id;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getImage() {
+                return image;
+            }
+
+            public void setImage(String image) {
+                this.image = image;
+            }
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+        }
+
+
+        public static class DiscountInfoBean {
+            private String name;
+            private String image;
+            private int product_id;
+            private String url;
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getImage() {
+                return image;
+            }
+
+            public void setImage(String image) {
+                this.image = image;
+            }
+
+            public String getUrl() {
+                return url;
+            }
+
+            public void setUrl(String url) {
+                this.url = url;
+            }
+
+            public int getProduct_id() {
+                return product_id;
+            }
+
+            public void setProduct_id(int product_id) {
+                this.product_id = product_id;
+            }
+        }
+
+
+        public static class RecommendInfoBean {
+            private String product_id;
+            private String name;
+            private String cover_price;
+            private String figure;
+
+            public String getProduct_id() {
+                return product_id;
+            }
+
+            public void setProduct_id(String product_id) {
+                this.product_id = product_id;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public String getCover_price() {
+                return cover_price;
+            }
+
+            public void setCover_price(String cover_price) {
+                this.cover_price = cover_price;
+            }
+
+            public String getFigure() {
+                return figure;
+            }
+
+            public void setFigure(String figure) {
+                this.figure = figure;
+            }
+
+            @Override
+            public String toString() {
+                return "RecommendInfoBean{" +
+                        "product_id='" + product_id + '\'' +
+                        ", name='" + name + '\'' +
+                        ", cover_price='" + cover_price + '\'' +
+                        ", figure='" + figure + '\'' +
+                        '}';
+            }
+        }
+    }
+}
