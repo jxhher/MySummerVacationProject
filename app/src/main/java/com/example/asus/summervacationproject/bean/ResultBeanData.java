@@ -8,7 +8,7 @@ import java.util.List;
  * Created by ASUS on 2018/7/21.
  */
 
-public class ResultBeanData extends JSONObject {
+public class ResultBeanData{
 
     private int code;
     private String msg;
@@ -156,9 +156,6 @@ public class ResultBeanData extends JSONObject {
 
             public static class ValueBean {
                 private String url;
-                private String product_id;
-                private String brand_id;
-
 
                 public String getUrl() {
                     return url;
@@ -166,31 +163,6 @@ public class ResultBeanData extends JSONObject {
 
                 public void setUrl(String url) {
                     this.url = url;
-                }
-
-                public String getProduct_id() {
-                    return product_id;
-                }
-
-                public void setProduct_id(String product_id) {
-                    this.product_id = product_id;
-                }
-
-                public String getBrand_id() {
-                    return brand_id;
-                }
-
-                public void setBrand_id(String brand_id) {
-                    this.brand_id = brand_id;
-                }
-
-                @Override
-                public String toString() {
-                    return "ValueBean{" +
-                            "url='" + url + '\'' +
-                            ", product_id='" + product_id + '\'' +
-                            ", brand_id='" + brand_id + '\'' +
-                            '}';
                 }
             }
 

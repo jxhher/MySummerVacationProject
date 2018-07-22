@@ -4,6 +4,7 @@ package com.example.asus.summervacationproject.fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -19,6 +20,8 @@ import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
 
+import static com.example.asus.summervacationproject.R.id.home_LinearLayout;
+
 
 /**
  * Created by ASUS on 2018/7/19.
@@ -31,13 +34,14 @@ public class HomePageFragment extends BaseFragment {
     private ResultBeanData.ResultBean resultBean;      //获得解析返回的数据
     private HomePageAdapter adapter;
     private RecyclerView recyclerView;
-
+    private View view;
 
     @Override
     protected View initView() {
-        Log.e(TAG,"首页Fragment页面被初始化了...");
 
-        View view = View.inflate(mContext, R.layout.fragment_homepage,null);
+        Log.e(TAG,"首页Fragment页面开始初始化...");
+
+        view = View.inflate(mContext, R.layout.fragment_homepage,null);
         SearchView searchView = (SearchView) view.findViewById(R.id.homePage_searchView);
         recyclerView = (RecyclerView) view.findViewById(R.id.homePage_recyclerView);
 
@@ -53,19 +57,25 @@ public class HomePageFragment extends BaseFragment {
             }
         });
 
-
-        //viewPager.setAdapter();
+        initDate();
+        adapter = new HomePageAdapter(mContext,resultBean);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new GridLayoutManager(mContext,1));
+//        try {
+//            Thread.sleep(10000);
+//        } catch (InterruptedException e) {
+//        }
         return view;
     }
 
     @Override
     protected void initDate() {
-        new OkHttpUtils(Config.SERVEL_URL+"/servlet/initHomePage", HttpMethod.GET, new OkHttpUtils.SuccessCallback() {
+        new OkHttpUtils(Config.HOMEPAGE_URL, HttpMethod.GET, new OkHttpUtils.SuccessCallback() {
             @Override
             public void onSuccess(String result) {
                 Toast.makeText(mContext, "联网获取数据成功", Toast.LENGTH_SHORT).show();
                 final String TAG = HomePageFragment.class.getSimpleName();
-                Log.e(TAG,result);
+                Log.e(TAG,"initData"+result);
                 processData(result);
             }
         }, new OkHttpUtils.FailCallback() {
@@ -79,14 +89,22 @@ public class HomePageFragment extends BaseFragment {
     private void processData(String json) {
         ResultBeanData resultBeanData = JSON.parseObject(json,ResultBeanData.class);
         resultBean = resultBeanData.getResult();
-        Log.d("HomePage","解析得到的数据:"+resultBean.getBanner_info());
+        int code = resultBeanData.getCode();
+        String msg = resultBeanData.getMsg();
+        Log.e(TAG,"code:"+code+"msg:"+msg);
         if(resultBean!=null){
+            Log.e(TAG,"第二次adapter");
             adapter = new HomePageAdapter(mContext,resultBean);
+            recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new GridLayoutManager(mContext,1));
         }else{
-
+            Log.e(TAG,"resultBean为null");
         }
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        LayoutInflater.from(mContext);
+    }
 }

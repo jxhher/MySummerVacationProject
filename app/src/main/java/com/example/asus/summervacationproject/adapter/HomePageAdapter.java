@@ -2,6 +2,7 @@ package com.example.asus.summervacationproject.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by ASUS on 2018/7/21.
@@ -91,9 +94,15 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Log.e(TAG,"position:"+position);
         if (getItemViewType(position) == BANNER) {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
-            bannerViewHolder.setData(resultBean.getBanner_info());
+            if(resultBean!=null){
+                bannerViewHolder.setData(resultBean.getBanner_info());
+                Log.e(TAG,resultBean.getBanner_info().toString());
+            }else{
+                Log.e(TAG,"resultBean为null:");
+            }
         } /*else if (getItemViewType(position) == CHANNEL) {
             ChannelViewHolder channelViewHolder = (ChannelViewHolder) holder;
             channelViewHolder.setData(resultBean.getChannel_info());
@@ -126,22 +135,26 @@ public class HomePageAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(List<ResultBeanData.ResultBean.BannerInfoBean> banner_info){
-            List<String> imageUrlList = new ArrayList<>();
+            ArrayList<String> imageUrlList = new ArrayList<>();
             for(int i=0;i<banner_info.size();i++){
                 imageUrlList.add(banner_info.get(i).getImage());
+                Log.e(TAG,"adapter:"+banner_info.get(i).getImage());
             }
             banner.setImages(imageUrlList);
             //设置循环指示点
             banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
             //设置手风琴效果
-            banner.setBannerAnimation(Transformer.Accordion);
+            banner.setBannerAnimation(Transformer.Default);
             banner.setImageLoader(new ImageLoader() {
                 @Override
                 public void displayImage(Context context, Object path, ImageView imageView) {
                    Picasso.with(context).load(Config.BASE_URL_IMAGE+path).into(imageView);
                 }
             });
-
+            //banner.setBannerTitles();        //设置标题集合
+            banner.setDelayTime(2000);
+            banner.setIndicatorGravity(BannerConfig.CENTER); //设置指示器位置
+            banner.start();
 
 
             banner.setOnBannerClickListener(new OnBannerClickListener() {
@@ -175,6 +188,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 break;
             case DISCOUNT:
                 currentType = DISCOUNT;
+                break;
             case RECOMMEND:
                 currentType = RECOMMEND;
                 break;

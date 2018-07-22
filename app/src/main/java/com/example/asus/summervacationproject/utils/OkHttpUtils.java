@@ -68,6 +68,7 @@ public class OkHttpUtils {
             protected void onPostExecute(String result) {
                 if(result!=null){
                     if(successCallback!=null){
+                        System.out.println(result);
                         successCallback.onSuccess(result);
                     }
                 }else{
