@@ -20,7 +20,6 @@ import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
 
-import static com.example.asus.summervacationproject.R.id.home_LinearLayout;
 
 
 /**
@@ -94,6 +93,9 @@ public class HomePageFragment extends BaseFragment {
         Log.e(TAG,"code:"+code+"msg:"+msg);
         if(resultBean!=null){
             Log.e(TAG,"第二次adapter");
+            Log.e(TAG,"banner的大小："+resultBean.getBanner_info().size());
+            Log.e(TAG,"themeList的大小："+resultBean.getThemeInfoBean().size());
+            Log.e(TAG,"brandList的大小"+resultBean.getBrandInfoBean().size());
             adapter = new HomePageAdapter(mContext,resultBean);
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(new GridLayoutManager(mContext,1));

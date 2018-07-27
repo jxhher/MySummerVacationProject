@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -12,4 +12,4 @@
         app:indicator_height="5dp"
         app:indicator_width="5dp"
         app:is_auto_play="true" />
-</LinearLayout>
+</RelativeLayout>

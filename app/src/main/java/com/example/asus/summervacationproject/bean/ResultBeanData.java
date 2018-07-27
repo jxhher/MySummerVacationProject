@@ -1,6 +1,5 @@
 package com.example.asus.summervacationproject.bean;
 
-import com.alibaba.fastjson.JSONObject;
 
 import java.util.List;
 
@@ -45,13 +44,11 @@ public class ResultBeanData{
         //广告横幅类型
         private List<BannerInfoBean> banner_info;
         //主题页面类型
-        private List<ThemeInfoBean> themeInfoBeen;
-        //热卖类型
-        private List<HotInfoBean> hot_info;
+        private List<ThemeInfoBean> themeInfoBean;
         //品牌类型
-        private List<BrandInfoBean> brandInfo;
+        private List<BrandInfoBean> brandInfoBean;
         //折扣类型
-        private List<DiscountInfoBean> discountInfoBeen;
+        private List<DiscountInfoBean> discountInfoBean;
         //推荐类型
         private List<RecommendInfoBean> recommend_info;
 
@@ -64,36 +61,29 @@ public class ResultBeanData{
             this.banner_info = banner_info;
         }
 
-        public List<ThemeInfoBean> getThemeInfoBeen() {
-            return themeInfoBeen;
+        public List<ThemeInfoBean> getThemeInfoBean() {
+
+            return themeInfoBean;
         }
 
-        public void setThemeInfoBeen(List<ThemeInfoBean> themeInfoBeen) {
-            this.themeInfoBeen = themeInfoBeen;
+        public void setThemeInfoBean(List<ThemeInfoBean> themeInfoBean) {
+            this.themeInfoBean = themeInfoBean;
         }
 
-        public List<HotInfoBean> getHot_info() {
-            return hot_info;
+        public List<BrandInfoBean> getBrandInfoBean() {
+            return brandInfoBean;
         }
 
-        public void setHot_info(List<HotInfoBean> hot_info) {
-            this.hot_info = hot_info;
+        public void setBrandInfoBean(List<BrandInfoBean> brandInfoBean) {
+            this.brandInfoBean = brandInfoBean;
         }
 
-        public List<BrandInfoBean> getBrandInfo() {
-            return brandInfo;
+        public List<DiscountInfoBean> getDiscountInfoBean() {
+            return discountInfoBean;
         }
 
-        public void setBrandInfo(List<BrandInfoBean> brandInfo) {
-            this.brandInfo = brandInfo;
-        }
-
-        public List<DiscountInfoBean> getDiscountInfoBeen() {
-            return discountInfoBeen;
-        }
-
-        public void setDiscountInfoBeen(List<DiscountInfoBean> discountInfoBeen) {
-            this.discountInfoBeen = discountInfoBeen;
+        public void setDiscountInfoBean(List<DiscountInfoBean> discountInfoBean) {
+            this.discountInfoBean = discountInfoBean;
         }
 
         public List<RecommendInfoBean> getRecommend_info() {
@@ -207,72 +197,24 @@ public class ResultBeanData{
                 this.image = image;
             }
 
-        }
-
-
-        public static class HotInfoBean {
-            private String product_id;
-            private String name;
-            private String cover_price;
-            private String figure;
-
-            public String getProduct_id() {
-                return product_id;
-            }
-
-            public void setProduct_id(String product_id) {
-                this.product_id = product_id;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getCover_price() {
-                return cover_price;
-            }
-
-            public void setCover_price(String cover_price) {
-                this.cover_price = cover_price;
-            }
-
-            public String getFigure() {
-                return figure;
-            }
-
-            public void setFigure(String figure) {
-                this.figure = figure;
-            }
-
             @Override
             public String toString() {
-                return "HotInfoBean{" +
-                        "product_id='" + product_id + '\'' +
-                        ", name='" + name + '\'' +
-                        ", cover_price='" + cover_price + '\'' +
-                        ", figure='" + figure + '\'' +
+                return "ThemeInfoBean{" +
+                        "image='" + image + '\'' +
+                        ", name=" + name +
+                        ", image=" + image +
+                        ", id=" + id +
                         '}';
-            }
+             }
         }
+
+
 
 
         public static class BrandInfoBean {
-            private String name;
             private String image;
             private String url;
             private int id;
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
 
             public String getImage() {
                 return image;
