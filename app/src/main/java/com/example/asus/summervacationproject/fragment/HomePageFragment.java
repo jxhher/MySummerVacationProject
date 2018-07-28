@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class HomePageFragment extends BaseFragment {
     private HomePageAdapter adapter;
     private RecyclerView recyclerView;
     private View view;
-
+    private ImageButton button_top;
     @Override
     protected View initView() {
 
@@ -43,6 +44,14 @@ public class HomePageFragment extends BaseFragment {
         view = View.inflate(mContext, R.layout.fragment_homepage,null);
         SearchView searchView = (SearchView) view.findViewById(R.id.homePage_searchView);
         recyclerView = (RecyclerView) view.findViewById(R.id.homePage_recyclerView);
+        button_top = (ImageButton) view.findViewById(R.id.homePage_imageButton);
+        button_top.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.scrollToPosition(0);
+            }
+        });
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override                    //点击搜索按钮时触发
@@ -96,9 +105,25 @@ public class HomePageFragment extends BaseFragment {
             Log.e(TAG,"banner的大小："+resultBean.getBanner_info().size());
             Log.e(TAG,"themeList的大小："+resultBean.getThemeInfoBean().size());
             Log.e(TAG,"brandList的大小"+resultBean.getBrandInfoBean().size());
+            Log.e(TAG,"discount的大小:"+resultBean.getDiscountInfoBean().size());
+            Log.e(TAG,"recommend的大小:"+resultBean.getRecommend_info().size());
             adapter = new HomePageAdapter(mContext,resultBean);
             recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new GridLayoutManager(mContext,1));
+            GridLayoutManager manager =  new GridLayoutManager(mContext,1);
+            manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if(position <= 3){
+                        //隐藏
+                        button_top.setVisibility(View.GONE);
+                    }else{
+                        //显示
+                        button_top.setVisibility(View.VISIBLE);
+                    }
+                    return 1;
+                }
+            });
+            recyclerView.setLayoutManager(manager);
         }else{
             Log.e(TAG,"resultBean为null");
         }

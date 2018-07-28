@@ -32,9 +32,11 @@ import static android.content.ContentValues.TAG;
 
 /**
  * Created by ASUS on 2018/7/21.
- * Upfated by ASUS on 2018/7/22   完成banner与picasso与okhttp的配合，解决异步加载请求数据与页面适配器配合的大bug
+ * Upfated by ASUS on 2018/7/22   完成banner与picasso与okhttp的配合，解决异步加载请求数据与页面适配器响应配合时间的bug
  * Updated by ASUS on 2018/7/23   找到及完善theme的图标,完成基本布局
- * Updated by ASUS on 2018/7/26   解决theme的bug，成功显示图标
+ * Updated by ASUS on 2018/7/26   解决theme因json数据数据名造成实例化不了集合的bug，成功显示图标
+ * Upaated by ASUS on 2018/7/27   完成brand的显示，解决因set和get方法错误造成实例化不了对象的bug及gridView只显示一行的bug
+ * Updated by ASUS on 2018/7/28   完成recommend的显示及页面返回顶部的按钮
  */
 
 public class HomePageAdapter extends RecyclerView.Adapter {
@@ -83,13 +85,11 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             return new ThemeViewHolder(mContext, mLayoutInflater.inflate(R.layout.type_theme, null));
         } else if (viewType == BRAND) {
             return new BrandViewHolder(mContext, mLayoutInflater.inflate(R.layout.type_brand, null,false));
-        }/*/*//*else if (viewType == BANNER) {
-            return new SeckillViewHolder(mContext, mLayoutInflater.inflate(R.layout.item_discount, null));
-        }else if(viewType == DISCOUNT ){
-            return new RecommendViewHolder(mContext, mLayoutInflater.inflate(R.layout.item_recommend, null));
+        }else if (viewType == DISCOUNT) {
+            return new DiscountViewHolder(mContext, mLayoutInflater.inflate(R.layout.type_discount, null));
         }else if(viewType == RECOMMEND){
-            return new HotViewHolder(mContext, mLayoutInflater.inflate(R.layout.item_hot, null));
-        }*/
+            return new RecommendViewHolder(mContext, mLayoutInflater.inflate(R.layout.type_recommend, null,false));
+        }
         return null;
     }
 
@@ -126,16 +126,21 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             }else{
                 Log.e(TAG, "result为null");
             }
-        }/*else if(getItemViewType(position) == SECKILL){
-            SeckillViewHolder seckillViewHolder = (SeckillViewHolder) holder;
-            seckillViewHolder.setData(resultBean.getSeckill_info());
+        }else if(getItemViewType(position) == DISCOUNT){
+            DiscountViewHolder discountViewHolder = (DiscountViewHolder) holder;
+            if (resultBean != null) {
+                discountViewHolder.setData(resultBean.getDiscountInfoBean());
+            }else{
+                Log.e(TAG, "result为null");
+            }
         }else if(getItemViewType(position) == RECOMMEND){
             RecommendViewHolder recommendViewHolder = (RecommendViewHolder) holder;
-            recommendViewHolder.setData(resultBean.getRecommend_info());
-        }else if(getItemViewType(position)==HOT){
-            HotViewHolder hotViewHolder = (HotViewHolder) holder;
-            hotViewHolder.setData(resultBean.getHot_info());
-        }**/
+            if (resultBean != null) {
+                recommendViewHolder.setData(resultBean.getRecommend_info());
+            }else{
+                Log.e(TAG, "result为null");
+            }
+        }
     }
 
 
@@ -251,6 +256,61 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     }
 
 
+    class DiscountViewHolder extends RecyclerView.ViewHolder {
+        private Context context;
+        private GridView gridView;
+        private List<ResultBeanData.ResultBean.DiscountInfoBean> discountList;
+        private DiscountAdapter discountAdapter;
+
+        public DiscountViewHolder(Context context, View itemView) {
+            super(itemView);
+            this.context = context;
+            gridView = (GridView) itemView.findViewById(R.id.discount_gridView);
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Toast.makeText(mContext, "position" + position, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        public void setData(List<ResultBeanData.ResultBean.DiscountInfoBean> discountList) {
+            this.discountList = discountList;
+            discountAdapter = new DiscountAdapter(context, discountList);
+            gridView.setAdapter(discountAdapter);
+        }
+
+
+    }
+
+        class RecommendViewHolder extends RecyclerView.ViewHolder{
+            private Context context;
+            private GridView gridView;
+            private List<ResultBeanData.ResultBean.RecommendInfoBean> recommendList;
+            private RecommendAdapter recommendAdapter;
+
+            public RecommendViewHolder(Context context,View itemView) {
+                super(itemView);
+                this.context = context;
+                gridView = (GridView) itemView.findViewById(R.id.recommend_gridView);
+                gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Toast.makeText(mContext, "position" + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            public void setData(List<ResultBeanData.ResultBean.RecommendInfoBean> recommendList) {
+                this.recommendList = recommendList;
+                recommendAdapter = new RecommendAdapter(context,recommendList);
+                gridView.setAdapter(recommendAdapter);
+            }
+    }
+
+
+
+
 
 
 
@@ -282,6 +342,6 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 5;
     }
 }

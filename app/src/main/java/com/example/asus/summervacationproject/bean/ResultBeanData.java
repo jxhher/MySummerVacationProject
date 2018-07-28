@@ -246,7 +246,7 @@ public class ResultBeanData{
         public static class DiscountInfoBean {
             private String name;
             private String image;
-            private int product_id;
+            private int id;
             private String url;
 
             public String getName() {
@@ -273,28 +273,37 @@ public class ResultBeanData{
                 this.url = url;
             }
 
-            public int getProduct_id() {
-                return product_id;
+            public int getId() {
+                return id;
             }
 
-            public void setProduct_id(int product_id) {
-                this.product_id = product_id;
+            public void setId(int id) {
+                this.id = id;
             }
         }
 
 
         public static class RecommendInfoBean {
-            private String product_id;
+            private int id;
             private String name;
-            private String cover_price;
-            private String figure;
+            private int cover_price;
+            private String image;
+            private String url;
 
-            public String getProduct_id() {
-                return product_id;
+            public int getId() {
+                return id;
             }
 
-            public void setProduct_id(String product_id) {
-                this.product_id = product_id;
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public int getCover_price() {
+                return cover_price;
+            }
+
+            public void setCover_price(int cover_price) {
+                this.cover_price = cover_price;
             }
 
             public String getName() {
@@ -305,30 +314,20 @@ public class ResultBeanData{
                 this.name = name;
             }
 
-            public String getCover_price() {
-                return cover_price;
+            public String getImage() {
+                return image;
             }
 
-            public void setCover_price(String cover_price) {
-                this.cover_price = cover_price;
+            public void setImage(String image) {
+                this.image = image;
             }
 
-            public String getFigure() {
-                return figure;
+            public String getUrl() {
+                return url;
             }
 
-            public void setFigure(String figure) {
-                this.figure = figure;
-            }
-
-            @Override
-            public String toString() {
-                return "RecommendInfoBean{" +
-                        "product_id='" + product_id + '\'' +
-                        ", name='" + name + '\'' +
-                        ", cover_price='" + cover_price + '\'' +
-                        ", figure='" + figure + '\'' +
-                        '}';
+            public void setUrl(String url) {
+                this.url = url;
             }
         }
     }
