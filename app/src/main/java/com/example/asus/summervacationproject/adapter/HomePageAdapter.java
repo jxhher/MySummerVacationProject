@@ -1,8 +1,8 @@
 package com.example.asus.summervacationproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +10,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.asus.summervacationproject.R;
+import com.example.asus.summervacationproject.activity.GoodsInfoActivity;
+import com.example.asus.summervacationproject.bean.GoodsBean;
 import com.example.asus.summervacationproject.bean.ResultBeanData;
 import com.example.asus.summervacationproject.utils.Config;
 import com.squareup.picasso.Picasso;
@@ -46,7 +46,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     private static final int BRAND = 2;
     private static final int DISCOUNT = 3;
     private static final int RECOMMEND = 4;
-
+    private static final String GOODS_BEAN = "goodsBean";
     /**
      * 用来初始化布局
      */
@@ -156,7 +156,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             this.banner = (Banner) itemView.findViewById(R.id.banner);
         }
 
-        public void setData(List<ResultBeanData.ResultBean.BannerInfoBean> banner_info){
+        public void setData(final List<ResultBeanData.ResultBean.BannerInfoBean> banner_info){
             ArrayList<String> imageUrlList = new ArrayList<>();
             for(int i=0;i<banner_info.size();i++){
                 imageUrlList.add(banner_info.get(i).getImage());
@@ -182,16 +182,12 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 @Override
                 public void OnBannerClick(int position) {
                     Toast.makeText(mContext, "position==" + position, Toast.LENGTH_SHORT).show();
-                    startBannerValueActivity();
+                    GoodsBean goodsBean  = new GoodsBean();;
+                    startBannerValueActivity(goodsBean);
                 }
             });
         }
 
-        private void startBannerValueActivity() {
-//            Intent intent = new Intent(mContext, GoodsInfoActivuty.class);
-//            intent.putExtra(GOODS_BEAN,goodsBean);
-//            mContext.startActivity(intent);
-        }
     }
 
 
@@ -297,6 +293,12 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Toast.makeText(mContext, "position" + position, Toast.LENGTH_SHORT).show();
+                        GoodsBean goodsBean  = new GoodsBean();
+                        goodsBean.setCover_price(recommendList.get(position).getCover_price());
+                        goodsBean.setName(recommendList.get(position).getName());
+                        goodsBean.setImage(recommendList.get(position).getImage());
+                        goodsBean.setProduct_id(recommendList.get(position).getId());
+                        startBannerValueActivity(goodsBean);
                     }
                 });
             }
@@ -310,6 +312,11 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
 
 
+        private void startBannerValueActivity(GoodsBean goodsBean) {
+            Intent intent = new Intent(mContext, GoodsInfoActivity.class);
+            intent.putExtra(GOODS_BEAN,goodsBean);
+            mContext.startActivity(intent);
+        }
 
 
 

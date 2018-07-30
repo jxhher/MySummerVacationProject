@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--标题栏-->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        android:paddingLeft="10dp"
+        >
+        <LinearLayout
+            android:paddingLeft="5dp"
+            android:layout_width="40dp"
+            android:layout_height="match_parent">
+
+    <ImageButton
+        android:id="@+id/good_back_imageButton48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/image_back_button16"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+        </LinearLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/good_tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_light"
+        app:tabIndicatorColor="@android:color/holo_red_dark"
+        app:tabSelectedTextColor="@android:color/holo_red_dark"
+        app:tabTextColor="@color/cardview_dark_background"
+        android:layout_weight="1" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#eeee" />
+
+    <!--帧布局-->
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbars="none"-->
+        <!--android:layout_weight="1">-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/good_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+    <!--</ScrollView>-->
+
+    <!--底部导航栏-->
+    <LinearLayout
+        android:id="@+id/good_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/good_bottom_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="1dp"
+            android:drawableTop="@drawable/image_good_service"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="客服"
+            android:textColor="#AAAAAA" />
+
+        <TextView
+            android:id="@+id/good_bottom_shopping"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="1dp"
+            android:drawableTop="@drawable/image_good_shopping"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="店铺"
+            android:textColor="#AAAAAA" />
+
+
+        <TextView
+            android:id="@+id/good_bottom_collection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="1dp"
+            android:drawableTop="@drawable/image_good_collect"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="收藏"
+            android:textColor="#AAAAAA" />
+
+        <Button
+            android:id="@+id/good_bottom_add_cart"
+            android:layout_width="110dp"
+            android:layout_height="51dp"
+            android:layout_gravity="center"
+            android:background="#FDB119"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="加入购物车"
+            android:textColor="#fff" />
+        <Button
+            android:id="@+id/goods_bottom_bug_now"
+            android:layout_width="110dp"
+            android:layout_height="51dp"
+            android:layout_gravity="center"
+            android:background="#DF3033"
+            android:gravity="center"
+            android:text="立即购买"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+</LinearLayout>

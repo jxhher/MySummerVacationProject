@@ -8,13 +8,13 @@ import java.io.Serializable;
 
 public class GoodsBean implements Serializable {
     //价格
-    private String cover_price;
+    private int cover_price;
     //图片
-    private String figure;
+    private String image;
     //名称
     private String name;
     //产品id
-    private String product_id;
+    private int product_id;
 
     private int number = 1;
 
@@ -39,20 +39,20 @@ public class GoodsBean implements Serializable {
         this.number = number;
     }
 
-    public String getCover_price() {
+    public int getCover_price() {
         return cover_price;
     }
 
-    public void setCover_price(String cover_price) {
+    public void setCover_price(int cover_price) {
         this.cover_price = cover_price;
     }
 
-    public String getFigure() {
-        return figure;
+    public String getImage() {
+        return image;
     }
 
-    public void setFigure(String figure) {
-        this.figure = figure;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
@@ -63,24 +63,12 @@ public class GoodsBean implements Serializable {
         this.name = name;
     }
 
-    public String getProduct_id() {
+    public int getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(String product_id) {
+    public void setProduct_id(int product_id) {
         this.product_id = product_id;
-    }
-
-    @Override
-    public String toString() {
-        return "GoodsBean{" +
-                "cover_price='" + cover_price + '\'' +
-                ", figure='" + figure + '\'' +
-                ", name='" + name + '\'' +
-                ", product_id='" + product_id + '\'' +
-                ", number=" + number +
-                ", isSelected=" + isSelected +
-                '}';
     }
 }
 

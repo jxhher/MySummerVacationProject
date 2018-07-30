@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/good_main_imageView"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_gravity="center_horizontal" />
+            <TextView
+                android:id="@+id/tv_good_info_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:text="价格"
+                android:textColor="#FF0000" />
+            <LinearLayout
+                android:orientation ="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:textColor="#AAAAAA"
+                android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="快递:0.00"
+                android:layout_marginLeft="7dp"/>
+            <TextView
+                android:id="@+id/good_main_expressage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="月销:0"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/good_main_site"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="广东深圳" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeee" />
+            <TextView
+                android:id="@+id/good_main_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:padding="8dp"
+                android:text="【预售】《来年就交给你啦》珍藏画册 限量礼盒版"
+                android:textColor="#323427"
+                android:textSize="35px"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeee" />
+            <LinearLayout
+                android:orientation ="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="#AAAAAA"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="正品保证"
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="7dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="寄宿退款"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="赠运险费"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="七天无理由退换"
+                    android:gravity="center_horizontal"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="#eeee" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <ImageView
+                    android:id="@+id/good_main_shopping_icon"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp" />
+                <TextView
+                    android:id="@+id/good_main_shopping_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
