@@ -1,12 +1,23 @@
 package com.example.asus.summervacationproject.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.nfc.Tag;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +26,8 @@ import android.os.Bundle;
 
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +38,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.summervacationproject.R;
@@ -34,12 +48,18 @@ import com.example.asus.summervacationproject.fragment.ClassificationFragment;
 import com.example.asus.summervacationproject.fragment.DiscoverFragment;
 import com.example.asus.summervacationproject.fragment.HomePageFragment;
 import com.example.asus.summervacationproject.fragment.ShoppingCartFragment;
+import com.example.asus.summervacationproject.utils.BitmapUtils;
+import com.example.asus.summervacationproject.utils.Config;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 /**
@@ -56,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
-    @BindView(R.id.left_drawer_list)
-    ListView mDrawerListView;
+    @BindView(R.id.drawer_layout_navigationView)
+    NavigationView navigationView;
     @BindView(R.id.rg_main)
     RadioGroup radioGroup;
     private ArrayList<String> menuLists = new ArrayList<String>();
@@ -69,16 +89,25 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     private List<BaseFragment> mBaseFragmentList;
     private int selectPostion;   //选中的Fragment对应的位置
     private Fragment mContent;
+    private IntentFilter intentFilter;
+    private LocalReceiver localReceiver;
+    private LocalBroadcastManager localBroadcastManager;
+    protected  SharedPreferences sp;
+    private ImageView head_portrait_imageView;
+    private TextView head_userName_textView;
+    private String TAG = MainActivity.class.getSimpleName();
+    private boolean login_flag = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         initToolBar();
         initDrawerLayout();
         initFragment();
         setFragment();
-
         //监听点击事件实现Popmenu效果
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,18 +151,126 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
             }
         };
         drawerLayout.setDrawerListener(mDrawerToggle);
-        for(int i=0;i<6;i++)
-            menuLists.add("DrawerLayout"+i);
-        adapter = new ListViewAdapter(this,menuLists,R.layout.adapter_list_item);
-        mDrawerListView.setAdapter(adapter);
-
+        View headerView = navigationView.getHeaderView(0);
+        navigationView.setItemIconTintList(null);
+        head_portrait_imageView = (ImageView) headerView.findViewById(R.id.headerView_head_portrait);
+        head_portrait_imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(login_flag){
+                    Intent intent = new Intent(MainActivity.this,UserInfoActivity.class);
+                    intent.putExtra("name",sp.getString("name",""));
+                    intent.putExtra("sex",sp.getString("sex",""));
+                    startActivity(intent);
+                }
+                else login();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
+        head_userName_textView = (TextView)headerView.findViewById(R.id.headView_userName);
+        head_userName_textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(login_flag){
+                    Intent intent = new Intent(MainActivity.this,UserInfoActivity.class);
+                    intent.putExtra("name",sp.getString("name",""));
+                    intent.putExtra("sex",sp.getString("sex",""));
+                    startActivity(intent);
+                }
+                else login();
+                drawerLayout.closeDrawer(GravityCompat.START);
+            }
+        });
+        intentFilter = new IntentFilter();
+        intentFilter.addAction("com.example.asus.summervacationproject.activity.LoginActivity");
+        localReceiver = new LocalReceiver();
+        localBroadcastManager.registerReceiver(localReceiver, intentFilter);
+        islogin();
     }
 
-    @OnItemClick(R.id.left_drawer_list)
-    void onItemClick(int potion) {
-        Toast.makeText(this, "点击了:" + potion, Toast.LENGTH_SHORT).show();
-        drawerLayout.closeDrawer(mDrawerListView );
+    private void islogin() {
+        SharedPreferences sp2 = MainActivity.this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        String name = sp2.getString("name", "");
+        if (TextUtils.isEmpty(name)) {
+            return;
+        }else{
+            setUser();
+        }
     }
+
+    public void setUser(){
+        sp = MainActivity.this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        String imageUrl = sp.getString("imageUrl","");
+        // toolbar.setNavigationIcon();//设置toolbar导航栏图标
+        head_userName_textView.setText(sp.getString("name",""));
+          /*  //判断本地是否已经保存头像的图片，如果有，则不再执行联网操作
+            boolean isExist = readImage();
+            if(isExist){
+                return;
+            }*/
+        //使用Picasso联网获取图
+        Log.e(TAG,Config.Base_URl_HEAD_PORTRAIT+sp.getString("imageUrl",""));
+        Picasso.with(MainActivity.this).load(Config.Base_URl_HEAD_PORTRAIT+sp.getString("imageUrl","")).transform(new Transformation() {
+            @Override
+            public Bitmap transform(Bitmap source) {//下载以后的内存中的bitmap对象
+                //压缩处理
+                Bitmap bitmap = BitmapUtils.zoom(source,dp2px(62),dp2px(62));
+                //圆形处理
+                bitmap = BitmapUtils.circleBitmap(bitmap);
+                //回收bitmap资源
+                source.recycle();
+                return bitmap;
+            }
+
+            @Override
+            public String key() {
+                return "";//需要保证返回值不能为null。否则报错
+            }
+        }).into( head_portrait_imageView);
+        login_flag = true;
+    }
+
+
+    //将dp转化为px
+    public  int dp2px(int dp){
+        //获取手机密度
+        float density = MainActivity.this.getResources().getDisplayMetrics().density;
+        return (int) (dp * density + 0.5);//实现四舍五入
+    }
+
+
+    class LocalReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+           setUser();
+        }
+        private boolean readImage() {
+            File filesDir;
+            if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
+                //路径1：storage/sdcard/Android/data/包名/files
+                filesDir = MainActivity.this.getExternalFilesDir("");
+
+            }else{//手机内部存储
+                //路径：data/data/包名/files
+                filesDir = MainActivity.this.getFilesDir();
+
+            }
+            File file = new File(filesDir,"icon.png");
+            if(file.exists()){
+                //存储--->内存
+                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                head_portrait_imageView.setImageBitmap(bitmap);
+                return true;
+            }
+            return false;
+
+        }
+    }
+
+        private void login() {
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
 
     private void initFragment() {
         mBaseFragmentList = new ArrayList<>();
@@ -281,6 +418,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);  //为防止内存泄漏，移除所有的未被执行的消息
+        localBroadcastManager.unregisterReceiver(localReceiver);
     }
 
 

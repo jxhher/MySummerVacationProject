@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:background="@drawable/images_background"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/headerView_head_portrait"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image_head_portrait"/>
+    <TextView
+        android:id="@+id/headView_userName"
+        android:layout_marginTop="10dp"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/headerView_head_portrait"
+        android:text="点击登录"
+        android:textSize="40px"
+        android:gravity="center"/>
+</RelativeLayout>

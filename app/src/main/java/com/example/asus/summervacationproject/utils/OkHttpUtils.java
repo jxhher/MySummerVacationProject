@@ -2,6 +2,9 @@ package com.example.asus.summervacationproject.utils;
 
 
 import android.os.AsyncTask;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 
@@ -16,6 +19,11 @@ import okhttp3.Response;
  *
  */
 
+/**
+ * Post两种传输：
+ * Form表单数据的传递
+ * Json格式数据的传递
+ */
 public class OkHttpUtils {
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
@@ -34,12 +42,11 @@ public class OkHttpUtils {
                                 .url(url)
                                 .build();
                         try {
-                            response = client.newCall(request).execute();
+                            response = client.newCall(request).execute();  // 异步请求 okHttpClient.newCall(request).enqueue(new Callback() {}
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                         break;
-
                     case POST:
                         RequestBody body = RequestBody.create(JSON, json);
                         Request request2 = new Request.Builder()
@@ -47,7 +54,7 @@ public class OkHttpUtils {
                                 .post(body)
                                 .build();
                         try {
-                            response = client.newCall(request2).execute();
+                            response = client.newCall(request2).execute();// 异步请求 okHttpClient.newCall(request).enqueue(new Callback(){}
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

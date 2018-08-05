@@ -2,13 +2,13 @@ package com.example.asus.summervacationproject.fragment;
 
 
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.asus.summervacationproject.R;
 import com.example.asus.summervacationproject.baseclass.BaseFragment;
 
 /**
  * Created by ASUS on 2018/7/28.
+ * Updated by ASUS on 2018/7/30  完成商品信息主页面的的布局
  */
 
 public class Goods_Main_Fragment extends BaseFragment {
