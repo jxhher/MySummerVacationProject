@@ -51,6 +51,7 @@ import com.example.asus.summervacationproject.fragment.HomePageFragment;
 import com.example.asus.summervacationproject.fragment.ShoppingCartFragment;
 import com.example.asus.summervacationproject.utils.BitmapUtils;
 import com.example.asus.summervacationproject.utils.Config;
+import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -182,18 +183,18 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         SharedPreferences sp2 = MainActivity.this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
 
 
-            SharedPreferences.Editor editor = sp2.edit();//获取Editor
+          /*  SharedPreferences.Editor editor = sp2.edit();//获取Editor
             editor.clear();
             editor.commit();
             Log.i(TAG, "清空数据");
+*/
 
-
-   /*      String name = sp2.getString("name", "");
+         String name = sp2.getString("name", "");
         if (TextUtils.isEmpty(name)) {
             return;
         }else{
             setUser();
-        }*/
+        }
     }
 
     public void setUser(){
@@ -201,18 +202,18 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         String imageUrl = sp.getString("imageUrl","");
         // toolbar.setNavigationIcon();//设置toolbar导航栏图标
         head_userName_textView.setText(sp.getString("name",""));
-          /*  //判断本地是否已经保存头像的图片，如果有，则不再执行联网操作
+          /*  //判断本地是否已经保存头像的图片，如果有，则不再执行联网操作*/
             boolean isExist = readImage();
             if(isExist){
                 return;
-            }*/
+            }
         //使用Picasso联网获取图
         Log.e(TAG,Config.Base_URl_HEAD_PORTRAIT+sp.getString("imageUrl",""));
         Picasso.with(MainActivity.this).load(Config.Base_URl_HEAD_PORTRAIT+sp.getString("imageUrl","")).transform(new Transformation() {
             @Override
             public Bitmap transform(Bitmap source) {//下载以后的内存中的bitmap对象
                 //压缩处理
-                Bitmap bitmap = BitmapUtils.zoom(source,dp2px(62),dp2px(62));
+                Bitmap bitmap = BitmapUtils.zoom(source,dp2px(70),dp2px(70));
                 //圆形处理
                 bitmap = BitmapUtils.circleBitmap(bitmap);
                 //回收bitmap资源
@@ -224,10 +225,31 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
             public String key() {
                 return "";//需要保证返回值不能为null。否则报错
             }
-        }).into( head_portrait_imageView);
+        }).memoryPolicy(MemoryPolicy.NO_CACHE).into( head_portrait_imageView);  //memoryPolicy(MemoryPolicy.NO_CACHE)取消从缓存中读取
         login_flag = true;
     }
 
+    private boolean readImage() {
+        File filesDir;
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
+            //路径1：storage/sdcard/Android/data/包名/files
+            filesDir = MainActivity.this.getExternalFilesDir("");
+
+        }else{//手机内部存储
+            //路径：data/data/包名/files
+            filesDir = MainActivity.this.getFilesDir();
+
+        }
+        File file = new File(filesDir,"icon.png");
+        if(file.exists()){
+            //存储--->内存
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            head_portrait_imageView.setImageBitmap(bitmap);
+            return true;
+        }
+        return false;
+
+    }
 
     //将dp转化为px
     public  int dp2px(int dp){
@@ -240,28 +262,8 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     class LocalReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-           setUser();
-        }
-        private boolean readImage() {
-            File filesDir;
-            if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
-                //路径1：storage/sdcard/Android/data/包名/files
-                filesDir = MainActivity.this.getExternalFilesDir("");
-
-            }else{//手机内部存储
-                //路径：data/data/包名/files
-                filesDir = MainActivity.this.getFilesDir();
-
-            }
-            File file = new File(filesDir,"icon.png");
-            if(file.exists()){
-                //存储--->内存
-                Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                head_portrait_imageView.setImageBitmap(bitmap);
-                return true;
-            }
-            return false;
-
+            System.out.println("更新抽屉");
+            setUser();
         }
     }
 

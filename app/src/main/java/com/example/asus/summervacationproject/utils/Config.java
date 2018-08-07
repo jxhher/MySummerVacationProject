@@ -14,4 +14,5 @@ public class Config {
     public static final String FIND_SITEOFRECEIVE_URL = SERVEL_URL+"/servlet/findSiteOfReceiveServlet";
     public static final String DELETE_SITEODRECEIVE = SERVEL_URL+"/servlet/deleteSiteOfReceiveServlet";
     public static final String ADD_SITEOFRECEIVE = SERVEL_URL+"/servlet/addSiteOfReceiveServlet";
+    public static final String SEND_HEADPORTRAIT = SERVEL_URL+"/servlet/sendHeadPortraitServlet";
 }
