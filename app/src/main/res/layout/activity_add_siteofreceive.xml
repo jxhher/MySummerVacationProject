@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/manage_add_siteOfReceive_linearLayout"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/manage_add_siteOfReceive_button_back"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/image_back_button"
+            android:paddingRight="7dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="新增收货地址"
+            android:textSize="37px"
+            android:gravity="center_vertical"
+            android:textColor="@color/cardview_dark_background"
+            />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#eeee" />
+        <EditText
+            android:id="@+id/add_receiveName"
+            android:hint="收货人姓名"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@null"
+            android:maxLines="1"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eeee" />
+        <EditText
+            android:id="@+id/add_receivePhoneNumber"
+            android:hint="手机号码"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@null"
+            android:maxLines="1"
+            android:inputType="number"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eeee" />
+        <EditText
+            android:id="@+id/add_receiveSite"
+            android:hint="收货地点"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@null"
+            android:maxLines="1"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#eeee" />
+        <EditText
+            android:id="@+id/add_receivePostalCode"
+            android:hint="邮政编码"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@null"
+            android:maxLines="1"
+            android:inputType="number"/>
+    <Button
+        android:id="@+id/add_saveButton"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:text="保   存"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#FF0000"
+        android:textSize="32px"/>
+</LinearLayout>

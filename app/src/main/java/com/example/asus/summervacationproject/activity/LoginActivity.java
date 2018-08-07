@@ -39,6 +39,7 @@ import butterknife.OnClick;
 
 /**
  * Created by ASUS on 2018/7/30.
+ * Updated by ASUS on 2018/8/5 完成登录功能及获取服务器端数据，完成对应UI的数据显示
  */
 
 public class LoginActivity extends AppCompatActivity {
@@ -68,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
       void login(){
         InputMethodManager imm =(InputMethodManager)getSystemService(
                 Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(et_login_pwd.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(et_login_pwd.getWindowToken(), 0);   //收回软键盘
+
         loginPage_ProgressBar.setVisibility(View.VISIBLE);
         String phoneNumber = et_login_number.getText().toString().trim();
         String password = et_login_pwd.getText().toString().trim();
@@ -117,17 +119,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void changeUI() {
         Intent intent = new Intent("com.example.asus.summervacationproject.activity.LoginActivity");
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);     //发送广播更新抽屉，显示用户名及头像
     }
 
     private void saveUser(User user) {
-        SharedPreferences sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        SharedPreferences sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);  //保存数据到本地
         SharedPreferences.Editor editor = sp.edit();
-        editor.putInt("id",user.getId());
+        editor.putString("id",user.getId()+"");
         editor.putString("name",user.getName());
         editor.putString("password",user.getPassword());
         editor.putString("imageUrl",user.getImageUrl());
-        editor.putLong("phoneNumber",user.getPhoneNumber());
+        editor.putString("phoneNumber",user.getPhoneNumber()+"");
         editor.putString("sex", user.getSex());
         editor.putString("idOfBuyed",user.getIdOfBuyed());
         editor.putString("idOfShoppingCart",user.getIdOfShoppingCart());

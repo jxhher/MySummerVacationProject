@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/manage_siteOfReceive_linearLayout_title"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/manage_siteOfReceive_button_back"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/image_back_button"
+            android:paddingRight="7dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="管理收货地址"
+            android:textSize="37px"
+            android:gravity="center_vertical"
+            android:textColor="@color/cardview_dark_background"
+            />
+    </LinearLayout>
+    <ListView
+        android:id="@+id/manage_siteOfReceive_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="3dp"
+        android:layout_weight="1"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+    <Button
+        android:id="@+id/manage_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="新增收货地址"
+        android:textSize="35px"
+        android:background="#FF0000"
+        />
+    </LinearLayout>
+</LinearLayout>

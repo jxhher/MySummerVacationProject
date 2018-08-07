@@ -35,6 +35,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.RadioGroup;
@@ -154,34 +155,23 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         View headerView = navigationView.getHeaderView(0);
         navigationView.setItemIconTintList(null);
         head_portrait_imageView = (ImageView) headerView.findViewById(R.id.headerView_head_portrait);
-        head_portrait_imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(login_flag){
-                    Intent intent = new Intent(MainActivity.this,UserInfoActivity.class);
-                    intent.putExtra("name",sp.getString("name",""));
-                    intent.putExtra("sex",sp.getString("sex",""));
-                    startActivity(intent);
-                }
-                else login();
-                drawerLayout.closeDrawer(GravityCompat.START);
-            }
-        });
         head_userName_textView = (TextView)headerView.findViewById(R.id.headView_userName);
-        head_userName_textView.setOnClickListener(new View.OnClickListener() {
+        LinearLayout head_linearLayout = (LinearLayout) headerView.findViewById(R.id.drawer_layout_head_linearLayout);
+        head_linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(login_flag){
                     Intent intent = new Intent(MainActivity.this,UserInfoActivity.class);
                     intent.putExtra("name",sp.getString("name",""));
                     intent.putExtra("sex",sp.getString("sex",""));
+                    intent.putExtra("id",sp.getString("id",""));
                     startActivity(intent);
                 }
                 else login();
                 drawerLayout.closeDrawer(GravityCompat.START);
             }
         });
-        intentFilter = new IntentFilter();
+        intentFilter = new IntentFilter();                            //注册广播，等待接收个人信息
         intentFilter.addAction("com.example.asus.summervacationproject.activity.LoginActivity");
         localReceiver = new LocalReceiver();
         localBroadcastManager.registerReceiver(localReceiver, intentFilter);
@@ -190,12 +180,20 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
 
     private void islogin() {
         SharedPreferences sp2 = MainActivity.this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
-        String name = sp2.getString("name", "");
+
+
+            SharedPreferences.Editor editor = sp2.edit();//获取Editor
+            editor.clear();
+            editor.commit();
+            Log.i(TAG, "清空数据");
+
+
+   /*      String name = sp2.getString("name", "");
         if (TextUtils.isEmpty(name)) {
             return;
         }else{
             setUser();
-        }
+        }*/
     }
 
     public void setUser(){
