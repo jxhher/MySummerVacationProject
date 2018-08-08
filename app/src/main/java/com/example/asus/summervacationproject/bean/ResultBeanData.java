@@ -284,18 +284,18 @@ public class ResultBeanData{
 
 
         public static class RecommendInfoBean {
-            private int id;
+            private int goodId;
             private String name;
             private int cover_price;
-            private String image;
-            private String url;
+            private String imageUrl;
+            private int shopId;
 
-            public int getId() {
-                return id;
+            public int getGoodId() {
+                return goodId;
             }
 
-            public void setId(int id) {
-                this.id = id;
+            public void setGoodId(int goodId) {
+                this.goodId = goodId;
             }
 
             public int getCover_price() {
@@ -314,20 +314,20 @@ public class ResultBeanData{
                 this.name = name;
             }
 
-            public String getImage() {
-                return image;
+            public String getImageUrl() {
+                return imageUrl;
             }
 
-            public void setImage(String image) {
-                this.image = image;
+            public void setImageUrl(String imageUrl) {
+                this.imageUrl = imageUrl;
             }
 
-            public String getUrl() {
-                return url;
+            public int getShopId() {
+                return shopId;
             }
 
-            public void setUrl(String url) {
-                this.url = url;
+            public void setShopId(int shopId) {
+                this.shopId = shopId;
             }
         }
     }

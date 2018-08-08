@@ -46,7 +46,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     private static final int BRAND = 2;
     private static final int DISCOUNT = 3;
     private static final int RECOMMEND = 4;
-    private static final String GOODS_BEAN = "goodsBean";
+    private static final String GOOD_BEAN = "goodBean";
     /**
      * 用来初始化布局
      */
@@ -190,7 +190,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
     }
 
+    private void startBannerValueActivity(GoodsBean goodsBean) {
 
+    }
 
 
     class ThemeViewHolder extends RecyclerView.ViewHolder{
@@ -296,9 +298,10 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                         GoodsBean goodsBean  = new GoodsBean();
                         goodsBean.setCover_price(recommendList.get(position).getCover_price());
                         goodsBean.setName(recommendList.get(position).getName());
-                        goodsBean.setImage(recommendList.get(position).getImage());
-                        goodsBean.setProduct_id(recommendList.get(position).getId());
-                        startBannerValueActivity(goodsBean);
+                        goodsBean.setImageUrl(recommendList.get(position).getImageUrl());
+                        goodsBean.setGoodId(recommendList.get(position).getGoodId());
+                        goodsBean.setShopId(recommendList.get(position).getShopId());
+                        startGoodValueActivity(goodsBean);
                     }
                 });
             }
@@ -312,9 +315,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
 
 
-        private void startBannerValueActivity(GoodsBean goodsBean) {
+        private void startGoodValueActivity(GoodsBean goodBean) {
             Intent intent = new Intent(mContext, GoodsInfoActivity.class);
-            intent.putExtra(GOODS_BEAN,goodsBean);
+            intent.putExtra(GOOD_BEAN,goodBean);
             mContext.startActivity(intent);
         }
 

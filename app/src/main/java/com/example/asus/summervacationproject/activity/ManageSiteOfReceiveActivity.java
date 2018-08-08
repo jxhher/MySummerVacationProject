@@ -36,7 +36,7 @@ import butterknife.OnClick;
 
 /**
  * Created by ASUS on 2018/8/6.
- * uPdatad by ASUS on 2018/8/7  完成收货地址模块的数据查找、增加，解决数据传输的bug，
+ * uPdatad by ASUS on 2018/8/7  完成收货地址模块的数据查找、增加、删除，解决数据传输的bug，
  */
 
 public class ManageSiteOfReceiveActivity extends AppCompatActivity {

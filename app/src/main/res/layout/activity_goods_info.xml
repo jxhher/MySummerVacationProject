@@ -72,6 +72,7 @@
             android:drawableTop="@drawable/image_good_service"
             android:gravity="center"
             android:padding="2dp"
+            android:textSize="14sp"
             android:text="客服"
             android:textColor="#AAAAAA" />
 
@@ -84,6 +85,7 @@
             android:drawableTop="@drawable/image_good_shopping"
             android:gravity="center"
             android:padding="2dp"
+            android:textSize="14sp"
             android:text="店铺"
             android:textColor="#AAAAAA" />
 
@@ -97,6 +99,7 @@
             android:drawableTop="@drawable/image_good_collect"
             android:gravity="center"
             android:padding="2dp"
+            android:textSize="14sp"
             android:text="收藏"
             android:textColor="#AAAAAA" />
 

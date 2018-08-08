@@ -30,6 +30,7 @@ import butterknife.OnClick;
 
 /**
  * Created by ASUS on 2018/8/6.
+ * Updated by ASUS on 2018/8/7  完成界面布局及连接数据库进行操作
  */
 
 public class AddSiteOfReceiveActivity extends AppCompatActivity{

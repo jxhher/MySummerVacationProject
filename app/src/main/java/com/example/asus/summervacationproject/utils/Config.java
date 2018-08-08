@@ -16,4 +16,6 @@ public class Config {
     public static final String ADD_SITEOFRECEIVE = SERVEL_URL+"/servlet/addSiteOfReceiveServlet";
     public static final String SEND_HEADPORTRAIT = SERVEL_URL+"/servlet/sendHeadPortraitServlet";
     public static final String REGISTER_UTL = SERVEL_URL+"/servlet/registerServlet";
+    public static final String GET_GOOD_URL = SERVEL_URL+"/servlet/getGoodInfoServlet";
+    public static final String GET_SHOP_URL = SERVEL_URL+"/servlet/getShopInfoServlet";
 }

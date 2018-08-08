@@ -81,6 +81,8 @@ public class UserInfoActivity extends AppCompatActivity {
     ImageView userInfo_imageView;
     @BindView(R.id.userInfo_progressBar)
     ProgressBar userInfo_progressBar;
+    @BindView(R.id.userInfo_age)
+    TextView userInfo_age;
 
     private String updateFlag = null;
     private final int IMAGEURL = 0;
@@ -104,7 +106,7 @@ public class UserInfoActivity extends AppCompatActivity {
         id = Integer.parseInt(intent.getStringExtra("id").toString());
         userInfo_name.setText(intent.getStringExtra("name"));
         userInfo_sex.setText(intent.getStringExtra("sex"));
-
+        userInfo_age.setText(intent.getStringExtra("age"));
     }
     @OnClick(R.id.userinfo_linearLayout_back)
     void OnBackButtonClick(){

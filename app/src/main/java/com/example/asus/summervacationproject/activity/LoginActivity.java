@@ -131,6 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("imageUrl",user.getImageUrl());
         editor.putString("phoneNumber",user.getPhoneNumber()+"");
         editor.putString("sex", user.getSex());
+        editor.putString("age",user.getAge()+"");
         editor.putString("idOfBuyed",user.getIdOfBuyed());
         editor.putString("idOfShoppingCart",user.getIdOfShoppingCart());
         editor.putString("siteOfReceive",user.getSiteOfReceive());

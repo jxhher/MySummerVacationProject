@@ -57,7 +57,7 @@ public class RecommendAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         ResultBeanData.ResultBean.RecommendInfoBean recommend = recommendList.get(position);
-        Picasso.with(mContext).load(Config.BASE_URL_IMAGE+recommend.getImage()).into(viewHolder.imageView);
+        Picasso.with(mContext).load(Config.BASE_URL_IMAGE+recommend.getImageUrl()).into(viewHolder.imageView);
         viewHolder.textView_introduce.setText(recommend.getName());
         viewHolder.textView_price.setText("¥"+recommend.getCover_price());
         return convertView;

@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
                     intent.putExtra("name",sp.getString("name",""));
                     intent.putExtra("sex",sp.getString("sex",""));
                     intent.putExtra("id",sp.getString("id",""));
+                    intent.putExtra("age",sp.getString("age",""));
                     startActivity(intent);
                 }
                 else login();
@@ -207,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
                 .placeholder(R.drawable.image_head_portrait)
                 .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)        //跳过内存缓存,NO_CACHE:表示处理请求的时候跳过处理磁盘缓存,*NO_STORE: 表示请求成功之后，不将最终的结果存到内存。
                 .networkPolicy(NetworkPolicy.NO_CACHE,NetworkPolicy.NO_STORE)     //NO_CACHE: 表示处理请求的时候跳过处理磁盘缓存,NO_STORE:表示请求成功后，不将结果缓存到Disk
+                .error(R.drawable.image_error)
                 .into( head_portrait_imageView);
         login_flag = true;
     }

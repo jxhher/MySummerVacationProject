@@ -4,13 +4,13 @@
     <item
         android:id="@+id/favorite"
         android:icon="@mipmap/ic_launcher"
-        android:title="个人信息"/>
+        android:title="我的订单"/>
     </group>
     <group android:id="@+id/g2">
     <item
         android:id="@+id/wallet"
         android:icon="@mipmap/ic_launcher"
-        android:title="我的订单"/>
+        android:title="我的关注"/>
     </group>
     <group android:id="@+id/g3">
     <item

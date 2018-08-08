@@ -23,6 +23,7 @@ import butterknife.OnClick;
 
 /**
  * Created by ASUS on 2018/7/23.
+ * Updated by ASUS on 2018/8/8   更新优化界面布局，增加店铺布局，完成联网获取数据及显示
  */
 
 public class GoodsInfoActivity extends AppCompatActivity {
@@ -36,7 +37,6 @@ public class GoodsInfoActivity extends AppCompatActivity {
     public ArrayList<BaseFragment> fragments;
     public ViewPagerAdapter viewPagerAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +44,12 @@ public class GoodsInfoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        goodsBean = (GoodsBean) getIntent().getSerializableExtra("goodsBean");
+        goodsBean = (GoodsBean) getIntent().getSerializableExtra("goodBean");
+        System.out.println("shopId:"+goodsBean.getShopId());
         if (goodsBean != null) {
-            Toast.makeText(this, "goodsBean=="+goodsBean.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "goodId=="+goodsBean.getGoodId(), Toast.LENGTH_SHORT).show();
             fragments = new ArrayList<>();
-            fragments.add(new Goods_Main_Fragment());
+            fragments.add(new Goods_Main_Fragment(goodsBean));
             fragments.add(new Goods_Details_Fragment());
             fragments.add(new Goods_Evaluate_Fragment());
         }
