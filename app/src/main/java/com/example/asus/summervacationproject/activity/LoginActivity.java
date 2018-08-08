@@ -138,8 +138,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    @OnClick(R.id.btn_register)
+    @OnClick(R.id.login_register)
       void register(){
         loginPage_ProgressBar.setVisibility(View.VISIBLE);
+        Intent intent = new Intent(this,RegisterActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

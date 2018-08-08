@@ -118,7 +118,11 @@ public class AddSiteOfReceiveActivity extends AppCompatActivity{
         String siteOfeReceive = sp.getString("siteOfReceive","");
         System.out.println("result:"+result);
         System.out.println("siteOfReceive:"+siteOfeReceive);
-        siteOfeReceive=siteOfeReceive+","+result;
+        if("".equals(siteOfeReceive)){
+            siteOfeReceive=siteOfeReceive+result;
+        }else{
+            siteOfeReceive=siteOfeReceive+","+result;
+        }
         editor.putString("siteOfReceive",siteOfeReceive);
         editor.commit();
     }

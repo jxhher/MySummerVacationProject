@@ -52,6 +52,7 @@ import com.example.asus.summervacationproject.fragment.ShoppingCartFragment;
 import com.example.asus.summervacationproject.utils.BitmapUtils;
 import com.example.asus.summervacationproject.utils.Config;
 import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -99,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     private TextView head_userName_textView;
     private String TAG = MainActivity.class.getSimpleName();
     private boolean login_flag = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,14 +181,6 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
 
     private void islogin() {
         SharedPreferences sp2 = MainActivity.this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
-
-
-          /*  SharedPreferences.Editor editor = sp2.edit();//获取Editor
-            editor.clear();
-            editor.commit();
-            Log.i(TAG, "清空数据");
-*/
-
          String name = sp2.getString("name", "");
         if (TextUtils.isEmpty(name)) {
             return;
@@ -203,29 +195,19 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         // toolbar.setNavigationIcon();//设置toolbar导航栏图标
         head_userName_textView.setText(sp.getString("name",""));
           /*  //判断本地是否已经保存头像的图片，如果有，则不再执行联网操作*/
-            boolean isExist = readImage();
-            if(isExist){
-                return;
-            }
+//            boolean isExist = readImage();
+//            if(isExist){
+//                return;
+//            }
+
+        Picasso.with(getApplicationContext()).invalidate("send_head_portrait"+sp.getString("id","")+".png");    //清除本地缓存
         //使用Picasso联网获取图
         Log.e(TAG,Config.Base_URl_HEAD_PORTRAIT+sp.getString("imageUrl",""));
-        Picasso.with(MainActivity.this).load(Config.Base_URl_HEAD_PORTRAIT+sp.getString("imageUrl","")).transform(new Transformation() {
-            @Override
-            public Bitmap transform(Bitmap source) {//下载以后的内存中的bitmap对象
-                //压缩处理
-                Bitmap bitmap = BitmapUtils.zoom(source,dp2px(70),dp2px(70));
-                //圆形处理
-                bitmap = BitmapUtils.circleBitmap(bitmap);
-                //回收bitmap资源
-                source.recycle();
-                return bitmap;
-            }
-
-            @Override
-            public String key() {
-                return "";//需要保证返回值不能为null。否则报错
-            }
-        }).memoryPolicy(MemoryPolicy.NO_CACHE).into( head_portrait_imageView);  //memoryPolicy(MemoryPolicy.NO_CACHE)取消从缓存中读取
+        Picasso.with(MainActivity.this).load(Config.Base_URl_HEAD_PORTRAIT+sp.getString("imageUrl",""))
+                .placeholder(R.drawable.image_head_portrait)
+                .memoryPolicy(MemoryPolicy.NO_CACHE,MemoryPolicy.NO_STORE)        //跳过内存缓存,NO_CACHE:表示处理请求的时候跳过处理磁盘缓存,*NO_STORE: 表示请求成功之后，不将最终的结果存到内存。
+                .networkPolicy(NetworkPolicy.NO_CACHE,NetworkPolicy.NO_STORE)     //NO_CACHE: 表示处理请求的时候跳过处理磁盘缓存,NO_STORE:表示请求成功后，不将结果缓存到Disk
+                .into( head_portrait_imageView);
         login_flag = true;
     }
 
@@ -420,6 +402,4 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         handler.removeCallbacksAndMessages(null);  //为防止内存泄漏，移除所有的未被执行的消息
         localBroadcastManager.unregisterReceiver(localReceiver);
     }
-
-
 }

@@ -20,8 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="用户页面"
-            android:gravity="center"
-            android:textSize="47px"
+            android:gravity="center_vertical"
+            android:textSize="37px"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/cardview_dark_background"
 
 
@@ -44,7 +45,7 @@
             android:layout_centerVertical="true"
             android:text="手机号:"
             android:textColor="#333333"
-            android:textSize="18sp"/>
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/et_login_number"
@@ -60,7 +61,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="#5c5c5c"
-            android:textSize="18sp"/>
+            android:textSize="15sp"/>
     </RelativeLayout>
 
     <View
@@ -83,7 +84,7 @@
             android:layout_centerVertical="true"
             android:text="密码:"
             android:textColor="#333333"
-            android:textSize="18sp"/>
+            android:textSize="15sp"/>
 
         <EditText
             android:id="@+id/et_login_pwd"
@@ -98,7 +99,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="#5c5c5c"
-            android:textSize="18sp"/>
+            android:textSize="15sp"/>
     </RelativeLayout>
 
     <View
@@ -115,19 +116,19 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/images_login_button_background"
         android:text="登　录"
-        android:textColor="#ffffff"
+        android:textColor="#B4FFFF"
         android:textSize="18sp"
         android:layout_gravity="center"/>
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/login_register"
         android:layout_width="340dp"
         android:layout_height="40dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
         android:background="@drawable/images_login_button_background"
-        android:text="注  册"
-        android:textColor="#ffffff"
+        android:text="注   册"
+        android:textColor="#B4FFFF"
         android:textSize="18sp"
         android:layout_gravity="center"/>
     <ProgressBar

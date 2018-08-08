@@ -53,7 +53,7 @@
             android:text="头像"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="35px"
+            android:textSize="16sp"
             android:layout_centerVertical="true"
             android:textColor="@color/cardview_dark_background"/>
         <ImageView
@@ -77,14 +77,14 @@
             android:text="名称"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="35px"
+            android:textSize="16sp"
             android:textColor="@color/cardview_dark_background"/>
         <TextView
             android:id="@+id/userInfo_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textSize="28px"/>
+            android:textSize="15sp"/>
     </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -100,14 +100,14 @@
             android:text="性别"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="35px"
+            android:textSize="16sp"
             android:textColor="@color/cardview_dark_background"/>
         <TextView
             android:id="@+id/userInfo_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textSize="28px"/>
+            android:textSize="15sp"/>
     </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -123,7 +123,7 @@
             android:text="收货地址管理"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="35px"
+            android:textSize="16sp"
             android:textColor="@color/cardview_dark_background"/>
         <ImageView
             android:layout_width="wrap_content"
@@ -140,9 +140,10 @@
          android:id="@+id/userInfo_loginOutButton"
          android:layout_width="180dp"
          android:layout_height="40dp"
-         android:background="#BDFFFF"
+         android:background="@drawable/images_login_button_background"
          android:text="退  出  登  录"
-         android:textSize="30px"
+         android:textColor="#B4FFFF"
+         android:textSize="18sp"
          android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </LinearLayout>

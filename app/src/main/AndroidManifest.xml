@@ -33,6 +33,7 @@
         <activity android:name=".activity.UserInfoActivity"/>
         <activity android:name=".activity.AddSiteOfReceiveActivity"/>
         <activity android:name=".activity.ManageSiteOfReceiveActivity"/>
+        <activity android:name=".activity.RegisterActivity"/>
     </application>
 
 </manifest>

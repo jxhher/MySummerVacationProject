@@ -1,6 +1,7 @@
 package com.example.asus.summervacationproject.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.content.ContentUris;
 import android.content.Context;
@@ -26,6 +27,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -91,6 +93,7 @@ public class UserInfoActivity extends AppCompatActivity {
     private int updateType = -1;
     private int PICTURE = 0;
     private int CAMERA = 1;
+    private Intent updateIntent = new Intent("com.example.asus.summervacationproject.activity.LoginActivity");;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +150,7 @@ public class UserInfoActivity extends AppCompatActivity {
             //上传到服务器
             sendImage(bitmap);
             //保存到本地
-            saveImage(bitmap);
+            //saveImage(bitmap);
 
 
         }else if(requestCode == PICTURE && resultCode == RESULT_OK && data != null){//图库
@@ -169,7 +172,7 @@ public class UserInfoActivity extends AppCompatActivity {
             //上传到服务器
             sendImage(circleImage);
             //保存到本地
-            saveImage(circleImage);
+            //saveImage(circleImage);
 
         }
 
@@ -188,7 +191,7 @@ public class UserInfoActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
                 userInfo_progressBar.setVisibility(View.GONE);
-                updateUserInfo(IMAGEURL,"/user_head_portrait"+id+".png");
+                updateUserInfo(IMAGEURL,"/send_head_portrait"+id+".png");
                 ToastUtils.getShortToastByString(UserInfoActivity.this,"设置成功");
             }
         }, new OkHttpUtils.FailCallback() {
@@ -267,7 +270,7 @@ public class UserInfoActivity extends AppCompatActivity {
         },jsonObject.toString());
     }
 
-        Handler handler = new Handler(){
+    Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.arg1){
@@ -278,18 +281,15 @@ public class UserInfoActivity extends AppCompatActivity {
                         switch (msg.arg2){
                             case NAME:
                                 userInfo_name.setText((String) msg.obj);
-                                Intent intent = new Intent("com.example.asus.summervacationproject.activity.LoginActivity");
-                                LocalBroadcastManager.getInstance(UserInfoActivity.this).sendBroadcast(intent);
+                                LocalBroadcastManager.getInstance(UserInfoActivity.this).sendBroadcast(updateIntent);
                                 break;
                             case SEX:
                                 userInfo_sex.setText((String)msg.obj);
                                 break;
                             case IMAGEURL:
-                                Intent intent2 = new Intent("com.example.asus.summervacationproject.activity.LoginActivity");
-                                LocalBroadcastManager.getInstance(UserInfoActivity.this).sendBroadcast(intent2);
+                                LocalBroadcastManager.getInstance(UserInfoActivity.this).sendBroadcast(updateIntent);
                                 break;
                         }
-                        Snackbar.make(userInfo_linearLayout_siteOfReceive, "修改成功", Snackbar.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -471,5 +471,37 @@ public class UserInfoActivity extends AppCompatActivity {
      */
     public static boolean isGooglePhotosUri(Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+
+    @OnClick(R.id.userInfo_loginOutButton)
+    void OnLoginOutButtonClick(){
+        SharedPreferences sp = this.getSharedPreferences("user_info",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();//获取Editor
+        editor.clear();
+        editor.commit();
+        File filesDir;
+        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
+            //路径1：storage/sdcard/Android/data/包名/files
+            filesDir = this.getExternalFilesDir("");
+
+        }else{//手机内部存储
+            //路径：data/data/包名/files
+            filesDir = this.getFilesDir();
+
+        }
+        File file = new File(filesDir,"send_head_portrait"+id+".png");
+        if(file.exists()){
+            System.out.println("delete");
+            file.delete();//删除存储中的文件
+        }
+        Intent intent = new Intent(this,MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+        /*FLAG_ACTIVITY_CLEAR_TASK这个标志,那么这个标志将会清除之前所有已经打开的activity.
+        然后将会变成另外一个空栈的root,然后其他的Activitys就都被关闭了.
+        这个方法必须跟着{@link #FLAG_ACTIVITY_NEW_TASK}一起使用.
+        * */
     }
 }

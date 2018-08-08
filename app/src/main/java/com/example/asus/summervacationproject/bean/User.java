@@ -7,6 +7,7 @@ public class User {
 	String password;
 	String imageUrl;
 	String sex;
+	int age;
 	String siteOfReceive;
 	String idOfShoppingCart;
 	String idOfBuyed;
@@ -39,6 +40,12 @@ public class User {
 	}
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	public String getSiteOfReceive() {
 		return siteOfReceive;

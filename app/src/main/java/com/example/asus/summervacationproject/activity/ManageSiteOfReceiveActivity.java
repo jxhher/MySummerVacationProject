@@ -70,6 +70,7 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
     private void initListView() {
         sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         String ids = sp.getString("siteOfReceive","");
+        System.out.println("ids:"+ids);
         if(!ids.equals("")) {
             String[] idList = ids.split(",");
 
