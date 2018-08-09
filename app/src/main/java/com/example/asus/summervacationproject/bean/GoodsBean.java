@@ -32,6 +32,8 @@ public class GoodsBean implements Serializable {
     private String expirationDate;
     //商品生产企业/产地
     private String manufacturing_enterprise;
+    //商品库存
+    private String inventory;
 
     /**
      * 是否被选中
@@ -140,6 +142,14 @@ public class GoodsBean implements Serializable {
 
     public void setManufacturing_enterprise(String manufacturing_enterprise) {
         this.manufacturing_enterprise = manufacturing_enterprise;
+    }
+
+    public String getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(String inventory) {
+        this.inventory = inventory;
     }
 }
 

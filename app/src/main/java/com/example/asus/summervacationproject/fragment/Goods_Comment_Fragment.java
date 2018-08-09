@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by ASUS on 2018/7/28.
  * Updated by ASUS on 2018/7/30 完成商品评价页面的布局及显示
+ * Updated by ASUS on 2018/8/9  完成商品评价数据的数据库填充，懒加载连接数据库获取数据
  */
 
 public class Goods_Comment_Fragment extends BaseFragment {
@@ -97,6 +98,7 @@ public class Goods_Comment_Fragment extends BaseFragment {
         }, new OkHttpUtils.FailCallback() {
             @Override
             public void onFail() {
+                good_comment_progressBar.setVisibility(View.GONE);
                 ToastUtils.getShortToastByString(mContext,"获取数据失败");
             }
         },null);

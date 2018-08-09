@@ -1,5 +1,7 @@
 package com.example.asus.summervacationproject.utils;
 
+import com.example.asus.summervacationproject.bean.Shop;
+
 /**
  * Created by ASUS on 2018/7/20.
  */
@@ -19,4 +21,5 @@ public class Config {
     public static final String GET_GOOD_URL = SERVEL_URL+"/servlet/getGoodInfoServlet";
     public static final String GET_SHOP_URL = SERVEL_URL+"/servlet/getShopInfoServlet";
     public static final String GET_COMMENT_URL = SERVEL_URL+"/servlet/getCommentsServlet";
+    public static final String ADD_SHOPPINGCART = SERVEL_URL+"/servlet/addShoppingCartServlet";
 }

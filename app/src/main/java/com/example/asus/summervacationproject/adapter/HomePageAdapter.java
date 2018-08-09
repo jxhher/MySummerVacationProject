@@ -294,7 +294,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
                 gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(mContext, "position" + position, Toast.LENGTH_SHORT).show();
+
                         GoodsBean goodsBean  = new GoodsBean();
                         goodsBean.setCover_price(recommendList.get(position).getCover_price());
                         goodsBean.setName(recommendList.get(position).getName());

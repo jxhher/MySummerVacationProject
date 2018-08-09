@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp">
+    <LinearLayout
+        android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/good_popup_image"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:src="@drawable/image_head_portrait"/>
+            <LinearLayout
+                android:id="@+id/good_info_linearLayout"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                >
+                <TextView
+                    android:id="@+id/good_popup_price"
+                    android:text="价格"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:textSize="19sp"
+                    android:textColor="#FF0000"/>
+                <TextView
+                    android:id="@+id/good_popup_inventory"
+                    android:text="库存"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:textSize="17sp"
+                    android:textColor="#404040"
+
+                    />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/good_popup_backButton"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/image_close"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="购买数量"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="#404040"
+            />
+
+        <com.example.asus.summervacationproject.utils.AddSubView
+            android:id="@+id/good_popup_goodAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.71"
+
+            />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/good_popup_affirmButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="确   定"
+        android:layout_gravity="center_horizontal"
+        android:background="#FF0000"
+        android:textSize="32px"/>
+</LinearLayout>

@@ -4,6 +4,7 @@ package com.example.asus.summervacationproject.fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +60,8 @@ public class Goods_Main_Fragment extends BaseFragment {
     TextView good_main_merchantService;
     @BindView(R.id.good_main_expressageService)
     TextView good_main_expressageService;
-
+    @BindView(R.id.good_main_progressBar)
+    ProgressBar good_main_progressBar;
 
 
     public Goods_Main_Fragment(GoodsBean goodBean, Shop shop) {
@@ -80,6 +82,7 @@ public class Goods_Main_Fragment extends BaseFragment {
 
     @Override
     protected void initDate() {
+        good_main_progressBar.setVisibility(View.VISIBLE);
         if(goodBean!=null){
             Picasso.with(mContext).load(Config.BASE_URL_IMAGE+goodBean.getImageUrl()).into(good_main_imageView);
             good_main_price.setText("¥ "+goodBean.getCover_price()+".00");
@@ -96,5 +99,6 @@ public class Goods_Main_Fragment extends BaseFragment {
             good_main_merchantService.setText(shop.getMerchantService());
             good_main_expressageService.setText(shop.getExpressageService());
         }
+        good_main_progressBar.setVisibility(View.GONE);
     }
 }

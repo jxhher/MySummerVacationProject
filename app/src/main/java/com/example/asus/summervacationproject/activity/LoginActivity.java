@@ -102,6 +102,10 @@ public class LoginActivity extends AppCompatActivity {
                         User user = JSON.parseObject(result,User.class);
                         saveUser(user);
                         changeUI();
+                        Intent intent = new Intent();
+                        Log.e(GoodsInfoActivity.class.getSimpleName(),"login_userId"+user.getId());
+                        intent.putExtra("userId",user.getId()+"");
+                        LoginActivity.this.setResult(1,intent);
                         finish();
                         Log.e(TAG,"登录成功");
                     }
@@ -146,4 +150,5 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }

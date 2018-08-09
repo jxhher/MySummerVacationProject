@@ -51,6 +51,7 @@ import com.example.asus.summervacationproject.fragment.HomePageFragment;
 import com.example.asus.summervacationproject.fragment.ShoppingCartFragment;
 import com.example.asus.summervacationproject.utils.BitmapUtils;
 import com.example.asus.summervacationproject.utils.Config;
+import com.example.asus.summervacationproject.utils.UserInfo;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
@@ -181,9 +182,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     }
 
     private void islogin() {
-        SharedPreferences sp2 = MainActivity.this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
-         String name = sp2.getString("name", "");
-        if (TextUtils.isEmpty(name)) {
+        if (TextUtils.isEmpty(UserInfo.getUserInfo(this,"name"))) {
             return;
         }else{
             setUser();
