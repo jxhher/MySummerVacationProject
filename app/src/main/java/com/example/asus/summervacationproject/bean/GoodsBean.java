@@ -24,6 +24,14 @@ public class GoodsBean implements Serializable {
     private int salesVolume;
     //店铺id
     private int shopId;
+    //商品品牌
+    private String brand;
+    //商品型号
+    private String version;
+    //商品保修期/保质期
+    private String expirationDate;
+    //商品生产企业/产地
+    private String manufacturing_enterprise;
 
     /**
      * 是否被选中
@@ -100,6 +108,38 @@ public class GoodsBean implements Serializable {
 
     public void setShopId(int shopId) {
         this.shopId = shopId;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public String getManufacturing_enterprise() {
+        return manufacturing_enterprise;
+    }
+
+    public void setManufacturing_enterprise(String manufacturing_enterprise) {
+        this.manufacturing_enterprise = manufacturing_enterprise;
     }
 }
 

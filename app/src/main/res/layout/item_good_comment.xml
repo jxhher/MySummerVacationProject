@@ -2,32 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ProgressBar
+        android:id="@+id/good_comment_progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"
+        />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp">
     <TextView
-        android:id="@+id/good_evaluate_username"
+        android:paddingLeft="5dp"
+        android:id="@+id/good_comment_observerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30px"
+        android:textSize="13sp"
         android:text="username"
         android:layout_weight="1"
-        android:textColor="@color/cardview_dark_background"/>
+        android:textColor="#373737"/>
     <TextView
-        android:id="@+id/good_evaluate_time"
+        android:paddingRight="5dp"
+        android:id="@+id/good_comment_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30px"
+        android:textSize="12sp"
         android:text="time"/>
     </LinearLayout>
     <TextView
-        android:id="@+id/good_evaluate_evaluate"
+        android:id="@+id/good_comment_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:text="evaluate"
-        android:textSize="45px"
-        android:textColor="@color/cardview_dark_background"/>
+        android:textSize="13sp"
+        android:textColor="#373737"/>
 </LinearLayout>

@@ -18,4 +18,5 @@ public class Config {
     public static final String REGISTER_UTL = SERVEL_URL+"/servlet/registerServlet";
     public static final String GET_GOOD_URL = SERVEL_URL+"/servlet/getGoodInfoServlet";
     public static final String GET_SHOP_URL = SERVEL_URL+"/servlet/getShopInfoServlet";
+    public static final String GET_COMMENT_URL = SERVEL_URL+"/servlet/getCommentsServlet";
 }

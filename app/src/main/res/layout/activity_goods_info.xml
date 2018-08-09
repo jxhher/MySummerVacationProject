@@ -71,8 +71,8 @@
             android:drawablePadding="1dp"
             android:drawableTop="@drawable/image_good_service"
             android:gravity="center"
-            android:padding="2dp"
-            android:textSize="14sp"
+            android:padding="1dp"
+            android:textSize="12sp"
             android:text="客服"
             android:textColor="#AAAAAA" />
 
@@ -82,10 +82,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="1dp"
-            android:drawableTop="@drawable/image_good_shopping"
+            android:drawableTop="@drawable/image_good_shop"
             android:gravity="center"
-            android:padding="2dp"
-            android:textSize="14sp"
+            android:padding="1dp"
+            android:textSize="12sp"
             android:text="店铺"
             android:textColor="#AAAAAA" />
 
@@ -96,17 +96,17 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:drawablePadding="1dp"
-            android:drawableTop="@drawable/image_good_collect"
+            android:drawableTop="@drawable/image_good_attention"
             android:gravity="center"
-            android:padding="2dp"
-            android:textSize="14sp"
-            android:text="收藏"
+            android:padding="1dp"
+            android:textSize="12sp"
+            android:text="关注"
             android:textColor="#AAAAAA" />
 
         <Button
             android:id="@+id/good_bottom_add_cart"
             android:layout_width="110dp"
-            android:layout_height="51dp"
+            android:layout_height="47dp"
             android:layout_gravity="center"
             android:background="#FDB119"
             android:gravity="center"
@@ -116,7 +116,7 @@
         <Button
             android:id="@+id/goods_bottom_bug_now"
             android:layout_width="110dp"
-            android:layout_height="51dp"
+            android:layout_height="47dp"
             android:layout_gravity="center"
             android:background="#DF3033"
             android:gravity="center"

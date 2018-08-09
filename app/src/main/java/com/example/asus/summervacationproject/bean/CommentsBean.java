@@ -4,17 +4,17 @@ package com.example.asus.summervacationproject.bean;
  * Created by ASUS on 2018/7/30.
  */
 
-public class EvaluateBean {
-    private String userName;
+public class CommentsBean {
+    private String observerName;
     private String time;
     private String content;
 
-    public String getUserName() {
-        return userName;
+    public String getObserverName() {
+        return observerName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setObserverName(String observerName) {
+        this.observerName = observerName;
     }
 
     public String getTime() {

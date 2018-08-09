@@ -3,82 +3,117 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp">
-    <TextView
-        android:text="商品信息"
-        android:padding="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/goods_details_textView"
-        android:textSize="50px"/>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:padding="5dp"
-        android:layout_height="wrap_content">
-    <TextView
-        android:text="品牌"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30px"
-        android:textColor="@color/cardview_dark_background"/>
-    <TextView
-        android:id="@+id/good_details_good_brand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:padding="5dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="型号"
+        android:padding="3dp">
+        <LinearLayout
+            android:id="@+id/good_details_linearLayout_title"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30px"
-            android:textColor="@color/cardview_dark_background"/>
-        <TextView
-            android:id="@+id/good_details_good_version"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:padding="5dp">
+            <TextView
+                android:id="@+id/title"
+                android:text="品  牌"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/cardview_dark_background"
+                android:padding="3dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeee" />
+            <TextView
+                android:text="型  号"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/cardview_dark_background"
+                android:padding="3dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeee" />
+            <TextView
+                android:text="保 修 期/保 质 期"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/cardview_dark_background"
+                android:padding="3dp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeee" />
+            <TextView
+                android:text="生 产 企 业/产 地"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/cardview_dark_background"
+                android:padding="3dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"/>
-    </LinearLayout>
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal"
+            android:layout_toRightOf="@+id/good_details_linearLayout_title"
+            android:padding="5dp">
+            <TextView
 
-    <LinearLayout
-        android:padding="5dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="保修期/保质期"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30px"
-            android:textColor="@color/cardview_dark_background"/>
-        <TextView
-            android:id="@+id/good_details_good_expiration_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"/>
-    </LinearLayout>
+                android:id="@+id/good_details_good_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textSize="15sp"
+                />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeee" />
+            <TextView
+                android:id="@+id/good_details_good_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textSize="15sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeee" />
+            <TextView
+                android:id="@+id/good_details_good_expiration_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textSize="15sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeee" />
+            <TextView
+                android:id="@+id/good_details_good_manufacturing_enterprise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:textSize="15sp"
+                android:gravity="center"/>
+        </LinearLayout>
 
-    <LinearLayout
-        android:padding="5dp"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:text="生产企业"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30px"
-            android:textColor="@color/cardview_dark_background"/>
-        <TextView
-            android:id="@+id/good_details_good_made"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"/>
-    </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
 </LinearLayout>
