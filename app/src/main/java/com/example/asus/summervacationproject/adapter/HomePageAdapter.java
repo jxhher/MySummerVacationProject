@@ -107,38 +107,38 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
             if (resultBean != null) {
                 bannerViewHolder.setData(resultBean.getBanner_info());
-                Log.e(TAG, resultBean.getBanner_info().toString());
+             //   Log.e(TAG, resultBean.getBanner_info().toString());
             } else {
-                Log.e(TAG, "resultBean为null:");
+              //  Log.e(TAG, "resultBean为null:");
             }
         } else if (getItemViewType(position) == THEME) {
             ThemeViewHolder themeViewHolder = (ThemeViewHolder) holder;
             if (resultBean != null) {
                 themeViewHolder.setData(resultBean.getThemeInfoBean());
-                Log.e(TAG, resultBean.getThemeInfoBean().toString());
+              //  Log.e(TAG, resultBean.getThemeInfoBean().toString());
             } else {
-                Log.e(TAG, "result为null");
+               // Log.e(TAG, "result为null");
             }
         } else if (getItemViewType(position) == BRAND) {
             BrandViewHolder brandViewHolder = (BrandViewHolder) holder;
             if (resultBean != null) {
                 brandViewHolder.setData(resultBean.getBrandInfoBean());
             }else{
-                Log.e(TAG, "result为null");
+               // Log.e(TAG, "result为null");
             }
         }else if(getItemViewType(position) == DISCOUNT){
             DiscountViewHolder discountViewHolder = (DiscountViewHolder) holder;
             if (resultBean != null) {
                 discountViewHolder.setData(resultBean.getDiscountInfoBean());
             }else{
-                Log.e(TAG, "result为null");
+               // Log.e(TAG, "result为null");
             }
         }else if(getItemViewType(position) == RECOMMEND){
             RecommendViewHolder recommendViewHolder = (RecommendViewHolder) holder;
             if (resultBean != null) {
                 recommendViewHolder.setData(resultBean.getRecommend_info());
             }else{
-                Log.e(TAG, "result为null");
+               // Log.e(TAG, "result为null");
             }
         }
     }
@@ -160,7 +160,7 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             ArrayList<String> imageUrlList = new ArrayList<>();
             for(int i=0;i<banner_info.size();i++){
                 imageUrlList.add(banner_info.get(i).getImage());
-                Log.e(TAG,"adapter:"+banner_info.get(i).getImage());
+               // Log.e(TAG,"adapter:"+banner_info.get(i).getImage());
             }
             banner.setImages(imageUrlList);
             //设置循环指示点
@@ -216,9 +216,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
 
         public void setData(List<ResultBeanData.ResultBean.ThemeInfoBean> themeList) {
             if(themeList==null){
-                Log.e(TAG,"themeList为null");
+              //  Log.e(TAG,"themeList为null");
             }else{
-                Log.e(TAG,themeList.toString());
+              //  Log.e(TAG,themeList.toString());
             }
             adapter = new ThemeAdapter(mContext,themeList);
             gridView.setAdapter(adapter);

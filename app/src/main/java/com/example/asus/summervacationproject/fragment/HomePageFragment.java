@@ -83,7 +83,7 @@ public class HomePageFragment extends BaseFragment {
             public void onSuccess(String result) {
                 Toast.makeText(mContext, "联网获取数据成功", Toast.LENGTH_SHORT).show();
                 final String TAG = HomePageFragment.class.getSimpleName();
-                Log.e(TAG,"initData"+result);
+               // Log.e(TAG,"initData"+result);
                 processData(result);
             }
         }, new OkHttpUtils.FailCallback() {
@@ -99,7 +99,7 @@ public class HomePageFragment extends BaseFragment {
         resultBean = resultBeanData.getResult();
         int code = resultBeanData.getCode();
         String msg = resultBeanData.getMsg();
-        Log.e(TAG,"code:"+code+"msg:"+msg);
+       // Log.e(TAG,"code:"+code+"msg:"+msg);
         if(resultBean!=null){
             Log.e(TAG,"第二次adapter");
             Log.e(TAG,"banner的大小："+resultBean.getBanner_info().size());

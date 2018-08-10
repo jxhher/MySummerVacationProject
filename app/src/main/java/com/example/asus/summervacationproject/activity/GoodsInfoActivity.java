@@ -2,6 +2,7 @@ package com.example.asus.summervacationproject.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.media.Image;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,8 @@ import com.example.asus.summervacationproject.adapter.ViewPagerAdapter;
 import com.example.asus.summervacationproject.baseclass.BaseFragment;
 import com.example.asus.summervacationproject.bean.GoodsBean;
 import com.example.asus.summervacationproject.bean.Shop;
+import com.example.asus.summervacationproject.bean.ShoppingCartBean;
+import com.example.asus.summervacationproject.bean.User;
 import com.example.asus.summervacationproject.fragment.Goods_Details_Fragment;
 import com.example.asus.summervacationproject.fragment.Goods_Comment_Fragment;
 import com.example.asus.summervacationproject.fragment.Goods_Main_Fragment;
@@ -40,6 +44,7 @@ import com.example.asus.summervacationproject.utils.VirtualkeyboardHeight;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +71,11 @@ public class GoodsInfoActivity extends AppCompatActivity {
     public ViewPagerAdapter viewPagerAdapter;
     public Shop shop;
     public int amount = 1;
+    private LinearLayout view;
+    private boolean exit = false;
+    private String alreadyIdOfShoppingCart;
+    private String idOfShoppingCart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,6 +125,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
                         public void onSuccess(String result) {
                             shop = JSON.parseObject(result,Shop.class);
                             setData();
+
                         }
                     }, new OkHttpUtils.FailCallback() {
                         @Override
@@ -268,10 +279,11 @@ public class GoodsInfoActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
                 if(!("-1".equals(result))){
-                    updateLocalShoppingCart(result);
+                    updateShoppingCart(result);
                     ToastUtils.getShortToastByString(GoodsInfoActivity.this,"添加成功");
+                    updateLocalShoppingCart();
                 }else{
-                    ToastUtils.getShortToastByString(GoodsInfoActivity.this,"添加失败");
+                    ToastUtils.getShortToastByString(GoodsInfoActivity.this,"添加成功");
                 }
             }
         }, new OkHttpUtils.FailCallback() {
@@ -282,9 +294,57 @@ public class GoodsInfoActivity extends AppCompatActivity {
         },null);
     }
 
-    private void updateLocalShoppingCart(String shoppingCartId) {        //更新本地数据
-        UserInfo.saveUserInfo(GoodsInfoActivity.this,"idOfShoppingCart",shoppingCartId);
+
+    private void updateShoppingCart(String result) {        //更新本地数据
+        String idsOfShoppingCart = UserInfo.getUserInfo(GoodsInfoActivity.this,"idOfShoppingCart");
+        String[] results = result.split(",");
+        exit = false;
+        idOfShoppingCart = null;
+        if(results[0].equals("amount")){
+            amount = Integer.parseInt(results[1]);
+            alreadyIdOfShoppingCart = results[2];
+            exit = true;
+            return;
+        }else{
+            idOfShoppingCart = results[1];
+        }
+        Log.e(GoodsInfoActivity.class.getSimpleName(),"idOfShoppingCart"+idsOfShoppingCart);
+       // String[] idsOfShopCartArray = idsOfShoppingCart.split(",");
+        if("".equals(idsOfShoppingCart)){
+            idsOfShoppingCart=idOfShoppingCart;
+        }else{
+            idsOfShoppingCart=idsOfShoppingCart+","+idOfShoppingCart;
+        }
+
+        Log.e(GoodsInfoActivity.class.getSimpleName(),"updateIdsOfShoppingCart:"+idsOfShoppingCart);
+        UserInfo.saveUserInfo(GoodsInfoActivity.this,"idOfShoppingCart",idsOfShoppingCart);
     }
 
+    private void updateLocalShoppingCart() {
+        SharedPreferences sp = this.getSharedPreferences("shopping_cart",MODE_PRIVATE);
+        String jsonData = sp.getString("shopping_cart_"+UserInfo.getUserInfo(GoodsInfoActivity.this,"id")+"","");
+        List<ShoppingCartBean> shoppingCartBeanList = JSON.parseArray(jsonData,ShoppingCartBean.class);
+        if(exit){
+            for(int i=0;i<shoppingCartBeanList.size();i++){
+                if(shoppingCartBeanList.get(i).getShoppingCartId()==Integer.parseInt(alreadyIdOfShoppingCart)){
+                    shoppingCartBeanList.get(i).setAmount(amount+"");
+                    break;
+                }
+            }
+        }else{
+            ShoppingCartBean shoppingCartBean = new ShoppingCartBean();
+            shoppingCartBean.setAmount(amount+"");
+            shoppingCartBean.setShoppingCartId(Integer.parseInt(idOfShoppingCart));
+            shoppingCartBean.setImageUrl(updateGoodBean.getImageUrl());
+            shoppingCartBean.setShopName(shop.getShopName());
+            shoppingCartBean.setGoodPrice(updateGoodBean.getCover_price()+"");
+            shoppingCartBean.setGoodName(updateGoodBean.getName());
+            shoppingCartBeanList.add(shoppingCartBean);
+        }
+        jsonData = JSON.toJSONString(shoppingCartBeanList);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("shopping_cart_"+UserInfo.getUserInfo(GoodsInfoActivity.this,"id")+"",jsonData);
+        editor.commit();
+    }
 }
 

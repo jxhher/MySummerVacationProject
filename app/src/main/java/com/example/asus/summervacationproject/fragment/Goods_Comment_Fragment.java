@@ -45,7 +45,6 @@ public class Goods_Comment_Fragment extends BaseFragment {
         view = View.inflate(mContext, R.layout.fragments_goods_comment,null);
         ButterKnife.bind(this.view);
         commentListView = (ListView) view.findViewById(R.id.good_comment_listView);
-        initDate();
         return view;
     }
 

@@ -286,7 +286,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
                 }
                 Fragment nextFragment = mBaseFragmentList.get(selectPostion);
                 //替换
-                switchFrament(mContent,nextFragment);
+                switchFrament(mContent,nextFragment,selectPostion);
 
             }
         });
@@ -296,7 +296,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
     }
 
 
-    private void switchFrament(Fragment from, Fragment to) {
+    private void switchFrament(Fragment from, Fragment to,int i) {
         if(from!=to){
             mContent = to;
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -305,7 +305,23 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
                     ft.hide(from);
                 }
                 if(to!=null){
-                    ft.add(R.id.content,to).commit();
+                    String name = "";
+                    switch (i){
+                        case 0:
+                            name = "bottom_homePage";
+                            break;
+                        case 1:
+                            name = "bottom_classification";
+                            break;
+                        case 2:
+                            name = "bottom_discover";
+                            break;
+                        case 3:
+                            name = "bottom_shoppingCart";
+                            break;
+                    }
+                        ft.add(R.id.content,to,name).commit();
+
                 }
             }else{
                 if(from!=null){

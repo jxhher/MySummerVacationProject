@@ -476,12 +476,18 @@ public class UserInfoActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.userInfo_loginOutButton)
-    void OnLoginOutButtonClick(){
+    void OnLoginOutButtonClick(){              //退出登录删除本地数据
         SharedPreferences sp = this.getSharedPreferences("user_info",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();//获取Editor
+        SharedPreferences.Editor editor = sp.edit();//删除个人数据
+        editor.clear();
+        editor.commit();
+
+        SharedPreferences sp2 = this.getSharedPreferences("shopping_cart_"+id+"",MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sp.edit();//删除购物车数据
         editor.clear();
         editor.commit();
         File filesDir;
+
         if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
             //路径1：storage/sdcard/Android/data/包名/files
             filesDir = this.getExternalFilesDir("");

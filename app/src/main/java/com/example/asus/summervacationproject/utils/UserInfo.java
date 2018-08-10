@@ -18,4 +18,14 @@ public class UserInfo {
         SharedPreferences sp = context.getSharedPreferences("user_info",Context.MODE_PRIVATE);
         sp.edit().putString(key,value).commit();
     }
+
+    public static String getShoppingCartInfo(Context context,String key){
+        SharedPreferences sp = context.getSharedPreferences("shopping_cart",Context.MODE_PRIVATE);
+        return sp.getString(key,"");
+    }
+
+    public static void saveShoppingCartInfo(Context context, String key,String value) {
+        SharedPreferences sp = context.getSharedPreferences("shopping_cart",Context.MODE_PRIVATE);
+        sp.edit().putString(key,value).commit();
+    }
 }

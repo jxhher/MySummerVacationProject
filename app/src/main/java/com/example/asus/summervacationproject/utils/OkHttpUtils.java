@@ -115,6 +115,12 @@ public class OkHttpUtils {
                                 .add("userId", datas[1])
                                 .build();
                         break;
+                    case UPDATE:
+                        formBody = new FormBody.Builder()
+                                .add("id",datas[0])
+                                .add("amount", datas[1])
+                                .build();
+                        break;
                 }
                 Request request = new Request
                         .Builder()

@@ -18,20 +18,25 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.example.asus.summervacationproject.R;
+import com.example.asus.summervacationproject.bean.ShoppingCartBean;
 import com.example.asus.summervacationproject.bean.User;
 import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
+import com.example.asus.summervacationproject.utils.UserInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,8 +48,8 @@ import butterknife.OnClick;
  */
 
 public class LoginActivity extends AppCompatActivity {
-    @BindView(R.id.login_button_back)
-    ImageButton login_button_back;
+    @BindView(R.id.login_linearLayout_back)
+    LinearLayout login_linearLayout_back;
     @BindView(R.id.loginPage_progressBar)
     ProgressBar loginPage_ProgressBar;
     @BindView(R.id.et_login_number)
@@ -52,12 +57,14 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.et_login_pwd)
     EditText et_login_pwd;
     final String TAG = LoginActivity.class.getSimpleName();
+    private JSONArray jsonArray;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        login_button_back.setOnClickListener(new View.OnClickListener() {
+        login_linearLayout_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -101,11 +108,16 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
                         User user = JSON.parseObject(result,User.class);
                         saveUser(user);
+                        setShoppingCart();
                         changeUI();
+
+
                         Intent intent = new Intent();
                         Log.e(GoodsInfoActivity.class.getSimpleName(),"login_userId"+user.getId());
                         intent.putExtra("userId",user.getId()+"");
                         LoginActivity.this.setResult(1,intent);
+                        LoginActivity.this.setResult(2,intent);
+
                         finish();
                         Log.e(TAG,"登录成功");
                     }
@@ -120,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
             loginPage_ProgressBar.setVisibility(View.GONE);
         }
     }
+
 
     private void changeUI() {
         Intent intent = new Intent("com.example.asus.summervacationproject.activity.LoginActivity");
@@ -151,4 +164,52 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void setShoppingCart() {
+        getIds();
+        new OkHttpUtils(Config.GET_SHOPPINGCART, HttpMethod.POST, new OkHttpUtils.SuccessCallback() {
+            @Override
+            public void onSuccess(String result) {
+             //   List<ShoppingCartBean> shoppingCartBeanList = JSON.parseArray(result,ShoppingCartBean.class);
+                saveShoppingCartInfo(result);
+            }
+        }, new OkHttpUtils.FailCallback() {
+            @Override
+            public void onFail() {
+
+            }
+        },jsonArray.toString());
+    }
+
+
+    private void getIds() {
+        SharedPreferences sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        String ids = sp.getString("idOfShoppingCart","");
+        System.out.println("ids:"+ids);
+        if(!ids.equals("")) {
+            String[] idList = ids.split(",");
+
+           jsonArray = new JSONArray();
+
+            for (int i = 0; i < idList.length; i++) {
+                com.alibaba.fastjson.JSONObject json = new com.alibaba.fastjson.JSONObject();
+                try {
+                    json.put("shoppingCartId", idList[i]);//JSONObject对象中添加键值对
+                    jsonArray.add(json);//将JSONObject对象添加到Json数组中
+                } catch (com.alibaba.fastjson.JSONException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(idList[i] + "  ");
+            }
+        }
+    }
+
+
+
+    private void saveShoppingCartInfo(String result) {
+        Log.e(LoginActivity.class.getSimpleName(),result.toString());
+        SharedPreferences sp = LoginActivity.this.getSharedPreferences("shopping_cart", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("shopping_cart_"+ UserInfo.getUserInfo(LoginActivity.this,"id")+"",result);
+        editor.commit();
+    }
 }

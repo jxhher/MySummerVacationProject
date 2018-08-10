@@ -9,7 +9,7 @@ public class User {
 	String sex;
 	int age;
 	String siteOfReceive;
-	String idOfShoppingCart;
+	String idOfShoppingCart;    //购物车记录数据库的id
 	String idOfBuyed;
 	public long getPhoneNumber() {
 		return phoneNumber;

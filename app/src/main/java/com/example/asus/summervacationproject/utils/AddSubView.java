@@ -29,7 +29,7 @@ public class AddSubView extends LinearLayout {
     TextView shopCart_value_textView;
     private int value = 1;
     private int minValue = 1;
-    private int maxValue = 5;
+    private int maxValue = 100;
     private OnNumberChangeListener  onNumberChangeListener;
 
     public AddSubView(Context context, AttributeSet attrs) {

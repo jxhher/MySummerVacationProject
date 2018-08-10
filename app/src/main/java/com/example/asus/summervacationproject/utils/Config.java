@@ -22,4 +22,6 @@ public class Config {
     public static final String GET_SHOP_URL = SERVEL_URL+"/servlet/getShopInfoServlet";
     public static final String GET_COMMENT_URL = SERVEL_URL+"/servlet/getCommentsServlet";
     public static final String ADD_SHOPPINGCART = SERVEL_URL+"/servlet/addShoppingCartServlet";
+    public static final String GET_SHOPPINGCART = SERVEL_URL+"/servlet/getShoppingCartData";
+    public static final String UPDATE_SHOPPINGCART = SERVEL_URL+"/servlet/updateShoppingCartInfoServlet";
 }
