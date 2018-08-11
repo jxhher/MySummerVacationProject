@@ -166,24 +166,27 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setShoppingCart() {
         getIds();
-        new OkHttpUtils(Config.GET_SHOPPINGCART, HttpMethod.POST, new OkHttpUtils.SuccessCallback() {
-            @Override
-            public void onSuccess(String result) {
-             //   List<ShoppingCartBean> shoppingCartBeanList = JSON.parseArray(result,ShoppingCartBean.class);
-                saveShoppingCartInfo(result);
-            }
-        }, new OkHttpUtils.FailCallback() {
-            @Override
-            public void onFail() {
+        if(jsonArray!=null){
+            new OkHttpUtils(Config.GET_SHOPPINGCART, HttpMethod.POST, new OkHttpUtils.SuccessCallback() {
+                @Override
+                public void onSuccess(String result) {
+                 //   List<ShoppingCartBean> shoppingCartBeanList = JSON.parseArray(result,ShoppingCartBean.class);
+                    saveShoppingCartInfo(result);
+                }
+            }, new OkHttpUtils.FailCallback() {
+                @Override
+                public void onFail() {
 
-            }
-        },jsonArray.toString());
+                }
+            },jsonArray.toString());
+        }
     }
 
 
     private void getIds() {
         SharedPreferences sp = this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         String ids = sp.getString("idOfShoppingCart","");
+        if(ids.equals(""))return;
         System.out.println("ids:"+ids);
         if(!ids.equals("")) {
             String[] idList = ids.split(",");

@@ -44,6 +44,7 @@ import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
 import com.example.asus.summervacationproject.utils.PostType;
 import com.example.asus.summervacationproject.utils.ToastUtils;
+import com.example.asus.summervacationproject.utils.UserInfo;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -482,10 +483,10 @@ public class UserInfoActivity extends AppCompatActivity {
         editor.clear();
         editor.commit();
 
-        SharedPreferences sp2 = this.getSharedPreferences("shopping_cart_"+id+"",MODE_PRIVATE);
-        SharedPreferences.Editor editor2 = sp.edit();//删除购物车数据
-        editor.clear();
-        editor.commit();
+        SharedPreferences sp2 = this.getSharedPreferences("shopping_cart",MODE_PRIVATE);
+        SharedPreferences.Editor editor2 = sp2.edit();//删除购物车数据
+        editor2.clear();
+        editor2.commit();
         File filesDir;
 
         if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载

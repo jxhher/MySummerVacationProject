@@ -74,7 +74,7 @@ import butterknife.OnItemClick;
  */
 
 
-public class MainActivity extends AppCompatActivity implements android.widget.PopupMenu.OnMenuItemClickListener{
+public class MainActivity extends AppCompatActivity{
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -111,18 +111,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         initDrawerLayout();
         initFragment();
         setFragment();
-        //监听点击事件实现Popmenu效果
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(MainActivity.this, v);
-                MenuInflater inflater = popup.getMenuInflater();
-                inflater.inflate(R.menu.toolbar_menu, popup.getMenu());
-                //绑定菜单项的点击事件
-                popup.setOnMenuItemClickListener(MainActivity.this);
-                popup.show();
-            }
-        });
+
 
     }
 
@@ -131,13 +120,13 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-        button = new ImageView(this);
+       /* button = new ImageView(this);
         button.setImageResource(R.drawable.add_image);
         toolbar.addView(button);
         //为ImageView设置参数
         Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) button.getLayoutParams();
         layoutParams.gravity = GravityCompat.END;
-        layoutParams.rightMargin = 20;
+        layoutParams.rightMargin = 20;*/
 
         setSupportActionBar(toolbar);
     }
@@ -335,26 +324,7 @@ public class MainActivity extends AppCompatActivity implements android.widget.Po
 
     }
 
-    public boolean onMenuItemClick(MenuItem item) {
-        // TODO Auto-generated method stub
-        switch (item.getItemId()) {
-            case R.id.settings:
-                Toast.makeText(this, "设置", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.sync:
-                Toast.makeText(this, "同步", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.share:
-                Toast.makeText(this, "分享", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_search:
-                Toast.makeText(this, "搜索", Toast.LENGTH_SHORT).show();
-                break;
-            default:
-                break;
-        }
-        return false;
-    }
+
 
     @Override
     public void onPostCreate(Bundle savedInstanceState, PersistableBundle persistentState) {

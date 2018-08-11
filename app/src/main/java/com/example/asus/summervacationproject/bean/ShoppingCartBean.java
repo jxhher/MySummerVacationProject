@@ -13,14 +13,14 @@ public class ShoppingCartBean {
     private String goodPrice;          //商品价格
     private String amount;                //购买数量
 
-    private boolean selected = false;
+    private boolean isSelected = false;
 
     public boolean isSelected() {
-        return selected;
+        return isSelected;
     }
 
     public void setSelected(boolean selected) {
-        this.selected = selected;
+        isSelected = selected;
     }
 
     public int getShoppingCartId() {

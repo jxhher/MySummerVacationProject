@@ -48,7 +48,7 @@
                     android:paddingLeft="0dp"
                     android:text="全选"
                     android:textColor="#303235"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     android:layout_weight="1"/>
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:padding="8dp"
                     android:text="合计:"
                     android:textColor="#303235"
-                    android:textSize="13sp" />
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/shopCart_totalMoney"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:background="#fff"
                 android:orientation="horizontal"
-                android:padding="5dp"
+                android:padding="3dp"
                 android:visibility="gone">
 
                 <CheckBox
@@ -98,19 +98,19 @@
                     android:button="@null"
                     android:drawableLeft="@drawable/checkbox_selector"
                     android:drawablePadding="10dp"
-                    android:padding="10dp"
+                    android:padding="7dp"
                     android:paddingLeft="0dp"
                     android:text="全选"
                     android:textColor="#303235"
-                    android:textSize="15sp" />
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/shopCart_delete_button"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
-                    android:background="@drawable/circle"
-                    android:text="删除"
-                    android:textColor="#303235"
+                    android:background="#FF5A56"
+                    android:text="删  除"
+                    android:textColor="#FFFFFF"
                     android:textSize="15sp" />
 
                 <Button
@@ -118,9 +118,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginLeft="15dp"
-                    android:background="@drawable/circle_hot"
-                    android:text="关注"
-                    android:textColor="#ed3f3f"
+                    android:background="#ACFFAA"
+                    android:text="关  注"
+                    android:textColor="#FFFFFF"
                     android:textSize="15sp" />
             </LinearLayout>
         </LinearLayout>

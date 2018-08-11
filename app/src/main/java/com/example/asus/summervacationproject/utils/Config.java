@@ -2,6 +2,8 @@ package com.example.asus.summervacationproject.utils;
 
 import com.example.asus.summervacationproject.bean.Shop;
 
+import java.util.ServiceConfigurationError;
+
 /**
  * Created by ASUS on 2018/7/20.
  */
@@ -24,4 +26,5 @@ public class Config {
     public static final String ADD_SHOPPINGCART = SERVEL_URL+"/servlet/addShoppingCartServlet";
     public static final String GET_SHOPPINGCART = SERVEL_URL+"/servlet/getShoppingCartData";
     public static final String UPDATE_SHOPPINGCART = SERVEL_URL+"/servlet/updateShoppingCartInfoServlet";
+    public static final String DELETE_SHOPPINGCART = SERVEL_URL+"/servlet/deleteShoppingCartBeanServlet";
 }

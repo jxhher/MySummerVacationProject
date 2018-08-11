@@ -1,13 +1,17 @@
 package com.example.asus.summervacationproject.fragment;
 
 
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -36,6 +40,10 @@ public class HomePageFragment extends BaseFragment {
     private RecyclerView recyclerView;
     private View view;
     private ImageButton button_top;
+    private Toolbar mToolBar;
+    private TextView titleTextView;
+
+
     @Override
     protected View initView() {
 
@@ -131,7 +139,29 @@ public class HomePageFragment extends BaseFragment {
 
     @Override
     public void onResume() {
+        if (mToolBar == null) {
+            AppCompatActivity activity = (AppCompatActivity) getActivity();
+            mToolBar = (Toolbar) activity.findViewById(R.id.toolbar);
+            if (titleTextView == null) {
+                titleTextView = (TextView) mToolBar.findViewWithTag("title");
+                titleTextView.setTextSize(21);
+            }
+        }
+        titleTextView.setText("首页");
         super.onResume();
         LayoutInflater.from(mContext);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+
+        if (hidden) {
+
+
+        }else{
+            titleTextView = (TextView) mToolBar.findViewWithTag("title");
+            titleTextView.setText("首页");
+        }
+
     }
 }

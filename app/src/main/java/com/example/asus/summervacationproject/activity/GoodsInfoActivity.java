@@ -324,6 +324,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
         SharedPreferences sp = this.getSharedPreferences("shopping_cart",MODE_PRIVATE);
         String jsonData = sp.getString("shopping_cart_"+UserInfo.getUserInfo(GoodsInfoActivity.this,"id")+"","");
         List<ShoppingCartBean> shoppingCartBeanList = JSON.parseArray(jsonData,ShoppingCartBean.class);
+        if(shoppingCartBeanList==null)shoppingCartBeanList = new ArrayList<>();
         if(exit){
             for(int i=0;i<shoppingCartBeanList.size();i++){
                 if(shoppingCartBeanList.get(i).getShoppingCartId()==Integer.parseInt(alreadyIdOfShoppingCart)){
@@ -342,6 +343,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
             shoppingCartBeanList.add(shoppingCartBean);
         }
         jsonData = JSON.toJSONString(shoppingCartBeanList);
+        Log.e(GoodsInfoActivity.class.getSimpleName(),"shopppingCart:"+jsonData.toString());
         SharedPreferences.Editor editor = sp.edit();
         editor.putString("shopping_cart_"+UserInfo.getUserInfo(GoodsInfoActivity.this,"id")+"",jsonData);
         editor.commit();
