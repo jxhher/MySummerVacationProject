@@ -115,9 +115,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         Intent intent = new Intent();
                         Log.e(GoodsInfoActivity.class.getSimpleName(), "login_userId" + user.getId());
-                        // intent.putExtra("shoppingCartBeanList",user.getIdOfShoppingCart()+"");
+                        intent.putExtra("shoppingCartBeanList",user.getIdOfShoppingCart()+"");
+                        intent.putExtra("userId",user.getId()+"");
+                        intent.putExtra("siteOfReceiveId",user.getSiteOfReceive()+"");
                         LoginActivity.this.setResult(1,intent);
-                        LoginActivity.this.setResult(2);
+                        LoginActivity.this.setResult(2,intent);
                         LoginActivity.this.setResult(3,intent);
 
                         finish();

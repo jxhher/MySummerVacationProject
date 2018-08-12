@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -65,18 +66,20 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_siteofreceive);
         ButterKnife.bind(this);
-        if(getIntent().getStringExtra("id").equals("1")){
-            //manage_add_button.setVisibility(View.GONE);
-            change = true;
-            manage_siteOfReceive_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent = new Intent();
-                    intent.putExtra("siteOfReceiveId",SiteOfReceiveList.get(position).getId()+"");
-                    ManageSiteOfReceiveActivity.this.setResult(1,intent);
-                    finish();
-                }
-            });
+        if(!TextUtils.isEmpty(getIntent().getStringExtra("id"))){
+            if(getIntent().getStringExtra("id").equals("1")){
+                //manage_add_button.setVisibility(View.GONE);
+                change = true;
+                manage_siteOfReceive_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent();
+                        intent.putExtra("siteOfReceiveId",SiteOfReceiveList.get(position).getId()+"");
+                        ManageSiteOfReceiveActivity.this.setResult(1,intent);
+                        finish();
+                    }
+                });
+            }
         }
 
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
@@ -138,7 +141,7 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
             initListView();                           //刷新页面
         }
     }
-            @OnClick(R.id.manage_siteOfReceive_linearLayout_title)
+    @OnClick(R.id.manage_siteOfReceive_linearLayout_title)
         void OnBackClick(){
             finish();
         }

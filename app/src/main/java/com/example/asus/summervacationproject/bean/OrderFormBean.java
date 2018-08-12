@@ -15,6 +15,7 @@ public class OrderFormBean {
     private String date;
     private int userId;
     private int shopId;
+    private int isEvaluate;
 
     public OrderFormBean() {
 
@@ -108,5 +109,13 @@ public class OrderFormBean {
 
     public void setShopId(int shopId) {
         this.shopId = shopId;
+    }
+
+    public int getIsEvaluate() {
+        return isEvaluate;
+    }
+
+    public void setIsEvaluate(int isEvaluate) {
+        this.isEvaluate = isEvaluate;
     }
 }

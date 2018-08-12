@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    //顶部布局
     <LinearLayout
-        android:id="@+id/manage_siteOfReceive_linearLayout_title"
+        android:id="@+id/evaluate_linearLayout_back"
         android:paddingLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/manage_siteOfReceive_button_back"
-            android:layout_width="30dp"
+            android:id="@+id/evaluate_button_back"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="@drawable/image_back_button"
@@ -19,31 +20,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="管理收货地址"
-            android:textSize="37px"
+            android:text="评价"
             android:gravity="center_vertical"
+            android:textSize="37px"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/cardview_dark_background"
             />
     </LinearLayout>
-    <ListView
-        android:id="@+id/manage_siteOfReceive_listView"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:dividerHeight="3dp"
-        android:layout_weight="1"/>
-    <LinearLayout
-        android:orientation="vertical"
+        android:layout_height="4dp"
+        android:background="#D7DBDF"/>
+    <EditText
+        android:id="@+id/evaluate_text"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:hint="分享你的购买感想"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_height="300dp" />
     <Button
-        android:id="@+id/manage_add_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="新 增 收 货 地 址"
-        android:textColor="#FFFFFF"
+        android:id="@+id/evaluate_button"
+        android:text="提 交 评 价"
         android:textSize="35px"
         android:background="#FF0000"
-        />
-    </LinearLayout>
+        android:textColor="#FFFFFF"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

@@ -129,7 +129,6 @@ public class MainActivity extends AppCompatActivity{
                         ToastUtils.getShortToastByString(MainActivity.this,"myCardFile");
                         break;
                     case R.id.myOrderForm:
-                        ToastUtils.getShortToastByString(MainActivity.this,"myOrderForm");
                         Intent intent = new Intent(MainActivity.this,MyOrderFormsActivity.class);
                         startActivity(intent);
                         break;

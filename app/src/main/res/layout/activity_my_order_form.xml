@@ -29,7 +29,7 @@
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="3dp"
         android:background="#D7DBDF"/>
     <ProgressBar
         android:paddingTop="5dp"
@@ -40,6 +40,14 @@
         android:layout_gravity="center_horizontal"
         android:visibility = "gone"
         />
+    <TextView
+        android:id="@+id/myOrderForm_empty"
+        android:text="没 有 购 买 记 录"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:visibility="gone"/>
     <ListView
         android:id="@+id/myOrderForm_listView"
         android:layout_width="match_parent"

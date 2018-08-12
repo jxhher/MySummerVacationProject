@@ -5,6 +5,6 @@ package com.example.asus.summervacationproject.utils;
  */
 
 public enum PostType {
-    SEND,UPDATE
+    SEND,UPDATE,ADD
 }
 

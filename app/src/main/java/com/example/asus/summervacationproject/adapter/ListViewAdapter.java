@@ -7,6 +7,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
 import com.example.asus.summervacationproject.utils.ToastUtils;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,7 @@ public class ListViewAdapter extends BaseAdapter {
     private String[] ids;
     private StringBuffer newIds = new StringBuffer();
     private boolean change;
+    private ArrayList<String> list;
 
     public ListViewAdapter(Context context, List<SiteOfReceive> listData,int listItemId,boolean change) {
         this.mcontext = context;
@@ -74,7 +78,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder ;
         if (convertView==null){
             convertView = LayoutInflater.from(mcontext).inflate(listItemId,parent,false);
@@ -96,30 +100,13 @@ public class ListViewAdapter extends BaseAdapter {
             public void onClick(final View v) {
                 id = (Integer) v.getTag(R.id.btn);
                 sp = mcontext.getSharedPreferences("user_info", Context.MODE_PRIVATE);
-                ids = sp.getString("siteOfReceive","").split(",");
                 new OkHttpUtils(Config.DELETE_SITEODRECEIVE+"?id="+v.getTag(R.id.btn)+"&userId="+sp.getString("id",""),HttpMethod.GET, new OkHttpUtils.SuccessCallback() {
                     @Override
                     public void onSuccess(String result) {
                         if(result.equals("true")){
-                            SharedPreferences.Editor editor = sp.edit();
-                            if(ids.length!=1) {
-                                for (int i = 0; i < ids.length; i++) {       //重新生成本地数据
-                                    if (Integer.parseInt(ids[i]) == id) {
-                                        continue;
-                                    }
-                                    if (i == 0) {
-                                        newIds.append(ids[i]);
-                                    }else if(Integer.parseInt(ids[0])==id&&i==1){
-                                        newIds.append(ids[i]);
-                                    }
-                                    else newIds.append("," + ids[i]);
-                                }
-                            }
-                            editor.putString("siteOfReceive",newIds.toString());
-                            editor.commit();
-                            Message msg = Message.obtain();
-                            msg.obj = "删除成功";
-                            handler.sendMessage(msg);
+                            if(listData.size()!=0)listData.remove(position);
+                            updateLocalOrderFormData();
+                            notifyDataSetChanged();
                         }else{
                             Snackbar.make(v, "删除失败", Snackbar.LENGTH_SHORT).show();
                         }
@@ -136,6 +123,27 @@ public class ListViewAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    private void updateLocalOrderFormData() {
+        SharedPreferences sp = mcontext.getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        String[] ids = sp.getString("siteOfReceive","").split(",");
+        SharedPreferences.Editor editor = sp.edit();
+        if (ids.length != 1) {
+            list = new ArrayList<>();
+            for(int i=0;i<ids.length;i++){
+                if (Integer.parseInt(ids[i])==id)continue;
+                list.add(ids[i]);
+            }
+        }else if(ids.length==1){
+            editor.putString("siteOfReceive","");
+            editor.commit();
+            return;
+        }
+        Log.e(MyOrderFormAdapter.class.getSimpleName(),"adapter:ids "+ StringUtils.join(list,","));
+        editor.putString("siteOfReceive",StringUtils.join(list, ","));
+        editor.commit();
+    }
+
     static class ViewHolder{
         @BindView(R.id.siteOfReceive_name_TextView)TextView name;
         @BindView(R.id.siteOfReceive_phoneNumber_TextView)TextView phoneNumber;

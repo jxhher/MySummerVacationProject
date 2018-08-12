@@ -79,7 +79,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
     private String idOfShoppingCart;
     public final int ADD = 101;
     public final int BUG = 202;
-    private int siteId = 1;                  //用来显示收货地址的id
+    private int siteId = -1;                  //用来显示收货地址的id
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,9 +150,11 @@ public class GoodsInfoActivity extends AppCompatActivity {
 
     }
 
-    private void getSiteId() {
-        String[] ids = UserInfo.getUserInfo(GoodsInfoActivity.this,"siteOfReceive").split(",");
-        siteId = Integer.parseInt(ids[0]);
+    private void getSiteId() {                    //获取第一个收货地址id，发送到确认订单页面
+        if (!(TextUtils.isEmpty(UserInfo.getUserInfo(GoodsInfoActivity.this,"siteOfReceive")))) {
+            String[] ids = UserInfo.getUserInfo(GoodsInfoActivity.this,"siteOfReceive").split(",");
+            siteId = Integer.parseInt(ids[0]);
+        }
     }
 
     @OnClick(R.id.good_bottom_collection)
@@ -194,11 +196,12 @@ public class GoodsInfoActivity extends AppCompatActivity {
                 int userId = Integer.parseInt(data.getStringExtra("userId"));
                 addToShoppingCart(userId,updateGoodBean.getShopId());
             }else if(requestCode == BUG){
+                getSiteId();
                 Intent intent = new Intent(GoodsInfoActivity.this,SelectSiteOfReceiveActivity.class);
                 startActivity(intent);
                 EventBus.getDefault().postSticky(new OrderFormBean(siteId,shop.getShopName(),updateGoodBean.getImageUrl(),
                         updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+"",updateGoodBean.getShopId()));
-                Log.e(GoodsInfoActivity.class.getSimpleName(),"发送事件");
+                Log.e(GoodsInfoActivity.class.getSimpleName(),"发送粘性事件");
             }
         }
 
@@ -271,11 +274,11 @@ public class GoodsInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 backgroundAlpha(1);
                 window.dismiss();
-                if(TextUtils.isEmpty(UserInfo.getUserInfo(GoodsInfoActivity.this,"name"))){
+                if(TextUtils.isEmpty(UserInfo.getUserInfo(GoodsInfoActivity.this,"name"))){          //未登录
                     Intent intent = new Intent(GoodsInfoActivity.this,LoginActivity.class);
                     if(type == ADD)startActivityForResult(intent,ADD);
                     else startActivityForResult(intent,BUG);
-                }else{
+                }else{                                                                               //已登录
                     if(type== ADD)addToShoppingCart(Integer.parseInt(UserInfo.getUserInfo(GoodsInfoActivity.this,"id")),updateGoodBean.getGoodId());
                     else{
                         Intent intent = new Intent(GoodsInfoActivity.this,SelectSiteOfReceiveActivity.class);

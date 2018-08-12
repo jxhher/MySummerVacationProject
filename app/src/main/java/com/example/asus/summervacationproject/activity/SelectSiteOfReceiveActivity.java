@@ -118,9 +118,11 @@ public class SelectSiteOfReceiveActivity extends AppCompatActivity {
                 if(!result.equals("ERROR")){
                     SiteOfReceive siteOfReceive = JSON.parseObject(result,SiteOfReceive.class);
                     Log.e(SelectSiteOfReceiveActivity.class.getSimpleName(),"siteOfReceive:"+siteOfReceive);
-                    receiverName.setText(siteOfReceive.getName());
-                    receiver_phoneNumber.setText(siteOfReceive.getPhoneNumber());
-                    receiver_site.setText(siteOfReceive.getSite());
+                   if(siteOfReceive!=null){
+                        receiverName.setText(siteOfReceive.getName());
+                        receiver_phoneNumber.setText(siteOfReceive.getPhoneNumber());
+                        receiver_site.setText(siteOfReceive.getSite());
+                   }
                 }
             }
         }, new OkHttpUtils.FailCallback() {
@@ -167,6 +169,7 @@ public class SelectSiteOfReceiveActivity extends AppCompatActivity {
     }
 
     private void updateLocalUserInfo(String orderFormIds) {
+        Log.e(SelectSiteOfReceiveActivity.class.getSimpleName(),"orderFormId"+orderFormIds);
         UserInfo.saveUserInfo(SelectSiteOfReceiveActivity.this,"idOfOrderForm",orderFormIds);
     }
 

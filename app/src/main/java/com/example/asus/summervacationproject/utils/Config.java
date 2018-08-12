@@ -31,4 +31,5 @@ public class Config {
     public static final String ADD_ORDERFORM = SERVEL_URL+"/servlet/addOrderFormServlet";
     public static final String GET_ORDERFORM_LIST = SERVEL_URL+"/servlet/getOrderFormListServlet";
     public static final String DELETE_ORDERFORM = SERVEL_URL+"/servlet/deleteOrderFormServlet";
+    public static final String ADD_COMMENT = SERVEL_URL+"/servlet/addCommentServlet";
 }

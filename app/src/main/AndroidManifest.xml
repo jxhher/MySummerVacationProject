@@ -36,6 +36,7 @@
         <activity android:name=".activity.RegisterActivity"/>
         <activity android:name=".activity.SelectSiteOfReceiveActivity"/>
         <activity android:name=".activity.MyOrderFormsActivity"/>
+        <activity android:name=".activity.EvaluateActivity"/>
     </application>
 
 </manifest>

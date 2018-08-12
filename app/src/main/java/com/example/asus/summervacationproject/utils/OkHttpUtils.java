@@ -121,6 +121,16 @@ public class OkHttpUtils {
                                 .add("amount", datas[1])
                                 .build();
                         break;
+                    case ADD: formBody = new FormBody.Builder()
+                            .add("shopId",datas[0])
+                            .add("observerName", datas[1])
+                            .add("text",datas[2])
+                            .add("userId",datas[3])
+                            .add("orderFormId",datas[4])
+                            .build();
+                        break;
+
+
                 }
                 Request request = new Request
                         .Builder()
