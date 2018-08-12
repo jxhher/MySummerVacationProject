@@ -155,25 +155,4 @@ public class ListViewAdapter extends BaseAdapter {
         }
     }
 
-    private Handler handler = new Handler(){
-        @Override                                      //移除list集合中被删除条目，更新界面
-        public void handleMessage(Message msg){
-            // TODO Auto-generated method stub
-            String result = (String)msg.obj;
-            ToastUtils.getShortToastByString(mcontext, result);
-            if (listData.size() > 0){
-                for(int i=0;i<listData.size();i++){
-                    if(listData.get(i).getId()==id){
-                        System.out.println("listDataId:"+listData.get(i).getId()+"listDataName:"+listData.get(i).getName());
-                        System.out.println("id:"+id+"   "+"remove"+i);
-                        listData.remove(i);
-                        break;
-                    }
-                }
-                notifyDataSetChanged();
-            }
-        }
-
-    };
-
 }

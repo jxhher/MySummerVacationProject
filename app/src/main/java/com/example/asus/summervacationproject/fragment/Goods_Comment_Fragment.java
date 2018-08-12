@@ -34,10 +34,10 @@ public class Goods_Comment_Fragment extends BaseFragment {
     private boolean isFragmentVisible = false;
     private boolean isFirst = true;
     private GoodCommentListViewAdapter adapter;
-    private int shopId = -1;
+    private int goodId = -1;
     private ProgressBar good_comment_progressBar;
-    public Goods_Comment_Fragment(int shopId) {
-        this.shopId = shopId;
+    public Goods_Comment_Fragment(int goodId) {
+        this.goodId = goodId;
     }
 
 
@@ -66,7 +66,7 @@ public class Goods_Comment_Fragment extends BaseFragment {
         }
 
         //可见，并且没有加载过
-        if (isFirst&&isFragmentVisible&&shopId!=-1) {
+        if (isFirst&&isFragmentVisible&&goodId!=-1) {
             getCommentsByInternet();
             return;
         }
@@ -81,7 +81,7 @@ public class Goods_Comment_Fragment extends BaseFragment {
         good_comment_progressBar = (ProgressBar) view.findViewById(R.id.good_comment_progressBar);
         good_comment_progressBar.setVisibility(View.VISIBLE);
 
-        new OkHttpUtils(Config.GET_COMMENT_URL+"?shopId="+shopId, HttpMethod.GET, new OkHttpUtils.SuccessCallback() {
+        new OkHttpUtils(Config.GET_COMMENT_URL+"?goodId="+goodId, HttpMethod.GET, new OkHttpUtils.SuccessCallback() {
             @Override
             public void onSuccess(String result) {
                 if("NO".equals(result)){

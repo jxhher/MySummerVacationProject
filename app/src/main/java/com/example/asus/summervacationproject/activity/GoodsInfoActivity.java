@@ -103,7 +103,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
         if(updateGoodBean!=null){
             fragments.add(new Goods_Main_Fragment(updateGoodBean,shop));
             fragments.add(new Goods_Details_Fragment(updateGoodBean));
-            fragments.add(new Goods_Comment_Fragment(goodsBean.getShopId()));
+            fragments.add(new Goods_Comment_Fragment(goodsBean.getGoodId()));
             //设置ViewPager的适配器
             viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),fragments);
             viewPager.setAdapter(viewPagerAdapter);
@@ -200,7 +200,8 @@ public class GoodsInfoActivity extends AppCompatActivity {
                 Intent intent = new Intent(GoodsInfoActivity.this,SelectSiteOfReceiveActivity.class);
                 startActivity(intent);
                 EventBus.getDefault().postSticky(new OrderFormBean(siteId,shop.getShopName(),updateGoodBean.getImageUrl(),
-                        updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+"",updateGoodBean.getShopId()));
+                        updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+"",updateGoodBean.getGoodId(),
+                        Integer.parseInt(UserInfo.getUserInfo(GoodsInfoActivity.this,"id"))));
                 Log.e(GoodsInfoActivity.class.getSimpleName(),"发送粘性事件");
             }
         }
@@ -284,7 +285,8 @@ public class GoodsInfoActivity extends AppCompatActivity {
                         Intent intent = new Intent(GoodsInfoActivity.this,SelectSiteOfReceiveActivity.class);
                         startActivity(intent);
                         EventBus.getDefault().postSticky(new OrderFormBean(siteId,shop.getShopName(),updateGoodBean.getImageUrl(),
-                                updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+"",updateGoodBean.getShopId()));
+                                updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+"",updateGoodBean.getGoodId(),
+                                Integer.parseInt(UserInfo.getUserInfo(GoodsInfoActivity.this,"id"))));
                         Log.e(GoodsInfoActivity.class.getSimpleName(),"发送事件");
                     }
                 }

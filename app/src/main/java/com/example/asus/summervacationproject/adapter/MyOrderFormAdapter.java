@@ -118,10 +118,10 @@ public class MyOrderFormAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
                     Intent intent2 = new Intent(context, EvaluateActivity.class);
-                    int shopId = orderFormBean.getShopId();
+                    int goodId = orderFormBean.getGoodId();
                     int orderFormId = orderFormBean.getId();
-                    Log.e(MyOrderFormAdapter.class.getSimpleName(),"shopId"+shopId+"orderFormId"+orderFormId);
-                    intent2.putExtra("shopId",shopId);
+                    Log.e(MyOrderFormAdapter.class.getSimpleName(),"goodId"+goodId+"orderFormId"+orderFormId);
+                    intent2.putExtra("goodId",goodId);
                     intent2.putExtra("orderFormId",orderFormId);
                     context.startActivity(intent2);
                     MyOrderFormsActivity activity = (MyOrderFormsActivity) context;

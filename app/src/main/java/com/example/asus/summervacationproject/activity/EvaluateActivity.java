@@ -30,7 +30,7 @@ import butterknife.OnClick;
 public class EvaluateActivity extends AppCompatActivity {
     @BindView(R.id.evaluate_text)
     EditText evaluate_text;
-    private int shopId = -1;
+    private int goodId = -1;
     private String observerName = null;
     private String userId = null;
     private int orderFormId = -1;
@@ -40,7 +40,7 @@ public class EvaluateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_evaluate);
         ButterKnife.bind(this);
         Intent intent = getIntent();
-        shopId = intent.getIntExtra("shopId",-1);
+        goodId = intent.getIntExtra("goodId",-1);
         orderFormId = intent.getIntExtra("orderFormId",-1);
         observerName = UserInfo.getUserInfo(this,"name");
         userId = UserInfo.getUserInfo(this,"id");
@@ -64,8 +64,8 @@ public class EvaluateActivity extends AppCompatActivity {
             return;
         }
        // if (shopId!=null&&observerName!=null) {
-        Log.e(EvaluateActivity.class.getSimpleName(),"shopid:"+shopId+"observerName:"+observerName+"text:"+text+"userId:"+userId+"orderFormId:"+orderFormId);
-            String[] data = {shopId+"",observerName,text,userId,orderFormId+""};
+        Log.e(EvaluateActivity.class.getSimpleName(),"goodId:"+goodId+"observerName:"+observerName+"text:"+text+"userId:"+userId+"orderFormId:"+orderFormId);
+            String[] data = {goodId+"",observerName,text,userId,orderFormId+""};
 
             new OkHttpUtils(Config.ADD_COMMENT, PostType.ADD, new OkHttpUtils.SuccessCallback() {
                 @Override

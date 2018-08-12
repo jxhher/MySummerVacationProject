@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/receive_shopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="商品店铺名"
+        android:textColor="#404040"
+        android:textSize="14sp"
+        android:padding="13dp"
+        />
+    <LinearLayout
+        android:paddingRight="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+    <ImageButton
+        android:id="@+id/receive_item_removeButton"
+        android:layout_gravity="center"
+        android:background="@drawable/image_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:paddingLeft="8dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/receive_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                />
+                <TextView
+                    android:padding="10dp"
+                    android:id="@+id/receive_goodName"
+                    android:layout_width="170dp"
+                    android:layout_height="match_parent"
+                    android:lines="3"
+                    android:text="华硕（ASUS）经典系列X554LP 15.6英寸笔记本 （i5-5200U 4G 500G R5-M230 1G独显 蓝牙 Win8.1 黑色）"
+
+                    android:textSize="14sp"
+
+                   />
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/receiver_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="价格"
+                    android:gravity="center_vertical"
+                    android:paddingRight="8dp"
+                    android:textSize="15sp"
+                    android:textColor="#f00"
+                    />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_weight="1"
+                android:text="购买数量"
+                android:textColor="#404040"
+                android:textSize="15sp"
+                android:paddingTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"/>
+
+            <com.example.asus.summervacationproject.utils.AddSubView
+                android:id="@+id/receiver_addSubView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                >
+            </com.example.asus.summervacationproject.utils.AddSubView>
+</LinearLayout>
+        </LinearLayout>
+    </LinearLayout>

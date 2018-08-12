@@ -15,20 +15,22 @@ public class OrderFormBean {
     private String date;
     private int userId;
     private int shopId;
+    private int goodId;
     private int isEvaluate;
 
     public OrderFormBean() {
 
     }
 
-    public OrderFormBean(int siteOfReceiveId, String shopName, String imageUrl, String goodName, int amount, String price,int shopId) {
+    public OrderFormBean(int siteOfReceiveId, String shopName, String imageUrl, String goodName, int amount, String price,int goodId,int userId) {
         this.siteOfReceiveId = siteOfReceiveId;
         this.shopName = shopName;
         this.imageUrl = imageUrl;
         this.goodName = goodName;
         this.amount = amount;
         this.price = price;
-        this.shopId = shopId;
+        this.goodId = goodId;
+        this.userId = userId;
     }
 
     public int getId() {
@@ -117,5 +119,13 @@ public class OrderFormBean {
 
     public void setIsEvaluate(int isEvaluate) {
         this.isEvaluate = isEvaluate;
+    }
+
+    public int getGoodId() {
+        return goodId;
+    }
+
+    public void setGoodId(int goodId) {
+        this.goodId = goodId;
     }
 }

@@ -36,6 +36,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.asus.summervacationproject.R;
 import com.example.asus.summervacationproject.activity.LoginActivity;
 import com.example.asus.summervacationproject.activity.MainActivity;
+import com.example.asus.summervacationproject.activity.SelectSiteOfReceiveActivity;
 import com.example.asus.summervacationproject.adapter.ShoppingCartRecyclerViewAdapter;
 import com.example.asus.summervacationproject.baseclass.BaseFragment;
 import com.example.asus.summervacationproject.bean.Shop;
@@ -52,6 +53,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -81,8 +83,7 @@ public class ShoppingCartFragment extends BaseFragment{
 
     @BindView(R.id.shopCart_checkbox_out_all)
     CheckBox shopCart_checkbox_out_all;
-    @BindView(R.id.shopCart_check_out_button)
-    Button shopCart_check_out_button;
+
 
     @BindView(R.id.shoppingCart_recyclerview)
     RecyclerView shoppingCart_recyclerview;
@@ -93,9 +94,9 @@ public class ShoppingCartFragment extends BaseFragment{
     @BindView(R.id.shopCart_linearLayout_delete)
     LinearLayout shopCart_linearLayout_delete;
 
+
     private ShoppingCartRecyclerViewAdapter shoppingCartRecyclerViewAdapter = null;
     private View view;
-    private int userId = -1;
     private LinearLayout layout_empty_shopping_cart;
     private List<ShoppingCartBean> shoppingCartBeanList = new ArrayList<>();
     private HashMap<String, String> updateShopCartInfo = new HashMap<>();
@@ -317,5 +318,28 @@ public class ShoppingCartFragment extends BaseFragment{
         layout_empty_shopping_cart.setVisibility(View.GONE);
         edit.setVisibility(View.VISIBLE);
        // EventBus.getDefault().unregister(this);
+    }
+
+
+    @OnClick(R.id.shopCart_check_out_button)
+    void onCheckButtonClick(){
+        int userId = Integer.parseInt(UserInfo.getUserInfo(mContext,"id"));
+        Log.e(mContext.getClass().getSimpleName(),"id"+userId);
+       if(shoppingCartBeanList!=null&&shoppingCartBeanList.size()!=0){
+           List<ShoppingCartBean> shoppingCartBeen = new ArrayList<>();
+           for (int i =0;i<shoppingCartBeanList.size();i++) {
+                   ShoppingCartBean sb = shoppingCartBeanList.get(i);
+               if (sb.isSelected()){
+                   sb.setUserId(userId);
+                   shoppingCartBeen.add(sb);
+               }
+           }
+           if(shoppingCartBeen.size()==0)return;
+           Intent intent = new Intent(mContext, SelectSiteOfReceiveActivity.class);
+           intent.putExtra("shopping_cart_list",(Serializable)shoppingCartBeen);
+           startActivity(intent);
+           shopCart_checkbox_out_all.setChecked(false);
+       }
+
     }
 }
