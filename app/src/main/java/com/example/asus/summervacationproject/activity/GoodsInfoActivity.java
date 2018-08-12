@@ -197,7 +197,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
                 Intent intent = new Intent(GoodsInfoActivity.this,SelectSiteOfReceiveActivity.class);
                 startActivity(intent);
                 EventBus.getDefault().postSticky(new OrderFormBean(siteId,shop.getShopName(),updateGoodBean.getImageUrl(),
-                        updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+""));
+                        updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+"",updateGoodBean.getShopId()));
                 Log.e(GoodsInfoActivity.class.getSimpleName(),"发送事件");
             }
         }
@@ -281,7 +281,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
                         Intent intent = new Intent(GoodsInfoActivity.this,SelectSiteOfReceiveActivity.class);
                         startActivity(intent);
                         EventBus.getDefault().postSticky(new OrderFormBean(siteId,shop.getShopName(),updateGoodBean.getImageUrl(),
-                                updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+""));
+                                updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+"",updateGoodBean.getShopId()));
                         Log.e(GoodsInfoActivity.class.getSimpleName(),"发送事件");
                     }
                 }

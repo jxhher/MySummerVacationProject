@@ -1,6 +1,7 @@
 package com.example.asus.summervacationproject.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -92,7 +93,8 @@ public class SelectSiteOfReceiveActivity extends AppCompatActivity {
         receive_shopName.setText(event.getShopName());
         receive_goodName.setText(event.getGoodName());
         receiver_price.setText("¥ "+event.getPrice()+".00");
-        receiver_total_price.setText("共 ¥ "+event.getPrice()+".00");
+        receiver_total_price.setText("共 ¥ "+Integer.parseInt(event.getPrice())*event.getAmount()+".00");
+        receiver_addSubView.setValue(event.getAmount());
         getSiteOfReceive(event.getSiteOfReceiveId());
 
     }
@@ -148,8 +150,13 @@ public class SelectSiteOfReceiveActivity extends AppCompatActivity {
         new OkHttpUtils(Config.ADD_ORDERFORM, HttpMethod.POST, new OkHttpUtils.SuccessCallback() {
             @Override
             public void onSuccess(String result) {
-                ToastUtils.getShortToastByString(SelectSiteOfReceiveActivity.this,"提交成功");
-                finish();
+                if(!result.equals("ERROR")){
+                    updateLocalUserInfo(result);
+                    ToastUtils.getShortToastByString(SelectSiteOfReceiveActivity.this,"下单成功");
+                    finish();
+                }else{
+                    ToastUtils.getShortToastByString(SelectSiteOfReceiveActivity.this,"下单失败");
+                }
             }
         }, new OkHttpUtils.FailCallback() {
             @Override
@@ -157,6 +164,10 @@ public class SelectSiteOfReceiveActivity extends AppCompatActivity {
                 ToastUtils.getShortToastByString(SelectSiteOfReceiveActivity.this,"提交失败");
             }
         },jsonData);
+    }
+
+    private void updateLocalUserInfo(String orderFormIds) {
+        UserInfo.saveUserInfo(SelectSiteOfReceiveActivity.this,"idOfOrderForm",orderFormIds);
     }
 
 }

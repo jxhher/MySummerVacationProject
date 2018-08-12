@@ -40,12 +40,17 @@ import com.example.asus.summervacationproject.adapter.ShoppingCartRecyclerViewAd
 import com.example.asus.summervacationproject.baseclass.BaseFragment;
 import com.example.asus.summervacationproject.bean.Shop;
 import com.example.asus.summervacationproject.bean.ShoppingCartBean;
+import com.example.asus.summervacationproject.bean.ShoppingCartList;
 import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
 import com.example.asus.summervacationproject.utils.PostType;
 import com.example.asus.summervacationproject.utils.ToastUtils;
 import com.example.asus.summervacationproject.utils.UserInfo;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -99,6 +104,7 @@ public class ShoppingCartFragment extends BaseFragment{
     private TextView titleTextView;
     private LinearLayout shopCart_check_linearLayout_all;
     private boolean login = false;
+    private String jsonData;
 
 
     @Override
@@ -111,7 +117,7 @@ public class ShoppingCartFragment extends BaseFragment{
             edit.setText("编辑");
             edit.setTextSize(21);
             edit.setTag("edit");
-            edit.setVisibility(View.GONE);
+            if(UserInfo.getUserInfo(mContext,"id").equals(""))edit.setVisibility(View.GONE);
             mToolBar.addView(edit);
             titleTextView = (TextView) mToolBar.findViewWithTag("title");
             //为ImageView设置参数
@@ -131,7 +137,6 @@ public class ShoppingCartFragment extends BaseFragment{
         //mToolBar.setVisibility(View.GONE);
         super.onResume();
     }
-
 
     private void updateTextViewUI() {
         if(edit.getText().equals("编辑")){
@@ -193,9 +198,10 @@ public class ShoppingCartFragment extends BaseFragment{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
-            onResume();
-            Log.e(ShoppingCartFragment.class.getSimpleName(), "userId:" + userId);
+        if (data != null){
+            EventBus.getDefault().register(this);
+
+           // onResume();
         } else {
             ToastUtils.getShortToastByString(mContext, "同步数据失败");
             FragmentManager fragmentManager = getFragmentManager();
@@ -203,6 +209,7 @@ public class ShoppingCartFragment extends BaseFragment{
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.remove(fragment);
             fragmentTransaction.commit();
+            edit.setVisibility(View.GONE);
 
         }
     }
@@ -210,9 +217,10 @@ public class ShoppingCartFragment extends BaseFragment{
     private void setShoppingCartData() {
 
         SharedPreferences sp = mContext.getSharedPreferences("shopping_cart", Context.MODE_PRIVATE);
-        String jsonData = sp.getString("shopping_cart_" + UserInfo.getUserInfo(mContext, "id") + "", "");
+        jsonData = sp.getString("shopping_cart_" + UserInfo.getUserInfo(mContext, "id") + "", "");
         shoppingCartBeanList = JSON.parseArray(jsonData, ShoppingCartBean.class);
         if(shoppingCartBeanList==null){
+            Log.e(ShoppingCartFragment.class.getSimpleName(),"shoppingCartBeanList为null");
             if(!UserInfo.getUserInfo(mContext,"id").equals(""))           //点击购物车时判断是否登录用以设置布局显示
                 layout_empty_shopping_cart.setVisibility(View.VISIBLE);
                 shopCart_check_linearLayout_all.setVisibility(View.GONE);
@@ -221,6 +229,7 @@ public class ShoppingCartFragment extends BaseFragment{
                 edit.setVisibility(View.GONE);
             }
         }else{
+            Log.e(ShoppingCartFragment.class.getSimpleName(),"shoppingCartBeanList不为null");
             if(shoppingCartBeanList.size()!=0){
                 layout_empty_shopping_cart.setVisibility(View.GONE);
                 shopCart_check_linearLayout_all.setVisibility(View.VISIBLE);
@@ -255,7 +264,7 @@ public class ShoppingCartFragment extends BaseFragment{
         }, json);
     }
 
-    private void updateLocalShopCartInfo(HashMap<String, String> hashMap) {
+    private void updateLocalShopCartInfo(HashMap<String, String> hashMap) {                //当在购物车页面进行增减商品数量后，隐藏fragement后会调用该方法更新本地和数据库数据
         SharedPreferences sp = mContext.getSharedPreferences("shopping_cart", Context.MODE_PRIVATE);
         String jsonData = sp.getString("shopping_cart_" + UserInfo.getUserInfo(mContext, "id") + "", "");
         List<ShoppingCartBean> shoppingCartBeen = JSON.parseArray(jsonData, ShoppingCartBean.class);
@@ -293,5 +302,20 @@ public class ShoppingCartFragment extends BaseFragment{
             edit.setText("编辑");
             edit.setVisibility(View.GONE);
         }
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN , priority = 1)          //当用户登录后，用来更新购物车界面数据
+    public void readMessage(ShoppingCartList event) {
+        shoppingCartBeanList = event.getShoppingCartBeen();
+        Log.e(ShoppingCartFragment.class.getSimpleName(),"接收到消息："+shoppingCartBeanList.get(0).getGoodName());
+        shoppingCartRecyclerViewAdapter = new ShoppingCartRecyclerViewAdapter(mContext, shoppingCartBeanList,
+                shopCart_totalMoney, shopCart_checkbox_out_all, updateShopCartInfo, shopCart_check_delete_all);
+        shoppingCart_recyclerview.setLayoutManager(new LinearLayoutManager(mContext));
+        shoppingCart_recyclerview.setAdapter(shoppingCartRecyclerViewAdapter);
+        shopCart_check_linearLayout_all.setVisibility(View.VISIBLE);
+        layout_empty_shopping_cart.setVisibility(View.GONE);
+        edit.setVisibility(View.VISIBLE);
+       // EventBus.getDefault().unregister(this);
     }
 }

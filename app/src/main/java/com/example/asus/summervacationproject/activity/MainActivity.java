@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PersistableBundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -51,6 +52,7 @@ import com.example.asus.summervacationproject.fragment.HomePageFragment;
 import com.example.asus.summervacationproject.fragment.ShoppingCartFragment;
 import com.example.asus.summervacationproject.utils.BitmapUtils;
 import com.example.asus.summervacationproject.utils.Config;
+import com.example.asus.summervacationproject.utils.ToastUtils;
 import com.example.asus.summervacationproject.utils.UserInfo;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
@@ -111,8 +113,32 @@ public class MainActivity extends AppCompatActivity{
         initDrawerLayout();
         initFragment();
         setFragment();
+        onNavigationItemClick();
 
+    }
 
+    private void onNavigationItemClick() {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.myAttention:
+                        ToastUtils.getShortToastByString(MainActivity.this,"mayAttention");
+                        break;
+                    case R.id.myCardFile:
+                        ToastUtils.getShortToastByString(MainActivity.this,"myCardFile");
+                        break;
+                    case R.id.myOrderForm:
+                        ToastUtils.getShortToastByString(MainActivity.this,"myOrderForm");
+                        Intent intent = new Intent(MainActivity.this,MyOrderFormsActivity.class);
+                        startActivity(intent);
+                        break;
+                }
+
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return false;
+            }
+        });
     }
 
     private void initToolBar() {
@@ -120,13 +146,6 @@ public class MainActivity extends AppCompatActivity{
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("");
-       /* button = new ImageView(this);
-        button.setImageResource(R.drawable.add_image);
-        toolbar.addView(button);
-        //为ImageView设置参数
-        Toolbar.LayoutParams layoutParams = (Toolbar.LayoutParams) button.getLayoutParams();
-        layoutParams.gravity = GravityCompat.END;
-        layoutParams.rightMargin = 20;*/
 
         setSupportActionBar(toolbar);
     }
@@ -389,4 +408,6 @@ public class MainActivity extends AppCompatActivity{
         handler.removeCallbacksAndMessages(null);  //为防止内存泄漏，移除所有的未被执行的消息
         localBroadcastManager.unregisterReceiver(localReceiver);
     }
+
+
 }

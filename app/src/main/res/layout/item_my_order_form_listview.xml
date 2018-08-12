@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/myOrderForm_shopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品店铺名"
+            android:textColor="#404040"
+            android:textSize="14sp"
+            android:padding="13dp"
+            />
+    <TextView
+        android:id="@+id/myOrderForm_date"
+        android:paddingLeft="13dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:text="下单日期："
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:background="#eee"
+            android:paddingLeft="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/image_head_portrait"
+                android:id="@+id/myOrderForm_imageView"
+                android:layout_width="74dp"
+                android:layout_height="74dp" />
+
+            <TextView
+                    android:paddingLeft="10dp"
+                    android:id="@+id/myOrderForm_goodName"
+                    android:layout_width="222dp"
+                    android:layout_height="match_parent"
+                    android:lines="3"
+                    android:text="华硕（ASUS）经典系列X554LP 15.6英寸笔记本 （i5-5200U 4G 500G R5-M230 1G独显 蓝牙 Win8.1 黑色）"
+                    android:textColor="#404040"
+                    android:textSize="14sp"
+                    android:gravity="center_vertical"/>
+                <TextView
+                    android:layout_weight="0.5"
+                    android:id="@+id/myOrderForm_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="价格"
+                    android:textColor="#4A4847"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/myOrderForm_total_price"
+        android:paddingTop="8dp"
+        android:textColor="#4A4847"
+        android:text="共1件商品，合计100元"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingRight="13dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:paddingRight="13dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="11dp"
+        >
+
+        <Button
+            android:id="@+id/myOrderForm_comment"
+            android:text="评 价"
+            android:layout_marginRight="10dp"
+            android:layout_width="73dp"
+            android:layout_height="37dp"
+            android:background="#DAFBFD"/>
+
+        <Button
+            android:id="@+id/myOrderForm_delete"
+            android:text="删 除 订 单"
+            android:layout_width="85dp"
+            android:layout_height="37dp"
+            android:background="#DAFBFD"/>
+    </LinearLayout>
+</LinearLayout>

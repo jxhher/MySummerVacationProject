@@ -26,12 +26,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.example.asus.summervacationproject.R;
 import com.example.asus.summervacationproject.bean.ShoppingCartBean;
+import com.example.asus.summervacationproject.bean.ShoppingCartList;
 import com.example.asus.summervacationproject.bean.User;
 import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
 import com.example.asus.summervacationproject.utils.UserInfo;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,62 +75,63 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.btn_login)
-      void login(){
-        InputMethodManager imm =(InputMethodManager)getSystemService(
+      void login() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(et_login_pwd.getWindowToken(), 0);   //收回软键盘
 
         loginPage_ProgressBar.setVisibility(View.VISIBLE);
         String phoneNumber = et_login_number.getText().toString().trim();
         String password = et_login_pwd.getText().toString().trim();
-        if(TextUtils.isEmpty(phoneNumber)){
-            Toast.makeText(this,"账号不能为空",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(phoneNumber)) {
+            Toast.makeText(this, "账号不能为空", Toast.LENGTH_SHORT).show();
             loginPage_ProgressBar.setVisibility(View.GONE);
             return;
-        }else if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"密码不能为空",Toast.LENGTH_SHORT).show();
+        } else if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
             loginPage_ProgressBar.setVisibility(View.GONE);
             return;
-        }else{
-            Log.e(TAG,phoneNumber+"  "+password);
+        } else {
+            Log.e(TAG, phoneNumber + "  " + password);
             JSONObject jsonObject = new JSONObject();
             try {
-                jsonObject.put("phoneNumber",phoneNumber);
-                jsonObject.put("password",password);
+                jsonObject.put("phoneNumber", phoneNumber);
+                jsonObject.put("password", password);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             new OkHttpUtils(Config.LOGINPAGE_URL, HttpMethod.POST, new OkHttpUtils.SuccessCallback() {
                 @Override
                 public void onSuccess(String result) {
-                    if(result.equals("ERROR_FIND")){
-                        Toast.makeText(LoginActivity.this,"账号或密码错误",Toast.LENGTH_SHORT).show();
+                    if (result.equals("ERROR_FIND")) {
+                        Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                         return;
-                    }else{
-                        Toast.makeText(LoginActivity.this,"登录成功",Toast.LENGTH_SHORT).show();
-                        User user = JSON.parseObject(result,User.class);
+                    } else {
+                        Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        User user = JSON.parseObject(result, User.class);
                         saveUser(user);
                         setShoppingCart();
                         changeUI();
 
                         Intent intent = new Intent();
-                        Log.e(GoodsInfoActivity.class.getSimpleName(),"login_userId"+user.getId());
-                        intent.putExtra("userId",user.getId()+"");
+                        Log.e(GoodsInfoActivity.class.getSimpleName(), "login_userId" + user.getId());
+                        // intent.putExtra("shoppingCartBeanList",user.getIdOfShoppingCart()+"");
                         LoginActivity.this.setResult(1,intent);
-                        LoginActivity.this.setResult(2,intent);
+                        LoginActivity.this.setResult(2);
                         LoginActivity.this.setResult(3,intent);
 
                         finish();
-                        Log.e(TAG,"登录成功");
+
+                        Log.e(TAG, "登录成功");
                     }
                 }
             }, new OkHttpUtils.FailCallback() {
-                   @Override
+                @Override
                 public void onFail() {
-                    Toast.makeText(LoginActivity.this,"联网失败",Toast.LENGTH_SHORT).show();
-                    Log.e(TAG,"联网失败");
+                    Toast.makeText(LoginActivity.this, "联网失败", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "联网失败");
                 }
-            },jsonObject.toString());
+            }, jsonObject.toString());
             loginPage_ProgressBar.setVisibility(View.GONE);
         }
     }
@@ -152,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("idOfBuyed",user.getIdOfBuyed());
         editor.putString("idOfShoppingCart",user.getIdOfShoppingCart());
         editor.putString("siteOfReceive",user.getSiteOfReceive());
+        editor.putString("idOfOrderForm",user.getIdOfOrderForm());
         editor.commit();//必须提交，否则保存不成功
     }
 
@@ -171,6 +175,8 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(String result) {
                  //   List<ShoppingCartBean> shoppingCartBeanList = JSON.parseArray(result,ShoppingCartBean.class);
+                    EventBus.getDefault().post(new ShoppingCartList(JSON.parseArray(result,ShoppingCartBean.class)));
+                    Log.e(LoginActivity.class.getSimpleName(),"login发送信息");
                     saveShoppingCartInfo(result);
                 }
             }, new OkHttpUtils.FailCallback() {

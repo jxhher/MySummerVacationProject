@@ -2,26 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:id="@+id/g1">
     <item
-        android:id="@+id/favorite"
-        android:icon="@mipmap/ic_launcher"
+        android:id="@+id/myOrderForm"
+        android:icon="@drawable/image_order_form"
         android:title="我的订单"/>
     </group>
     <group android:id="@+id/g2">
     <item
-        android:id="@+id/wallet"
-        android:icon="@mipmap/ic_launcher"
+        android:id="@+id/myAttention"
+        android:icon="@drawable/image_attention"
         android:title="我的关注"/>
-    </group>
-    <group android:id="@+id/g3">
-    <item
-        android:id="@+id/photo"
-        android:icon="@mipmap/ic_launcher"
-        android:title="我的收藏"/>
     </group>
     <group android:id="@+id/g4">
     <item
-        android:id="@+id/file"
-        android:icon="@mipmap/ic_launcher"
+        android:id="@+id/myCardFile"
+        android:icon="@drawable/image_card_file"
         android:title="我的卡包"/>
     </group>
 </menu>

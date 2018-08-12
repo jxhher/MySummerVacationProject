@@ -14,15 +14,20 @@ public class OrderFormBean {
     private String price;
     private String date;
     private int userId;
+    private int shopId;
 
+    public OrderFormBean() {
 
-    public OrderFormBean(int siteOfReceiveId, String shopName, String imageUrl, String goodName, int amount, String price) {
+    }
+
+    public OrderFormBean(int siteOfReceiveId, String shopName, String imageUrl, String goodName, int amount, String price,int shopId) {
         this.siteOfReceiveId = siteOfReceiveId;
         this.shopName = shopName;
         this.imageUrl = imageUrl;
         this.goodName = goodName;
         this.amount = amount;
         this.price = price;
+        this.shopId = shopId;
     }
 
     public int getId() {
@@ -95,5 +100,13 @@ public class OrderFormBean {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
     }
 }
