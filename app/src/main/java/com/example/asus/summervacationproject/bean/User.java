@@ -11,6 +11,8 @@ public class User {
 	String siteOfReceive;
 	String idOfShoppingCart;    //购物车记录数据库的id
 	String idOfBuyed;
+	String idOfOrderForm;
+
 	public long getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -74,6 +76,12 @@ public class User {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
-}	
+
+	public String getIdOfOrderForm() {
+		return idOfOrderForm;
+	}
+
+	public void setIdOfOrderForm(String idOfOrderForm) {
+		this.idOfOrderForm = idOfOrderForm;
+	}
+}

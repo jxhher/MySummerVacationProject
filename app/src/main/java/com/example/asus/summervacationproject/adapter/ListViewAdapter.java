@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,11 +44,13 @@ public class ListViewAdapter extends BaseAdapter {
     private SharedPreferences sp;
     private String[] ids;
     private StringBuffer newIds = new StringBuffer();
+    private boolean change;
 
-    public ListViewAdapter(Context context, List<SiteOfReceive> listData,int listItemId) {
+    public ListViewAdapter(Context context, List<SiteOfReceive> listData,int listItemId,boolean change) {
         this.mcontext = context;
         this.listData = listData;
         this.listItemId = listItemId;
+        this.change = change;
     }
 
     public ListViewAdapter() {
@@ -83,6 +86,10 @@ public class ListViewAdapter extends BaseAdapter {
         holder.name.setText(listData.get(position).getName());
         holder.phoneNumber.setText(listData.get(position).getPhoneNumber());
         holder.site.setText(listData.get(position).getSite());
+        if(change){
+            holder.checkBox.setVisibility(View.GONE);
+            holder.deleteButton.setVisibility(View.GONE);
+        }
         holder.deleteButton.setTag(R.id.btn,listData.get(position).getId());
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +141,7 @@ public class ListViewAdapter extends BaseAdapter {
         @BindView(R.id.siteOfReceive_phoneNumber_TextView)TextView phoneNumber;
         @BindView(R.id.siteOfReceive_site_TextView)TextView site;
         @BindView(R.id.siteOfReceive_deleteButton)Button deleteButton;
+        @BindView(R.id.siteOfReceive_setting)CheckBox checkBox;
         public ViewHolder(View view) {
             ButterKnife.bind(this,view);
         }

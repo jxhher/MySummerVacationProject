@@ -118,9 +118,9 @@
             android:layout_width="110dp"
             android:layout_height="47dp"
             android:layout_gravity="center"
-            android:background="#DF3033"
             android:gravity="center"
             android:text="立即购买"
+            android:background="#DF3033"
             android:textColor="#fff" />
     </LinearLayout>
 

@@ -25,11 +25,7 @@
             android:textSize="37px"
             android:layout_marginLeft="5dp"
             android:textColor="@color/cardview_dark_background"
-
-
-
             />
-
     </LinearLayout>
     <RelativeLayout
         android:id="@+id/rl_login"

@@ -12,6 +12,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -22,6 +24,7 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.example.asus.summervacationproject.R;
 import com.example.asus.summervacationproject.adapter.ListViewAdapter;
+import com.example.asus.summervacationproject.bean.Shop;
 import com.example.asus.summervacationproject.bean.SiteOfReceive;
 import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
@@ -55,12 +58,27 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
 
     private LocalBroadcastManager localBroadcastManager;
     private LocalReceiver localReceiver;
+    private boolean change = false;
 
     @Override
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_siteofreceive);
         ButterKnife.bind(this);
+        if(getIntent().getStringExtra("id").equals("1")){
+            //manage_add_button.setVisibility(View.GONE);
+            change = true;
+            manage_siteOfReceive_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent();
+                    intent.putExtra("siteOfReceiveId",SiteOfReceiveList.get(position).getId()+"");
+                    ManageSiteOfReceiveActivity.this.setResult(1,intent);
+                    finish();
+                }
+            });
+        }
+
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         registerBroadCast();
         initListView();
@@ -91,7 +109,7 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(String result) {
                     SiteOfReceiveList = JSON.parseArray(result, SiteOfReceive.class);
-                    adapter = new ListViewAdapter(ManageSiteOfReceiveActivity.this, SiteOfReceiveList, R.layout.item_siteofreceive_listview);
+                    adapter = new ListViewAdapter(ManageSiteOfReceiveActivity.this, SiteOfReceiveList, R.layout.item_siteofreceive_listview,change);
                     manage_siteOfReceive_listView.setAdapter(adapter);
                 }
             }, new OkHttpUtils.FailCallback() {
@@ -105,6 +123,7 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
 
         }
     }
+
 
     private void registerBroadCast() {
         intentFilter = new IntentFilter();                            //动态注册广播，等待接收信息
@@ -130,4 +149,7 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-    }
+
+
+
+}

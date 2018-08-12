@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    //顶部布局
+    <LinearLayout
+        android:id="@+id/receive_linearLayout_back"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/receive_site_button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/image_back_button"
+            android:paddingRight="7dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="确认订单"
+            android:gravity="center_vertical"
+            android:textSize="37px"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/cardview_dark_background"
+            />
+        </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="#eeee"/>
+    //收货地址布局
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/receiver_siteOfReceive_linearLayout"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            >
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                android:layout_weight="1"
+                android:src="@drawable/image_location"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"/>
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <TextView
+                    android:padding="4dp"
+                    android:text="收货人:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/receiver_name"
+                    android:padding="4dp"
+                    android:text="姓名"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                     />
+
+                <TextView
+                    android:id="@+id/receiver_phoneNumber"
+                    android:layout_gravity="end"
+                    android:text="17329505161"
+                    android:padding="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+
+                    android:text="收货地址："
+                    android:padding="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/receiver_site"
+                    android:text="广东省佛山市狮山镇大学城广东东院"
+                    android:layout_width="240dp"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"/>
+            </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                        android:src="@drawable/image_right24"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+        <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#eeee"/>
+
+    //商品信息布局
+
+        <TextView
+            android:id="@+id/receive_shopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品店铺名"
+            android:textColor="#404040"
+            android:textSize="14sp"
+            android:padding="13dp"
+            />
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/receive_imageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        <TextView
+            android:layout_weight="0.1"
+            android:id="@+id/receive_goodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lines="3"
+            android:text="华硕（ASUS）经典系列X554LP 15.6英寸笔记本 （i5-5200U 4G 500G R5-M230 1G独显 蓝牙 Win8.1 黑色）"
+            android:textColor="#404040"
+            android:textSize="14sp"
+            android:gravity="center_vertical"/>
+                <TextView
+                    android:id="@+id/receiver_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="33dp"
+                    android:text="价格"
+                    android:textSize="17sp"
+                    android:textColor="#FF0000"
+                    android:gravity="center"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_weight="1"
+                android:text="购买数量"
+                android:textColor="#404040"
+                android:textSize="14sp"
+                android:paddingTop="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"/>
+
+            <com.example.asus.summervacationproject.utils.AddSubView
+                android:id="@+id/receiver_addSubView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+              >
+            </com.example.asus.summervacationproject.utils.AddSubView>
+        </LinearLayout>
+
+
+</LinearLayout>
+        //底部布局
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/receiver_total_price"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="价格"
+            android:textSize="19sp"
+            android:textColor="#FF0000"
+            android:gravity="center"/>
+        <Button
+            android:id="@+id/receiver_button"
+            android:text="提交订单"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:background="#DF3033"
+            android:textColor="#fff" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -27,4 +27,6 @@ public class Config {
     public static final String GET_SHOPPINGCART = SERVEL_URL+"/servlet/getShoppingCartData";
     public static final String UPDATE_SHOPPINGCART = SERVEL_URL+"/servlet/updateShoppingCartInfoServlet";
     public static final String DELETE_SHOPPINGCART = SERVEL_URL+"/servlet/deleteShoppingCartBeanServlet";
+    public static final String GET_SITEOFRECEIVE = SERVEL_URL+"/servlet/getSiteOfReceiveServlet";
+    public static final String ADD_ORDERFORM = SEND_HEADPORTRAIT+"servlet/addOrderFormServlet";
 }

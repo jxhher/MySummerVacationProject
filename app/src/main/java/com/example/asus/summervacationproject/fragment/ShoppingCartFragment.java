@@ -111,6 +111,7 @@ public class ShoppingCartFragment extends BaseFragment{
             edit.setText("编辑");
             edit.setTextSize(21);
             edit.setTag("edit");
+            edit.setVisibility(View.GONE);
             mToolBar.addView(edit);
             titleTextView = (TextView) mToolBar.findViewWithTag("title");
             //为ImageView设置参数
@@ -161,7 +162,10 @@ public class ShoppingCartFragment extends BaseFragment{
                 titleTextView = (TextView) mToolBar.findViewWithTag("title");
                 titleTextView.setText("购物车");
                 edit = (TextView) mToolBar.findViewWithTag("edit");
-                edit.setVisibility(View.VISIBLE);
+                if(shoppingCartRecyclerViewAdapter!=null)
+                    if(shoppingCartRecyclerViewAdapter.getItemCount()!=0)edit.setVisibility(View.VISIBLE);
+
+
         }
 
     }
@@ -211,7 +215,7 @@ public class ShoppingCartFragment extends BaseFragment{
         if(shoppingCartBeanList==null){
             if(!UserInfo.getUserInfo(mContext,"id").equals(""))           //点击购物车时判断是否登录用以设置布局显示
                 layout_empty_shopping_cart.setVisibility(View.VISIBLE);
-            shopCart_check_linearLayout_all.setVisibility(View.GONE);
+                shopCart_check_linearLayout_all.setVisibility(View.GONE);
             if(mToolBar!=null){
                 edit = (TextView) mToolBar.findViewWithTag("edit");
                 edit.setVisibility(View.GONE);
@@ -282,5 +286,12 @@ public class ShoppingCartFragment extends BaseFragment{
         shoppingCartRecyclerViewAdapter.deleteData();
         shoppingCartRecyclerViewAdapter.showTotalPrice();
         shoppingCartRecyclerViewAdapter.checkAll();
+        if(shoppingCartRecyclerViewAdapter.getItemCount()==0){
+            layout_empty_shopping_cart.setVisibility(View.VISIBLE);
+            shopCart_check_linearLayout_all.setVisibility(View.GONE);
+            shopCart_linearLayout_delete.setVisibility(View.GONE);
+            edit.setText("编辑");
+            edit.setVisibility(View.GONE);
+        }
     }
 }

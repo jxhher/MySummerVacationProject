@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -28,6 +27,7 @@ import com.example.asus.summervacationproject.R;
 import com.example.asus.summervacationproject.adapter.ViewPagerAdapter;
 import com.example.asus.summervacationproject.baseclass.BaseFragment;
 import com.example.asus.summervacationproject.bean.GoodsBean;
+import com.example.asus.summervacationproject.bean.OrderFormBean;
 import com.example.asus.summervacationproject.bean.Shop;
 import com.example.asus.summervacationproject.bean.ShoppingCartBean;
 import com.example.asus.summervacationproject.bean.User;
@@ -42,6 +42,8 @@ import com.example.asus.summervacationproject.utils.ToastUtils;
 import com.example.asus.summervacationproject.utils.UserInfo;
 import com.example.asus.summervacationproject.utils.VirtualkeyboardHeight;
 import com.squareup.picasso.Picasso;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,14 +77,16 @@ public class GoodsInfoActivity extends AppCompatActivity {
     private boolean exit = false;
     private String alreadyIdOfShoppingCart;
     private String idOfShoppingCart;
-
+    public final int ADD = 101;
+    public final int BUG = 202;
+    private int siteId = 1;                  //用来显示收货地址的id
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goods_info);
         ButterKnife.bind(this);
         initView();
-
+        getSiteId();
     }
 
     private void initView() {
@@ -146,6 +150,11 @@ public class GoodsInfoActivity extends AppCompatActivity {
 
     }
 
+    private void getSiteId() {
+        String[] ids = UserInfo.getUserInfo(GoodsInfoActivity.this,"siteOfReceive").split(",");
+        siteId = Integer.parseInt(ids[0]);
+    }
+
     @OnClick(R.id.good_bottom_collection)
         public void OnCollectionClick(){
 
@@ -168,29 +177,35 @@ public class GoodsInfoActivity extends AppCompatActivity {
 
         @OnClick(R.id.goods_bottom_bug_now)
         public void OnBugClick(){
-
+            showPopwindow(BUG);
         }
 
         @OnClick(R.id.good_bottom_add_cart)
-        public void OnAddCartClick()
-        {
-            showPopwindow();
-
+        public void OnAddCartClick(){
+            showPopwindow(ADD);
         }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(data!=null){
-            Log.e(GoodsInfoActivity.class.getSimpleName(),"userId"+data.getStringExtra("userId"));
-            int userId = Integer.parseInt(data.getStringExtra("userId"));
-            addToShoppingCart(userId,updateGoodBean.getShopId());
+            if(requestCode == ADD){
+                Log.e(GoodsInfoActivity.class.getSimpleName(),"userId"+data.getStringExtra("userId"));
+                int userId = Integer.parseInt(data.getStringExtra("userId"));
+                addToShoppingCart(userId,updateGoodBean.getShopId());
+            }else if(requestCode == BUG){
+                Intent intent = new Intent(GoodsInfoActivity.this,SelectSiteOfReceiveActivity.class);
+                startActivity(intent);
+                EventBus.getDefault().postSticky(new OrderFormBean(siteId,shop.getShopName(),updateGoodBean.getImageUrl(),
+                        updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+""));
+                Log.e(GoodsInfoActivity.class.getSimpleName(),"发送事件");
+            }
         }
 
     }
 
 
-    private void showPopwindow() {
+    private void showPopwindow(final int type) {
         // 1 利用layoutInflater获得View
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.popupwindow_add_shopping_cart, null);
@@ -258,15 +273,24 @@ public class GoodsInfoActivity extends AppCompatActivity {
                 window.dismiss();
                 if(TextUtils.isEmpty(UserInfo.getUserInfo(GoodsInfoActivity.this,"name"))){
                     Intent intent = new Intent(GoodsInfoActivity.this,LoginActivity.class);
-                    startActivityForResult(intent,1);
+                    if(type == ADD)startActivityForResult(intent,ADD);
+                    else startActivityForResult(intent,BUG);
                 }else{
-                    addToShoppingCart(Integer.parseInt(UserInfo.getUserInfo(GoodsInfoActivity.this,"id")),updateGoodBean.getGoodId());
+                    if(type== ADD)addToShoppingCart(Integer.parseInt(UserInfo.getUserInfo(GoodsInfoActivity.this,"id")),updateGoodBean.getGoodId());
+                    else{
+                        Intent intent = new Intent(GoodsInfoActivity.this,SelectSiteOfReceiveActivity.class);
+                        startActivity(intent);
+                        EventBus.getDefault().postSticky(new OrderFormBean(siteId,shop.getShopName(),updateGoodBean.getImageUrl(),
+                                updateGoodBean.getName(),amount,updateGoodBean.getCover_price()+""));
+                        Log.e(GoodsInfoActivity.class.getSimpleName(),"发送事件");
+                    }
                 }
             }
 
         });
 
     }
+
 
     private void backgroundAlpha(int bgAlpha) {
         WindowManager.LayoutParams lp = getWindow().getAttributes();

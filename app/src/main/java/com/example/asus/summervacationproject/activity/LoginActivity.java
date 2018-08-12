@@ -111,12 +111,12 @@ public class LoginActivity extends AppCompatActivity {
                         setShoppingCart();
                         changeUI();
 
-
                         Intent intent = new Intent();
                         Log.e(GoodsInfoActivity.class.getSimpleName(),"login_userId"+user.getId());
                         intent.putExtra("userId",user.getId()+"");
                         LoginActivity.this.setResult(1,intent);
                         LoginActivity.this.setResult(2,intent);
+                        LoginActivity.this.setResult(3,intent);
 
                         finish();
                         Log.e(TAG,"登录成功");
