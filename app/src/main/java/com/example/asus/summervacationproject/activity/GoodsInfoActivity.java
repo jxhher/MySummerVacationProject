@@ -48,11 +48,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：显示商品信息及店铺信息，完成购买功能
  * Created by ASUS on 2018/7/23.
  * Updated by ASUS on 2018/8/8   更新优化界面布局，增加店铺布局，完成联网获取数据及显示
  * Updated by ASUS on 2018/8/9   优化代码结构，更新界面UI图标
  * Updated by ASUS on 2018/8/9   完成加入购物车功能的popupwindow悬浮框
  * Updated by ASUS on 2018/8/10  完成加入购物车数据及个人数据的联网更新和本地更新
+ * Updated by ASUS on 2018/8/12  完成立即购买功能，实现购物车商品结算功能，完成选择收货地址功能，解决数据传输BUG
  */
 
 public class GoodsInfoActivity extends AppCompatActivity {

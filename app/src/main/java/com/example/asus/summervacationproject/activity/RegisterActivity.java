@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：个人注册页面
  * Created by ASUS on 2018/8/8.
  * Updated by ASUS on 2018/8/8 完成用户注册功能、头像切换功能，解决数据传输bug，优化代码结构
  */

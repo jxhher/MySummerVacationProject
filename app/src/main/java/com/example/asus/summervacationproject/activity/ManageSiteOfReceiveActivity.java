@@ -39,6 +39,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：个人收货地址管理页面，实现收货地址的增加和删除
  * Created by ASUS on 2018/8/6.
  * uPdatad by ASUS on 2018/8/7  完成收货地址模块的数据查找、增加、删除，解决数据传输的bug，
  */
@@ -52,7 +53,6 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
 
 
     private ListAdapter adapter = null;
-    private String jsonData = null;
     private List<SiteOfReceive> SiteOfReceiveList;
     private SharedPreferences sp;
     private IntentFilter intentFilter;
@@ -68,7 +68,6 @@ public class ManageSiteOfReceiveActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         if(!TextUtils.isEmpty(getIntent().getStringExtra("id"))){
             if(getIntent().getStringExtra("id").equals("1")){
-                //manage_add_button.setVisibility(View.GONE);
                 change = true;
                 manage_siteOfReceive_listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override

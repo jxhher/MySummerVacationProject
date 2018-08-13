@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * 作用：购物车页面的数据适配器
  * Created by ASUS on 2018/8/10.
  */
 

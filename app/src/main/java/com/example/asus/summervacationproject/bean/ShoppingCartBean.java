@@ -3,7 +3,8 @@ package com.example.asus.summervacationproject.bean;
 import java.io.Serializable;
 
 /**
- * Created by ASUS on 2018/8/10.  用来显示购物车条目信息的存储类
+ * 作用：存储购物车相关信息的类
+ * Created by ASUS on 2018/8/10.
  *
  */
 

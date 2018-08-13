@@ -19,6 +19,7 @@ import com.example.asus.summervacationproject.bean.CommentsBean;
 import java.util.ArrayList;
 
 /**
+ * 作用：自定义刷新组件
  * Created by ASUS on 2018/8/13.
  */
 

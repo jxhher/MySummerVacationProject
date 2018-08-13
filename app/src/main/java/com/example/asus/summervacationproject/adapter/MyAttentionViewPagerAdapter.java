@@ -9,6 +9,7 @@ import com.example.asus.summervacationproject.baseclass.BaseFragment;
 import java.util.ArrayList;
 
 /**
+ * 作用：个人关注页面的数据适配器
  * Created by ASUS on 2018/8/13.
  */
 

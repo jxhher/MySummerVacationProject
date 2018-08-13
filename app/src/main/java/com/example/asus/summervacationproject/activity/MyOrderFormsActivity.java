@@ -3,12 +3,10 @@ package com.example.asus.summervacationproject.activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,24 +16,18 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.example.asus.summervacationproject.R;
-import com.example.asus.summervacationproject.adapter.ListViewAdapter;
 import com.example.asus.summervacationproject.adapter.MyOrderFormAdapter;
 import com.example.asus.summervacationproject.bean.OrderFormBean;
-import com.example.asus.summervacationproject.bean.SiteOfReceive;
 import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
-import com.example.asus.summervacationproject.utils.ToastUtils;
-
-import org.w3c.dom.Text;
-
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：显示已完成的订单，可实现评价和删除订单功能
  * Created by ASUS on 2018/8/12.
  */
 

@@ -1,23 +1,16 @@
 package com.example.asus.summervacationproject.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -37,16 +30,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：完成个人登录，及个人信息的本地存储
  * Created by ASUS on 2018/7/30.
  * Updated by ASUS on 2018/8/5 完成登录功能及获取服务器端数据，完成对应UI的数据显示
+ * Updated by ASUS on 2018/8/11 添加EeventBus,实现数据传输到订单页面
  */
 
 public class LoginActivity extends AppCompatActivity {

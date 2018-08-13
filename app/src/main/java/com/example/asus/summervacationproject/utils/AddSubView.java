@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：自定义组件，实现商品购物数量的增减
  * Created by ASUS on 2018/8/9.
  */
 

@@ -5,6 +5,7 @@ import com.example.asus.summervacationproject.bean.Shop;
 import java.util.ServiceConfigurationError;
 
 /**
+ * 作用：存储连接地址
  * Created by ASUS on 2018/7/20.
  */
 

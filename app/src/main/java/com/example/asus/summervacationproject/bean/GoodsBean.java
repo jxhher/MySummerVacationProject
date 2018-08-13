@@ -3,6 +3,7 @@ package com.example.asus.summervacationproject.bean;
 import java.io.Serializable;
 
 /**
+ * 作用：存储商品信息的储存类
  * Created by ASUS on 2018/7/23.
  * Updated by ASUS on 2018/8/8
  */

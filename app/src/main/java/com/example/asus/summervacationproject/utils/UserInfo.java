@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
+ * 作用：存储个人信息类
  * Created by ASUS on 2018/8/9.
  */
 

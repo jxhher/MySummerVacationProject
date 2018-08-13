@@ -34,7 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-/**
+/**作用：收货地址页面的数据适配器
  * Created by ASUS on 2018/7/18.
  */
 
@@ -55,10 +55,6 @@ public class ListViewAdapter extends BaseAdapter {
         this.listData = listData;
         this.listItemId = listItemId;
         this.change = change;
-    }
-
-    public ListViewAdapter() {
-
     }
 
 

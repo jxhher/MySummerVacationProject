@@ -1,6 +1,7 @@
 package com.example.asus.summervacationproject.bean;
 
 /**
+ * 作用：存储店铺信息的类
  * Created by ASUS on 2018/8/8.
  */
 

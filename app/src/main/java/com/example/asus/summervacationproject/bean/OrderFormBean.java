@@ -1,6 +1,7 @@
 package com.example.asus.summervacationproject.bean;
 
 /**
+ * 作用：订单类
  * Created by ASUS on 2018/8/12.
  */
 

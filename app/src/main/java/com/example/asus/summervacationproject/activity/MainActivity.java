@@ -69,7 +69,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 /**
- * 作用：主页面
+ * 作用：主页面，整个项目的框架
  * Created by ASUS on 2018/7/17. 开始准备工作，配置Git和Github，添加ButterKnife插件
  * Updated by ASUS on 2018/7/18  组合toolbar和drawerLayout成功
  * Updated by ASUS on 2018/7/19  成功搭建底部模块选项，完善UI图标
@@ -86,12 +86,8 @@ public class MainActivity extends AppCompatActivity{
     NavigationView navigationView;
     @BindView(R.id.rg_main)
     RadioGroup radioGroup;
-    private ArrayList<String> menuLists = new ArrayList<String>();
-
 
     private ActionBarDrawerToggle mDrawerToggle;
-    private ListViewAdapter adapter;
-    private ImageView button;
     private List<BaseFragment> mBaseFragmentList;
     private int selectPostion;   //选中的Fragment对应的位置
     private Fragment mContent;
@@ -200,13 +196,8 @@ public class MainActivity extends AppCompatActivity{
     public void setUser(){
         sp = MainActivity.this.getSharedPreferences("user_info", Context.MODE_PRIVATE);
         String imageUrl = sp.getString("imageUrl","");
-        // toolbar.setNavigationIcon();//设置toolbar导航栏图标
         head_userName_textView.setText(sp.getString("name",""));
-          /*  //判断本地是否已经保存头像的图片，如果有，则不再执行联网操作*/
-//            boolean isExist = readImage();
-//            if(isExist){
-//                return;
-//            }
+
 
         Picasso.with(getApplicationContext()).invalidate("send_head_portrait"+sp.getString("id","")+".png");    //清除本地缓存
         //使用Picasso联网获取图
@@ -220,27 +211,7 @@ public class MainActivity extends AppCompatActivity{
         login_flag = true;
     }
 
-    private boolean readImage() {
-        File filesDir;
-        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){//判断sd卡是否挂载
-            //路径1：storage/sdcard/Android/data/包名/files
-            filesDir = MainActivity.this.getExternalFilesDir("");
 
-        }else{//手机内部存储
-            //路径：data/data/包名/files
-            filesDir = MainActivity.this.getFilesDir();
-
-        }
-        File file = new File(filesDir,"icon.png");
-        if(file.exists()){
-            //存储--->内存
-            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-            head_portrait_imageView.setImageBitmap(bitmap);
-            return true;
-        }
-        return false;
-
-    }
 
     //将dp转化为px
     public  int dp2px(int dp){
@@ -362,7 +333,6 @@ public class MainActivity extends AppCompatActivity{
      */
 
     public boolean onCreateOptionsMenu(Menu menu) {
-      //  getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
     public boolean onOptionsItemSelected(MenuItem item) {

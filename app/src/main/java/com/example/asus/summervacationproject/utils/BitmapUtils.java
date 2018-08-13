@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 
-/**
+/**作用：图像处理类
  * Created by ASUS on 2018/8/5
  */
 public class BitmapUtils {

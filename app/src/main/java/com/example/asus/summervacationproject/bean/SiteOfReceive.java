@@ -1,6 +1,7 @@
 package com.example.asus.summervacationproject.bean;
 
 /**
+ * 作用：收货地址类
  * Created by ASUS on 2018/8/6.
  */
 

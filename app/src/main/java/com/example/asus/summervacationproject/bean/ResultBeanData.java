@@ -4,6 +4,7 @@ package com.example.asus.summervacationproject.bean;
 import java.util.List;
 
 /**
+ * 作用：存储首页信息的类
  * Created by ASUS on 2018/7/21.
  */
 

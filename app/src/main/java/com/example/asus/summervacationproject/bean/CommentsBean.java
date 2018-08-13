@@ -1,6 +1,7 @@
 package com.example.asus.summervacationproject.bean;
 
 /**
+ * 作用：存储评价信息的存储类
  * Created by ASUS on 2018/7/30.
  */
 

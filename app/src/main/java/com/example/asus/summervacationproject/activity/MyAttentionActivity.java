@@ -1,18 +1,12 @@
 package com.example.asus.summervacationproject.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-
 import com.example.asus.summervacationproject.R;
 import com.example.asus.summervacationproject.adapter.MyAttentionViewPagerAdapter;
-import com.example.asus.summervacationproject.adapter.ViewPagerAdapter;
 import com.example.asus.summervacationproject.baseclass.BaseFragment;
-import com.example.asus.summervacationproject.fragment.Goods_Comment_Fragment;
-import com.example.asus.summervacationproject.fragment.Goods_Details_Fragment;
-import com.example.asus.summervacationproject.fragment.Goods_Main_Fragment;
 import com.example.asus.summervacationproject.fragment.MyAttention_Shop_Fragment;
 import com.example.asus.summervacationproject.fragment.MyAttention_goods_Fragment;
 
@@ -23,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：显示个人关注
  * Created by ASUS on 2018/8/13.
  */
 

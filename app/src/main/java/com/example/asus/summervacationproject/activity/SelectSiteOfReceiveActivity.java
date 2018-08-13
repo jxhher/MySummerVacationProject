@@ -1,48 +1,38 @@
 package com.example.asus.summervacationproject.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.alibaba.fastjson.JSON;
 import com.example.asus.summervacationproject.R;
 import com.example.asus.summervacationproject.adapter.SelectSiteOfReceiveAdapter;
 import com.example.asus.summervacationproject.bean.OrderFormBean;
-import com.example.asus.summervacationproject.bean.Shop;
 import com.example.asus.summervacationproject.bean.ShoppingCartBean;
 import com.example.asus.summervacationproject.bean.SiteOfReceive;
-import com.example.asus.summervacationproject.utils.AddSubView;
 import com.example.asus.summervacationproject.utils.Config;
 import com.example.asus.summervacationproject.utils.HttpMethod;
 import com.example.asus.summervacationproject.utils.OkHttpUtils;
 import com.example.asus.summervacationproject.utils.ToastUtils;
 import com.example.asus.summervacationproject.utils.UserInfo;
-import com.squareup.picasso.Picasso;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：确认订单页面，可实现收货地址的选择
  * Created by ASUS on 2018/8/11.
+ * Updated by ASUS on 2018/8/12  解决数据传输问题及Fragment生命周期问题
  */
 
 public class SelectSiteOfReceiveActivity extends AppCompatActivity {
@@ -54,16 +44,6 @@ public class SelectSiteOfReceiveActivity extends AppCompatActivity {
     @BindView(R.id.receiver_site)
     TextView receiver_site;
 
-    /* @BindView(R.id.receive_shopName)
-     TextView receive_shopName;
-     @BindView(R.id.receive_imageView)
-     ImageView receive_imageView;
-     @BindView(R.id.receive_goodName)
-     TextView receive_goodName;
-    /* @BindView(R.id.receiver_price)
-     TextView receiver_price;*/
-   /* @BindView(R.id.receiver_addSubView)
-    AddSubView receiver_addSubView;*/
     @BindView(R.id.receiver_total_price)
     TextView receiver_total_price;
     @BindView(R.id.receiver_siteOfReceive_linearLayout)
@@ -75,8 +55,6 @@ public class SelectSiteOfReceiveActivity extends AppCompatActivity {
     ListView receiver_listView;
     private List<ShoppingCartBean> shoppingCartBeanList = null;
     private SelectSiteOfReceiveAdapter selectSiteOfReceiveAdapter = null;
-
-    private OrderFormBean orderFormBean = null;
     private int userId;
 
     @Override
@@ -168,38 +146,6 @@ public class SelectSiteOfReceiveActivity extends AppCompatActivity {
                 },jsonData);
             }
         });
-        /*receiver_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //orderFormBean.setUserId(Integer.parseInt(UserInfo.getUserInfo(SelectSiteOfReceiveActivity.this, "id")));
-                String jsonData = JSON.toJSONString(orderFormBean);
-                new OkHttpUtils(Config.ADD_ORDERFORM, HttpMethod.POST, new OkHttpUtils.SuccessCallback() {
-                    @Override
-                    public void onSuccess(String result) {
-                        if (!result.equals("ERROR")) {
-                            updateLocalUserInfo(result);
-                            ToastUtils.getShortToastByString(SelectSiteOfReceiveActivity.this, "下单成功");
-                            finish();
-                        } else {
-                            ToastUtils.getShortToastByString(SelectSiteOfReceiveActivity.this, "下单失败");
-                        }
-                    }
-                }, new OkHttpUtils.FailCallback() {
-                    @Override
-                    public void onFail() {
-                        ToastUtils.getShortToastByString(SelectSiteOfReceiveActivity.this, "提交失败");
-                    }
-                }, jsonData);
-            }
-        });*/
-       /* orderFormBean = event;
-        Picasso.with(SelectSiteOfReceiveActivity.this).load(Config.BASE_URL_IMAGE+event.getImageUrl()).into(receive_imageView);
-        receive_shopName.setText(event.getShopName());
-        receive_goodName.setText(event.getGoodName());
-        receiver_price.setText("¥ "+event.getPrice()+".00");
-        receiver_total_price.setText("共 ¥ "+Integer.parseInt(event.getPrice())*event.getAmount()+".00");
-        receiver_addSubView.setValue(event.getAmount());*/
-
     }
 
 

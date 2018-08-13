@@ -23,6 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
+ * 作用：确认订单页面的数据适配器
  * Created by ASUS on 2018/8/12.
  */
 
