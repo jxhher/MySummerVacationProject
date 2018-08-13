@@ -29,6 +29,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 作用：联网添加个人的收货地址
  * Created by ASUS on 2018/8/6.
  * Updated by ASUS on 2018/8/7  完成界面布局及连接数据库进行操作
  */

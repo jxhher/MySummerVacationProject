@@ -123,7 +123,8 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.myAttention:
-                        ToastUtils.getShortToastByString(MainActivity.this,"mayAttention");
+                        Intent intent2 = new Intent(MainActivity.this,MyAttentionActivity.class);
+                        startActivity(intent2);
                         break;
                     case R.id.myCardFile:
                         ToastUtils.getShortToastByString(MainActivity.this,"myCardFile");

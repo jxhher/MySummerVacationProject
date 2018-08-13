@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    //顶部布局
+    <LinearLayout
+        android:id="@+id/myAttention_linearLayout_back"
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/myAttention_button_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/image_back_button"
+            android:paddingRight="7dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="我的关注"
+            android:gravity="center_vertical"
+            android:textSize="37px"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/cardview_dark_background"
+            />
+    </LinearLayout>
+    <android.support.design.widget.TabLayout
+        android:id="@+id/myAttention_tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#81C4F8"
+        app:tabIndicatorColor="@android:color/holo_red_dark"
+        app:tabSelectedTextColor="@android:color/holo_red_dark"
+        app:tabTextColor="@color/cardview_dark_background" />
+
+        <android.support.v4.view.ViewPager
+        android:id="@+id/myAttention_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

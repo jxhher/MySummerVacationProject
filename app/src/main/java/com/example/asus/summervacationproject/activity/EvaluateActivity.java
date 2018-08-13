@@ -24,7 +24,8 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by ASUS on 2018/8/12.
+ * 作用：对已完成的订单进行评价
+ * Created by ASUS on 2018/8/12  完成评价功能.
  */
 
 public class EvaluateActivity extends AppCompatActivity {
@@ -63,8 +64,7 @@ public class EvaluateActivity extends AppCompatActivity {
             Snackbar.make(evaluate_text, "评价不能为空", Snackbar.LENGTH_SHORT).show();
             return;
         }
-       // if (shopId!=null&&observerName!=null) {
-        Log.e(EvaluateActivity.class.getSimpleName(),"goodId:"+goodId+"observerName:"+observerName+"text:"+text+"userId:"+userId+"orderFormId:"+orderFormId);
+            Log.e(EvaluateActivity.class.getSimpleName(),"goodId:"+goodId+"observerName:"+observerName+"text:"+text+"userId:"+userId+"orderFormId:"+orderFormId);
             String[] data = {goodId+"",observerName,text,userId,orderFormId+""};
 
             new OkHttpUtils(Config.ADD_COMMENT, PostType.ADD, new OkHttpUtils.SuccessCallback() {
@@ -87,5 +87,4 @@ public class EvaluateActivity extends AppCompatActivity {
                 }
             },data);
         }
-  //  }
 }

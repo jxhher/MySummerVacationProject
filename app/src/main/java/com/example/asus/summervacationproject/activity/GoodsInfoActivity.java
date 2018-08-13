@@ -20,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.example.asus.summervacationproject.R;
@@ -30,7 +29,6 @@ import com.example.asus.summervacationproject.bean.GoodsBean;
 import com.example.asus.summervacationproject.bean.OrderFormBean;
 import com.example.asus.summervacationproject.bean.Shop;
 import com.example.asus.summervacationproject.bean.ShoppingCartBean;
-import com.example.asus.summervacationproject.bean.User;
 import com.example.asus.summervacationproject.fragment.Goods_Details_Fragment;
 import com.example.asus.summervacationproject.fragment.Goods_Comment_Fragment;
 import com.example.asus.summervacationproject.fragment.Goods_Main_Fragment;
@@ -42,12 +40,9 @@ import com.example.asus.summervacationproject.utils.ToastUtils;
 import com.example.asus.summervacationproject.utils.UserInfo;
 import com.example.asus.summervacationproject.utils.VirtualkeyboardHeight;
 import com.squareup.picasso.Picasso;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
