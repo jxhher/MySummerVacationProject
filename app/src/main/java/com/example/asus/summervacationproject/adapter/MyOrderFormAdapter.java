@@ -86,6 +86,14 @@ public class MyOrderFormAdapter extends BaseAdapter {
         viewHolder.myOrderForm_total_price.setText("共 "+orderFormBean.getAmount()+"件商品，"
                 +"合 计 ¥ "+Integer.parseInt(orderFormBean.getPrice())*orderFormBean.getAmount()+"元");
         Picasso.with(context).load(Config.BASE_URL_IMAGE+orderFormBean.getImageUrl()).into(viewHolder.myOrderForm_imageView);
+        if(orderFormBean.getIsEvaluate()==1){
+            viewHolder.myOrderForm_comment.setText("已评价");
+            viewHolder.myOrderForm_comment.setFocusable(false);
+        }else{
+            viewHolder.myOrderForm_comment.setText("评 价");
+            viewHolder.myOrderForm_comment.setFocusable(true);
+        }
+
         viewHolder.myOrderForm_delete.setTag(R.id.btn,orderFormBeen.get(position).getId());
         viewHolder.myOrderForm_delete.setOnClickListener(new View.OnClickListener() {
             @Override
