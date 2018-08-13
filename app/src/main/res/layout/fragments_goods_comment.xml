@@ -11,10 +11,12 @@
         android:visibility = "gone"
         android:paddingTop="5dp"
         />
+
     <ListView
         android:id="@+id/good_comment_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         android:dividerHeight="2dp"
     </ListView>
+
 </LinearLayout>

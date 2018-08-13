@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#2980b9</color>
+    <color name="orange">#FFFF4F</color>
+    <color name="green">#7BFFD3</color>
+    <color name="purple">#FF5288</color>
+    <color name="swipefefresh_bg">#81F8D0</color>
+    <color name="blue">#81C4F8</color>
 </resources>

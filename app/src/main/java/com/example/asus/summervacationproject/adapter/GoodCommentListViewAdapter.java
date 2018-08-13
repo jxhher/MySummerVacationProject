@@ -1,6 +1,7 @@
 package com.example.asus.summervacationproject.adapter;
 
 import android.content.Context;
+import android.content.pm.LabeledIntent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import com.example.asus.summervacationproject.R;
 import com.example.asus.summervacationproject.bean.CommentsBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

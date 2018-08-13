@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.asus.summervacationproject.R;
@@ -47,6 +48,9 @@ public class HomePageAdapter extends RecyclerView.Adapter {
     private static final int DISCOUNT = 3;
     private static final int RECOMMEND = 4;
     private static final String GOOD_BEAN = "goodBean";
+
+    private boolean hasMore = true;   // 变量，是否有更多数据
+    private boolean fadeTips = false; // 变量，是否隐藏了底部的提示
     /**
      * 用来初始化布局
      */
@@ -107,44 +111,46 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
             if (resultBean != null) {
                 bannerViewHolder.setData(resultBean.getBanner_info());
-             //   Log.e(TAG, resultBean.getBanner_info().toString());
+                //   Log.e(TAG, resultBean.getBanner_info().toString());
             } else {
-              //  Log.e(TAG, "resultBean为null:");
+                //  Log.e(TAG, "resultBean为null:");
             }
         } else if (getItemViewType(position) == THEME) {
             ThemeViewHolder themeViewHolder = (ThemeViewHolder) holder;
             if (resultBean != null) {
                 themeViewHolder.setData(resultBean.getThemeInfoBean());
-              //  Log.e(TAG, resultBean.getThemeInfoBean().toString());
+                //  Log.e(TAG, resultBean.getThemeInfoBean().toString());
             } else {
-               // Log.e(TAG, "result为null");
+                // Log.e(TAG, "result为null");
             }
         } else if (getItemViewType(position) == BRAND) {
             BrandViewHolder brandViewHolder = (BrandViewHolder) holder;
             if (resultBean != null) {
                 brandViewHolder.setData(resultBean.getBrandInfoBean());
-            }else{
-               // Log.e(TAG, "result为null");
+            } else {
+                // Log.e(TAG, "result为null");
             }
-        }else if(getItemViewType(position) == DISCOUNT){
+        } else if (getItemViewType(position) == DISCOUNT) {
             DiscountViewHolder discountViewHolder = (DiscountViewHolder) holder;
             if (resultBean != null) {
                 discountViewHolder.setData(resultBean.getDiscountInfoBean());
-            }else{
-               // Log.e(TAG, "result为null");
+            } else {
+                // Log.e(TAG, "result为null");
             }
-        }else if(getItemViewType(position) == RECOMMEND){
+        } else if (getItemViewType(position) == RECOMMEND) {
             RecommendViewHolder recommendViewHolder = (RecommendViewHolder) holder;
             if (resultBean != null) {
                 recommendViewHolder.setData(resultBean.getRecommend_info());
-            }else{
-               // Log.e(TAG, "result为null");
+            } else {
+                // Log.e(TAG, "result为null");
             }
+        } else {
+
+
         }
+
+
     }
-
-
-
 
      class BannerViewHolder extends RecyclerView.ViewHolder{
         private Context mContext;
@@ -320,8 +326,6 @@ public class HomePageAdapter extends RecyclerView.Adapter {
             intent.putExtra(GOOD_BEAN,goodBean);
             mContext.startActivity(intent);
         }
-
-
 
 
 

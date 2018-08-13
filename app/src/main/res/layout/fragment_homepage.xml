@@ -1,9 +1,10 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.asus.summervacationproject.fragment.HomePageFragment"
     android:focusable="true"
+    android:orientation="vertical"
     android:focusableInTouchMode="true"
     >
 
@@ -14,13 +15,15 @@
         android:iconifiedByDefault="false"
         android:queryHint="请输入搜索商品/店铺"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/homePage_recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/homePage_searchView"
-        android:focusable="true"
-        android:focusableInTouchMode="true"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/homePage_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/homePage_searchView"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
+
 
     <ImageButton
         android:id="@+id/homePage_imageButton"
@@ -32,4 +35,4 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/button_image_top"
         android:visibility="gone" />
-</RelativeLayout>
+</LinearLayout>

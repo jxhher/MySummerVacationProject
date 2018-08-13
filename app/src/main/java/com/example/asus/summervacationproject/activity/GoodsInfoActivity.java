@@ -369,6 +369,7 @@ public class GoodsInfoActivity extends AppCompatActivity {
             shoppingCartBean.setShopName(shop.getShopName());
             shoppingCartBean.setGoodPrice(updateGoodBean.getCover_price()+"");
             shoppingCartBean.setGoodName(updateGoodBean.getName());
+            shoppingCartBean.setGoodId(updateGoodBean.getGoodId());
             shoppingCartBeanList.add(shoppingCartBean);
         }
         jsonData = JSON.toJSONString(shoppingCartBeanList);
